@@ -58,6 +58,7 @@
     <Compile Include="Security\Hash.cs" />
     <Compile Include="Security\Key.cs" />
     <Compile Include="Security\Rsa.cs" />
+    <Compile Include="Security\TestSecurity.cs" />
     <Compile Include="Security\X509.cs" />
     <Compile Include="Utilities\Convert.cs" />
   </ItemGroup>
