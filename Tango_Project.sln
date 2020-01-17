@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\SmartFactory_GMKorea\Core\Core.csproj", "{D981E1EC-EBFF-4D9F-83AF-55E60A3B9122}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{D981E1EC-EBFF-4D9F-83AF-55E60A3B9122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
