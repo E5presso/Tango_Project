@@ -3,14 +3,17 @@
 namespace Core.Network
 {
 	/// <summary>
-	/// 클라이언트 기능을 제공하는 클래스입니다.
+	/// 클라이언트 기능을 제공합니다.
 	/// </summary>
 	public class Client : IDisposable
 	{
-		private bool started = false;
 		private readonly Connector connector;
 		private Session session;
 
+		/// <summary>
+		/// 클라이언트의 가동 여부를 가져옵니다.
+		/// </summary>
+		public bool IsActive { get; private set; } = false;
 		/// <summary>
 		/// 접속 중인 서버의 IP주소입니다.
 		/// </summary>
@@ -47,6 +50,8 @@ namespace Core.Network
 		public Client()
 		{
 			connector = new Connector();
+			connector.Connected += OnConnected;
+			connector.ErrorOccurred += OnErrorOccurred;
 		}
 		/// <summary>
 		/// 클라이언트를 시작합니다.
@@ -54,16 +59,15 @@ namespace Core.Network
 		/// <param name="ip">연결할 서버의 IP주소입니다.</param>
 		/// <param name="port">연결에 사용할 포트번호입니다.</param>
 		/// <param name="bufferSize">송수신에 사용할 버퍼의 크기입니다.</param>
-		public void Open(string ip, int port, int bufferSize)
+		/// <param name="enableMultiBytes">데이터 송수신 시 멀티바이트 수신을 사용할 지 여부를 지정합니다. 멀티바이트 수신 시 데이터 전송 용량에 제한이 없어지지만, 패킷 구조 특성 상, 송수신 측 모두 해당 구현체를 동일하게 사용해야합니다.</param>
+		public void Open(string ip, int port, int bufferSize, bool enableMultiBytes)
 		{
-			if (!started)
+			if (!IsActive)
 			{
-				connector.Connected += OnConnected;
-				connector.ErrorOccurred += OnErrorOccurred;
-				connector.Start(ip, port, bufferSize);
-
-				started = true;
+				connector.Start(ip, port, bufferSize, enableMultiBytes);
+				IsActive = true;
 			}
+			else ErrorOccurred?.Invoke(this, new ExceptionEventArgs(new InvalidOperationException("클라이언트가 이미 동작 중입니다.")));
 		}
 		/// <summary>
 		/// 데이터를 전송합니다.
@@ -78,19 +82,17 @@ namespace Core.Network
 		/// </summary>
 		public void Close()
 		{
-			if (started)
+			if (IsActive)
 			{
-				connector.Connected -= OnConnected;
-				connector.ErrorOccurred -= OnErrorOccurred;
-
 				session.Close();
 				session.Sended -= OnSended;
 				session.Received -= OnReceived;
 				session.Disconnected -= OnDisconnected;
 				session.ErrorOccurred -= OnErrorOccurred;
 
-				started = false;
+				IsActive = false;
 			}
+			else ErrorOccurred?.Invoke(this, new ExceptionEventArgs(new InvalidOperationException("클라이언트가 동작 중이 아닙니다.")));
 		}
 
 		private void OnConnected(Session session)
@@ -126,6 +128,7 @@ namespace Core.Network
 				session.Disconnected -= OnDisconnected;
 				session.ErrorOccurred -= OnErrorOccurred;
 				session.Dispose();
+				IsActive = false;
 
 				Disconnected?.Invoke(this, new DisconnectEventArgs(session.IP));
 			}

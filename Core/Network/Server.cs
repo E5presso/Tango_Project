@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 namespace Core.Network
 {
 	/// <summary>
-	/// 서버의 소켓통신 기능을 제공합니다.
+	/// 서버 기능을 제공합니다.
 	/// </summary>
 	public class Server : IDisposable
 	{
-		private bool started = false;
 		private readonly Listener listener;
 		private readonly Dictionary<string, Session> list;
 
+		/// <summary>
+		/// 서버의 가동 여부를 가져옵니다.
+		/// </summary>
+		public bool IsActive { get; private set; } = false;
 		/// <summary>
 		/// 서버의 로컬 IP주소입니다.
 		/// </summary>
@@ -59,20 +62,18 @@ namespace Core.Network
 		/// <param name="port">바인딩할 포트 번호를 지정합니다.</param>
 		/// <param name="backlog">접속 대기열의 길이를 지정합니다.</param>
 		/// <param name="bufferSize">송수신에 사용할 버퍼의 크기를 지정합니다.</param>
-		public void Open(int port, int backlog, int bufferSize)
+		/// <param name="enableMultiBytes">데이터 송수신 시 멀티바이트 수신을 사용할 지 여부를 지정합니다. 멀티바이트 수신 시 데이터 전송 용량에 제한이 없어지지만, 패킷 구조 특성 상, 송수신 측 모두 해당 구현체를 동일하게 사용해야합니다.</param>
+		public void Open(int port, int backlog, int bufferSize, bool enableMultiBytes)
 		{
-			if (!started)
+			if (!IsActive)
 			{
 				listener.Connected += OnConnected;
 				listener.ErrorOccurred += OnErrorOccurred;
-				listener.Open(port, backlog, bufferSize);
+				listener.Open(port, backlog, bufferSize, enableMultiBytes);
 
-				started = true;
+				IsActive = true;
 			}
-			else
-			{
-				ErrorOccurred?.Invoke(this, new ExceptionEventArgs(new InvalidOperationException("서버가 이미 구동 중입니다.")));
-			}
+			else ErrorOccurred?.Invoke(this, new ExceptionEventArgs(new InvalidOperationException("서버가 이미 동작 중입니다.")));
 		}
 		/// <summary>
 		/// 지정한 IP에 데이터를 전송합니다.
@@ -124,7 +125,7 @@ namespace Core.Network
 		/// </summary>
 		public void Close()
 		{
-			if (started)
+			if (IsActive)
 			{
 				listener.Close();
 				listener.Connected -= OnConnected;
@@ -139,8 +140,9 @@ namespace Core.Network
 				});
 				list.Clear();
 
-				started = false;
+				IsActive = false;
 			}
+			else ErrorOccurred?.Invoke(this, new ExceptionEventArgs(new InvalidOperationException("서버가 동작 중이 아닙니다.")));
 		}
 
 		private void OnConnected(Session session)

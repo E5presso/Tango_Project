@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.CompactNet;
+using Core.Network;
 
 namespace TestConsole
 {
 	class Program
 	{
-		static Client client = new Client();
-		static void Main(string[] args)
+		private static readonly Client client = new Client();
+		private static void Main()
 		{
 			client.ErrorOccurred += Client_ErrorOccurred;
 
-			client.Open("127.0.0.1", 11000, 1024);
+			client.Open("127.0.0.1", 11000, 1024, true);
 			Console.ReadKey();
 		}
 

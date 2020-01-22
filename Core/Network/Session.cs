@@ -8,6 +8,7 @@ namespace Core.Network
 	internal class Session : IDisposable
 	{
 		private readonly int buffersize;
+		private readonly bool enableMultiBytes;
 
 		private struct Status
 		{
@@ -32,10 +33,11 @@ namespace Core.Network
 		public event DisconnectEvent Disconnected;
 		public event ExceptionEvent ErrorOccurred;
 
-		public Session(Socket socket, int buffersize)
+		public Session(Socket socket, int buffersize, bool enableMultiBytes)
 		{
 			this.socket = socket;
 			this.buffersize = buffersize;
+			this.enableMultiBytes = enableMultiBytes;
 
 			IP = socket.RemoteEndPoint.ToString();
 			buffer = new byte[buffersize];
@@ -55,17 +57,25 @@ namespace Core.Network
 		{
 			if (socket.Connected)
 			{
-				byte[] packet = new byte[4 + data.Length];
-				byte[] length = BitConverter.GetBytes(data.Length);
-
-				Buffer.BlockCopy(length, 0, packet, 0, 4);
-				Buffer.BlockCopy(data, 0, packet, 4, data.Length);
+				byte[] packet;
+				if (enableMultiBytes)
+				{
+					packet = new byte[4 + data.Length];
+					byte[] length = BitConverter.GetBytes(data.Length);
+					Buffer.BlockCopy(length, 0, packet, 0, 4);
+					Buffer.BlockCopy(data, 0, packet, 4, data.Length);
+				}
+				else
+				{
+					packet = new byte[data.Length];
+					Buffer.BlockCopy(data, 0, packet, 0, data.Length);
+				}
 				try
 				{
 					socket.BeginSend(packet, 0, packet.Length, 0, new AsyncCallback((ar) =>
 					{
-						int bytesSent = socket.EndSend(ar) - 4;
-						Sended?.Invoke(this, bytesSent);
+						int bytesSent = socket.EndSend(ar);
+						Sended?.Invoke(this, enableMultiBytes ? bytesSent - 4 : bytesSent);
 					}), null);
 				}
 				catch (Exception e) { ErrorOccurred?.Invoke(e); }
@@ -104,9 +114,20 @@ namespace Core.Network
 				int bytesRead = socket.EndReceive(ar);
 				if (bytesRead > 0)
 				{
-					queue.Write(buffer, 0, bytesRead);
-					Array.Clear(buffer, 0, bytesRead);
-					GetPacket();
+					if (enableMultiBytes)
+					{
+						queue.Write(buffer, 0, bytesRead);
+						Array.Clear(buffer, 0, bytesRead);
+						GetPacket();
+					}
+					else
+					{
+						byte[] data = new byte[bytesRead];
+						Buffer.BlockCopy(buffer, 0, data, 0, bytesRead);
+						Array.Clear(buffer, 0, bytesRead);
+						socket.BeginReceive(buffer, 0, buffersize, 0, new AsyncCallback(OnReceived), null);
+						Received?.Invoke(this, bytesRead, data);
+					}
 				}
 				else
 				{

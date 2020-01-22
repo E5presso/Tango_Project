@@ -45,12 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\RingBuffer.cs" />
-    <Compile Include="CompactNet\Base.cs" />
-    <Compile Include="CompactNet\Client.cs" />
-    <Compile Include="CompactNet\Connector.cs" />
-    <Compile Include="CompactNet\Listener.cs" />
-    <Compile Include="CompactNet\Server.cs" />
-    <Compile Include="CompactNet\Session.cs" />
     <Compile Include="Extensions\CrossThreading.cs" />
     <Compile Include="Network\Base.cs" />
     <Compile Include="Network\Client.cs" />

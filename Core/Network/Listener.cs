@@ -19,7 +19,7 @@ namespace Core.Network
 			listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		}
 
-		public void Open(int port, int backlog, int buffersize)
+		public void Open(int port, int backlog, int buffersize, bool enableMultiBytes)
 		{
 			var localEndPoint = new IPEndPoint(IPAddress.Any, port);
 			listener.Bind(localEndPoint);
@@ -30,7 +30,7 @@ namespace Core.Network
 				{
 					var client = listener.EndAccept(ar);
 					if (flag) listener.BeginAccept(new AsyncCallback(Callback), null);
-					Connected(new Session(client, buffersize));
+					Connected?.Invoke(new Session(client, buffersize, enableMultiBytes));
 				}
 				catch (Exception e) { ErrorOccurred?.Invoke(e); }
 			}

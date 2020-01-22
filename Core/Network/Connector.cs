@@ -15,26 +15,28 @@ namespace Core.Network
 		public event ConnectEvent Connected;
 		public event ExceptionEvent ErrorOccurred;
 
-		public void Start(string address, int port, int buffersize)
+		public void Start(string address, int port, int buffersize, bool enableMultiBytes)
 		{
 			try
 			{
 				size = buffersize;
 				IPAddress ip = Dns.GetHostAddresses(address)[0];
 				point = new IPEndPoint(ip, port);
+				socket?.Dispose();
 				socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-				socket.BeginConnect(point, new AsyncCallback((ar) =>
+				void Callback(IAsyncResult ar)
 				{
 					try
 					{
 						socket.EndConnect(ar);
 						LocalIP = socket.LocalEndPoint.ToString();
-						Connected?.BeginInvoke(new Session(socket, size), new AsyncCallback((iar) => Connected?.EndInvoke(iar)), null);
+						Connected?.Invoke(new Session(socket, size, enableMultiBytes));
 					}
-					catch (Exception e) { ErrorOccurred?.BeginInvoke(e, new AsyncCallback((iar) => ErrorOccurred?.EndInvoke(iar)), null); }
-				}), null);
+					catch (Exception e) { ErrorOccurred?.Invoke(e); }
+				}
+				socket.BeginConnect(point, new AsyncCallback(Callback), null);
 			}
-			catch (Exception e) { ErrorOccurred?.BeginInvoke(e, new AsyncCallback((ar) => ErrorOccurred?.EndInvoke(ar)), null); }
+			catch (Exception e) { ErrorOccurred?.Invoke(e); }
 		}
 		#region IDisposable Support
 		private bool disposedValue = false;
