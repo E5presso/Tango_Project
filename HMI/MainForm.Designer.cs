@@ -50,11 +50,7 @@
 			System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -63,8 +59,22 @@
 			this.Exit = new System.Windows.Forms.Button();
 			this.TabMenu = new System.Windows.Forms.TabControl();
 			this.Main = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.Sensor1Data = new System.Windows.Forms.DataGridView();
+			this.Sensor2Data = new System.Windows.Forms.DataGridView();
+			this.DoorImage = new System.Windows.Forms.PictureBox();
+			this.StatusPanel = new System.Windows.Forms.GroupBox();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.Sensor1Status = new System.Windows.Forms.Label();
+			this.Sensor2Status = new System.Windows.Forms.Label();
+			this.Robot1Status = new System.Windows.Forms.Label();
+			this.Robot2Status = new System.Windows.Forms.Label();
 			this.Configuration = new System.Windows.Forms.TabPage();
 			this.Statistics = new System.Windows.Forms.TabPage();
+			this.StatisticsChartArea = new System.Windows.Forms.TableLayoutPanel();
+			this.SensorChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.Stats = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.ByPass = new System.Windows.Forms.TabPage();
 			this.BypassToggle = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
@@ -75,35 +85,21 @@
 			this.ConfigTabButton = new System.Windows.Forms.Button();
 			this.BypassTabButton = new System.Windows.Forms.Button();
 			this.LogTabButton = new System.Windows.Forms.Button();
-			this.StatisticsChartArea = new System.Windows.Forms.TableLayoutPanel();
-			this.SensorChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-			this.Stats = new System.Windows.Forms.DataVisualization.Charting.Chart();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.DoorImage = new System.Windows.Forms.PictureBox();
-			this.Sensor1Data = new System.Windows.Forms.DataGridView();
-			this.Sensor2Data = new System.Windows.Forms.DataGridView();
-			this.StatusPanel = new System.Windows.Forms.GroupBox();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			this.Sensor1Status = new System.Windows.Forms.Label();
-			this.Sensor2Status = new System.Windows.Forms.Label();
-			this.Robot1Status = new System.Windows.Forms.Label();
-			this.Robot2Status = new System.Windows.Forms.Label();
 			this.TabMenu.SuspendLayout();
 			this.Main.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1Data)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2Data)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.DoorImage)).BeginInit();
+			this.StatusPanel.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.Statistics.SuspendLayout();
-			this.ByPass.SuspendLayout();
-			this.Logs.SuspendLayout();
 			this.StatisticsChartArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.SensorChart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Stats)).BeginInit();
-			this.tableLayoutPanel1.SuspendLayout();
-			this.tableLayoutPanel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.DoorImage)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Sensor1Data)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Sensor2Data)).BeginInit();
-			this.StatusPanel.SuspendLayout();
-			this.flowLayoutPanel1.SuspendLayout();
+			this.ByPass.SuspendLayout();
+			this.Logs.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// TitleBar
@@ -164,6 +160,145 @@
 			this.Main.Size = new System.Drawing.Size(1272, 702);
 			this.Main.TabIndex = 0;
 			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 3;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.DoorImage, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.StatusPanel, 2, 0);
+			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(1272, 702);
+			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.ColumnCount = 1;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.Controls.Add(this.Sensor1Data, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.Sensor2Data, 0, 1);
+			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(508, 0);
+			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 2;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(508, 702);
+			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// Sensor1Data
+			// 
+			this.Sensor1Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.Sensor1Data.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor1Data.Location = new System.Drawing.Point(3, 3);
+			this.Sensor1Data.Name = "Sensor1Data";
+			this.Sensor1Data.RowHeadersWidth = 51;
+			this.Sensor1Data.RowTemplate.Height = 27;
+			this.Sensor1Data.Size = new System.Drawing.Size(502, 345);
+			this.Sensor1Data.TabIndex = 0;
+			// 
+			// Sensor2Data
+			// 
+			this.Sensor2Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.Sensor2Data.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor2Data.Location = new System.Drawing.Point(3, 354);
+			this.Sensor2Data.Name = "Sensor2Data";
+			this.Sensor2Data.RowHeadersWidth = 51;
+			this.Sensor2Data.RowTemplate.Height = 27;
+			this.Sensor2Data.Size = new System.Drawing.Size(502, 345);
+			this.Sensor2Data.TabIndex = 1;
+			// 
+			// DoorImage
+			// 
+			this.DoorImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.DoorImage.Location = new System.Drawing.Point(0, 0);
+			this.DoorImage.Margin = new System.Windows.Forms.Padding(0);
+			this.DoorImage.Name = "DoorImage";
+			this.DoorImage.Size = new System.Drawing.Size(508, 702);
+			this.DoorImage.TabIndex = 1;
+			this.DoorImage.TabStop = false;
+			// 
+			// StatusPanel
+			// 
+			this.StatusPanel.Controls.Add(this.flowLayoutPanel1);
+			this.StatusPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.StatusPanel.Location = new System.Drawing.Point(1016, 0);
+			this.StatusPanel.Margin = new System.Windows.Forms.Padding(0);
+			this.StatusPanel.Name = "StatusPanel";
+			this.StatusPanel.Size = new System.Drawing.Size(256, 702);
+			this.StatusPanel.TabIndex = 2;
+			this.StatusPanel.TabStop = false;
+			this.StatusPanel.Text = "연결 상태";
+			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Controls.Add(this.Sensor1Status);
+			this.flowLayoutPanel1.Controls.Add(this.Sensor2Status);
+			this.flowLayoutPanel1.Controls.Add(this.Robot1Status);
+			this.flowLayoutPanel1.Controls.Add(this.Robot2Status);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
+			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(250, 673);
+			this.flowLayoutPanel1.TabIndex = 0;
+			// 
+			// Sensor1Status
+			// 
+			this.Sensor1Status.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor1Status.ForeColor = System.Drawing.Color.White;
+			this.Sensor1Status.Location = new System.Drawing.Point(0, 5);
+			this.Sensor1Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+			this.Sensor1Status.Name = "Sensor1Status";
+			this.Sensor1Status.Size = new System.Drawing.Size(250, 70);
+			this.Sensor1Status.TabIndex = 0;
+			this.Sensor1Status.Text = "센서 1";
+			this.Sensor1Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Sensor2Status
+			// 
+			this.Sensor2Status.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor2Status.ForeColor = System.Drawing.Color.White;
+			this.Sensor2Status.Location = new System.Drawing.Point(0, 85);
+			this.Sensor2Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+			this.Sensor2Status.Name = "Sensor2Status";
+			this.Sensor2Status.Size = new System.Drawing.Size(250, 70);
+			this.Sensor2Status.TabIndex = 1;
+			this.Sensor2Status.Text = "센서 2";
+			this.Sensor2Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Robot1Status
+			// 
+			this.Robot1Status.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot1Status.ForeColor = System.Drawing.Color.White;
+			this.Robot1Status.Location = new System.Drawing.Point(0, 165);
+			this.Robot1Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+			this.Robot1Status.Name = "Robot1Status";
+			this.Robot1Status.Size = new System.Drawing.Size(250, 70);
+			this.Robot1Status.TabIndex = 2;
+			this.Robot1Status.Text = "로봇 1";
+			this.Robot1Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Robot2Status
+			// 
+			this.Robot2Status.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot2Status.ForeColor = System.Drawing.Color.White;
+			this.Robot2Status.Location = new System.Drawing.Point(0, 245);
+			this.Robot2Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+			this.Robot2Status.Name = "Robot2Status";
+			this.Robot2Status.Size = new System.Drawing.Size(250, 70);
+			this.Robot2Status.TabIndex = 3;
+			this.Robot2Status.Text = "로봇 2";
+			this.Robot2Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// Configuration
 			// 
 			this.Configuration.BackColor = System.Drawing.Color.White;
@@ -181,140 +316,6 @@
 			this.Statistics.Name = "Statistics";
 			this.Statistics.Size = new System.Drawing.Size(1272, 702);
 			this.Statistics.TabIndex = 2;
-			// 
-			// ByPass
-			// 
-			this.ByPass.BackColor = System.Drawing.Color.White;
-			this.ByPass.Controls.Add(this.BypassToggle);
-			this.ByPass.Controls.Add(this.label5);
-			this.ByPass.Location = new System.Drawing.Point(4, 14);
-			this.ByPass.Name = "ByPass";
-			this.ByPass.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.ByPass.Size = new System.Drawing.Size(1272, 702);
-			this.ByPass.TabIndex = 3;
-			// 
-			// BypassToggle
-			// 
-			this.BypassToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.BypassToggle.BackColor = System.Drawing.Color.DarkGray;
-			this.BypassToggle.FlatAppearance.BorderSize = 0;
-			this.BypassToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BypassToggle.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.BypassToggle.Location = new System.Drawing.Point(465, 343);
-			this.BypassToggle.Name = "BypassToggle";
-			this.BypassToggle.Size = new System.Drawing.Size(342, 50);
-			this.BypassToggle.TabIndex = 1;
-			this.BypassToggle.Text = "꺼짐";
-			this.BypassToggle.UseVisualStyleBackColor = false;
-			// 
-			// label5
-			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label5.Location = new System.Drawing.Point(432, 270);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(420, 60);
-			this.label5.TabIndex = 0;
-			this.label5.Text = "BY PASS 모드";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// Logs
-			// 
-			this.Logs.BackColor = System.Drawing.Color.White;
-			this.Logs.Controls.Add(this.LogConsole);
-			this.Logs.Location = new System.Drawing.Point(4, 14);
-			this.Logs.Name = "Logs";
-			this.Logs.Size = new System.Drawing.Size(1272, 702);
-			this.Logs.TabIndex = 4;
-			// 
-			// LogConsole
-			// 
-			this.LogConsole.BackColor = System.Drawing.Color.Black;
-			this.LogConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.LogConsole.ForeColor = System.Drawing.Color.Lime;
-			this.LogConsole.Location = new System.Drawing.Point(0, 0);
-			this.LogConsole.Margin = new System.Windows.Forms.Padding(0);
-			this.LogConsole.MaxLength = 65536;
-			this.LogConsole.Multiline = true;
-			this.LogConsole.Name = "LogConsole";
-			this.LogConsole.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.LogConsole.Size = new System.Drawing.Size(1272, 702);
-			this.LogConsole.TabIndex = 0;
-			// 
-			// MainTabButton
-			// 
-			this.MainTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.MainTabButton.FlatAppearance.BorderSize = 0;
-			this.MainTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.MainTabButton.Location = new System.Drawing.Point(0, 40);
-			this.MainTabButton.Margin = new System.Windows.Forms.Padding(0);
-			this.MainTabButton.Name = "MainTabButton";
-			this.MainTabButton.Size = new System.Drawing.Size(256, 40);
-			this.MainTabButton.TabIndex = 3;
-			this.MainTabButton.Text = "대시보드";
-			this.MainTabButton.UseVisualStyleBackColor = true;
-			this.MainTabButton.Click += new System.EventHandler(this.TabButton_Click);
-			// 
-			// StatisticsTabButton
-			// 
-			this.StatisticsTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.StatisticsTabButton.FlatAppearance.BorderSize = 0;
-			this.StatisticsTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.StatisticsTabButton.Location = new System.Drawing.Point(512, 40);
-			this.StatisticsTabButton.Margin = new System.Windows.Forms.Padding(0);
-			this.StatisticsTabButton.Name = "StatisticsTabButton";
-			this.StatisticsTabButton.Size = new System.Drawing.Size(256, 40);
-			this.StatisticsTabButton.TabIndex = 4;
-			this.StatisticsTabButton.Text = "통계";
-			this.StatisticsTabButton.UseVisualStyleBackColor = true;
-			this.StatisticsTabButton.Click += new System.EventHandler(this.TabButton_Click);
-			// 
-			// ConfigTabButton
-			// 
-			this.ConfigTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.ConfigTabButton.FlatAppearance.BorderSize = 0;
-			this.ConfigTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.ConfigTabButton.Location = new System.Drawing.Point(256, 40);
-			this.ConfigTabButton.Margin = new System.Windows.Forms.Padding(0);
-			this.ConfigTabButton.Name = "ConfigTabButton";
-			this.ConfigTabButton.Size = new System.Drawing.Size(256, 40);
-			this.ConfigTabButton.TabIndex = 5;
-			this.ConfigTabButton.Text = "설정";
-			this.ConfigTabButton.UseVisualStyleBackColor = true;
-			this.ConfigTabButton.Click += new System.EventHandler(this.TabButton_Click);
-			// 
-			// BypassTabButton
-			// 
-			this.BypassTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.BypassTabButton.FlatAppearance.BorderSize = 0;
-			this.BypassTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BypassTabButton.Location = new System.Drawing.Point(768, 40);
-			this.BypassTabButton.Margin = new System.Windows.Forms.Padding(0);
-			this.BypassTabButton.Name = "BypassTabButton";
-			this.BypassTabButton.Size = new System.Drawing.Size(256, 40);
-			this.BypassTabButton.TabIndex = 6;
-			this.BypassTabButton.Text = "BY PASS";
-			this.BypassTabButton.UseVisualStyleBackColor = true;
-			this.BypassTabButton.Click += new System.EventHandler(this.TabButton_Click);
-			// 
-			// LogTabButton
-			// 
-			this.LogTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.LogTabButton.FlatAppearance.BorderSize = 0;
-			this.LogTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.LogTabButton.Location = new System.Drawing.Point(1024, 40);
-			this.LogTabButton.Margin = new System.Windows.Forms.Padding(0);
-			this.LogTabButton.Name = "LogTabButton";
-			this.LogTabButton.Size = new System.Drawing.Size(256, 40);
-			this.LogTabButton.TabIndex = 7;
-			this.LogTabButton.Text = "로그";
-			this.LogTabButton.UseVisualStyleBackColor = true;
-			this.LogTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
 			// StatisticsChartArea
 			// 
@@ -468,65 +469,33 @@
 			// Stats
 			// 
 			chartArea4.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea4.Name = "Failed";
-			chartArea4.Position.Auto = false;
-			chartArea4.Position.Height = 85F;
-			chartArea4.Position.Width = 33F;
-			chartArea4.Position.Y = 3F;
-			chartArea5.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea5.Name = "Passed";
-			chartArea5.Position.Auto = false;
-			chartArea5.Position.Height = 85F;
-			chartArea5.Position.Width = 33F;
-			chartArea5.Position.X = 33F;
-			chartArea5.Position.Y = 3F;
-			chartArea6.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea6.Name = "Bended";
-			chartArea6.Position.Auto = false;
-			chartArea6.Position.Height = 85F;
-			chartArea6.Position.Width = 33F;
-			chartArea6.Position.X = 66F;
-			chartArea6.Position.Y = 3F;
+			chartArea4.Name = "StatsArea";
 			this.Stats.ChartAreas.Add(chartArea4);
-			this.Stats.ChartAreas.Add(chartArea5);
-			this.Stats.ChartAreas.Add(chartArea6);
 			this.Stats.Dock = System.Windows.Forms.DockStyle.Fill;
 			legend5.Alignment = System.Drawing.StringAlignment.Center;
-			legend5.DockedToChartArea = "Failed";
+			legend5.DockedToChartArea = "StatsArea";
 			legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
 			legend5.IsDockedInsideChartArea = false;
-			legend5.Name = "Failed";
-			legend6.Alignment = System.Drawing.StringAlignment.Center;
-			legend6.DockedToChartArea = "Passed";
-			legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend6.IsDockedInsideChartArea = false;
-			legend6.Name = "Passed";
-			legend7.Alignment = System.Drawing.StringAlignment.Center;
-			legend7.DockedToChartArea = "Bended";
-			legend7.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend7.IsDockedInsideChartArea = false;
-			legend7.Name = "Bended";
+			legend5.Name = "StatsLegend";
 			this.Stats.Legends.Add(legend5);
-			this.Stats.Legends.Add(legend6);
-			this.Stats.Legends.Add(legend7);
 			this.Stats.Location = new System.Drawing.Point(0, 421);
 			this.Stats.Margin = new System.Windows.Forms.Padding(0);
 			this.Stats.Name = "Stats";
 			this.Stats.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			series15.ChartArea = "Failed";
-			series15.Legend = "Failed";
+			series15.ChartArea = "StatsArea";
+			series15.Legend = "StatsLegend";
 			series15.LegendText = "벤딩불가";
 			series15.Name = "Failed";
-			series16.ChartArea = "Passed";
-			series16.Legend = "Passed";
+			series16.ChartArea = "StatsArea";
+			series16.Legend = "StatsLegend";
 			series16.LegendText = "통과";
 			series16.Name = "Passed";
-			series17.ChartArea = "Bended";
-			series17.Legend = "Bended";
+			series17.ChartArea = "StatsArea";
+			series17.Legend = "StatsLegend";
 			series17.LegendText = "1차 벤딩";
 			series17.Name = "FirstBended";
-			series18.ChartArea = "Bended";
-			series18.Legend = "Bended";
+			series18.ChartArea = "StatsArea";
+			series18.Legend = "StatsLegend";
 			series18.LegendText = "2차 벤딩";
 			series18.Name = "SecondBended";
 			this.Stats.Series.Add(series15);
@@ -537,143 +506,139 @@
 			this.Stats.TabIndex = 1;
 			this.Stats.Text = "chart2";
 			// 
-			// tableLayoutPanel1
+			// ByPass
 			// 
-			this.tableLayoutPanel1.ColumnCount = 3;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.DoorImage, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.StatusPanel, 2, 0);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(1272, 702);
-			this.tableLayoutPanel1.TabIndex = 0;
+			this.ByPass.BackColor = System.Drawing.Color.White;
+			this.ByPass.Controls.Add(this.BypassToggle);
+			this.ByPass.Controls.Add(this.label5);
+			this.ByPass.Location = new System.Drawing.Point(4, 14);
+			this.ByPass.Name = "ByPass";
+			this.ByPass.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.ByPass.Size = new System.Drawing.Size(1272, 702);
+			this.ByPass.TabIndex = 3;
 			// 
-			// tableLayoutPanel2
+			// BypassToggle
 			// 
-			this.tableLayoutPanel2.ColumnCount = 1;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.Controls.Add(this.Sensor1Data, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.Sensor2Data, 0, 1);
-			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(508, 0);
-			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 2;
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(508, 702);
-			this.tableLayoutPanel2.TabIndex = 0;
+			this.BypassToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.BypassToggle.BackColor = System.Drawing.Color.DarkGray;
+			this.BypassToggle.FlatAppearance.BorderSize = 0;
+			this.BypassToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BypassToggle.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.BypassToggle.Location = new System.Drawing.Point(465, 343);
+			this.BypassToggle.Name = "BypassToggle";
+			this.BypassToggle.Size = new System.Drawing.Size(342, 50);
+			this.BypassToggle.TabIndex = 1;
+			this.BypassToggle.Text = "꺼짐";
+			this.BypassToggle.UseVisualStyleBackColor = false;
 			// 
-			// DoorImage
+			// label5
 			// 
-			this.DoorImage.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DoorImage.Location = new System.Drawing.Point(3, 3);
-			this.DoorImage.Name = "DoorImage";
-			this.DoorImage.Size = new System.Drawing.Size(502, 696);
-			this.DoorImage.TabIndex = 1;
-			this.DoorImage.TabStop = false;
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label5.Location = new System.Drawing.Point(432, 270);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(420, 60);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "BY PASS 모드";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Sensor1Data
+			// Logs
 			// 
-			this.Sensor1Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.Sensor1Data.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor1Data.Location = new System.Drawing.Point(3, 3);
-			this.Sensor1Data.Name = "Sensor1Data";
-			this.Sensor1Data.RowHeadersWidth = 51;
-			this.Sensor1Data.RowTemplate.Height = 27;
-			this.Sensor1Data.Size = new System.Drawing.Size(502, 345);
-			this.Sensor1Data.TabIndex = 0;
+			this.Logs.BackColor = System.Drawing.Color.White;
+			this.Logs.Controls.Add(this.LogConsole);
+			this.Logs.Location = new System.Drawing.Point(4, 14);
+			this.Logs.Name = "Logs";
+			this.Logs.Size = new System.Drawing.Size(1272, 702);
+			this.Logs.TabIndex = 4;
 			// 
-			// Sensor2Data
+			// LogConsole
 			// 
-			this.Sensor2Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.Sensor2Data.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor2Data.Location = new System.Drawing.Point(3, 354);
-			this.Sensor2Data.Name = "Sensor2Data";
-			this.Sensor2Data.RowHeadersWidth = 51;
-			this.Sensor2Data.RowTemplate.Height = 27;
-			this.Sensor2Data.Size = new System.Drawing.Size(502, 345);
-			this.Sensor2Data.TabIndex = 1;
+			this.LogConsole.BackColor = System.Drawing.Color.Black;
+			this.LogConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.LogConsole.ForeColor = System.Drawing.Color.Lime;
+			this.LogConsole.Location = new System.Drawing.Point(0, 0);
+			this.LogConsole.Margin = new System.Windows.Forms.Padding(0);
+			this.LogConsole.MaxLength = 65536;
+			this.LogConsole.Multiline = true;
+			this.LogConsole.Name = "LogConsole";
+			this.LogConsole.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+			this.LogConsole.Size = new System.Drawing.Size(1272, 702);
+			this.LogConsole.TabIndex = 0;
 			// 
-			// StatusPanel
+			// MainTabButton
 			// 
-			this.StatusPanel.Controls.Add(this.flowLayoutPanel1);
-			this.StatusPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.StatusPanel.Location = new System.Drawing.Point(1016, 0);
-			this.StatusPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.StatusPanel.Name = "StatusPanel";
-			this.StatusPanel.Size = new System.Drawing.Size(256, 702);
-			this.StatusPanel.TabIndex = 2;
-			this.StatusPanel.TabStop = false;
-			this.StatusPanel.Text = "연결 상태";
+			this.MainTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.MainTabButton.FlatAppearance.BorderSize = 0;
+			this.MainTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.MainTabButton.Location = new System.Drawing.Point(0, 40);
+			this.MainTabButton.Margin = new System.Windows.Forms.Padding(0);
+			this.MainTabButton.Name = "MainTabButton";
+			this.MainTabButton.Size = new System.Drawing.Size(256, 40);
+			this.MainTabButton.TabIndex = 3;
+			this.MainTabButton.Text = "대시보드";
+			this.MainTabButton.UseVisualStyleBackColor = true;
+			this.MainTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
-			// flowLayoutPanel1
+			// StatisticsTabButton
 			// 
-			this.flowLayoutPanel1.Controls.Add(this.Sensor1Status);
-			this.flowLayoutPanel1.Controls.Add(this.Sensor2Status);
-			this.flowLayoutPanel1.Controls.Add(this.Robot1Status);
-			this.flowLayoutPanel1.Controls.Add(this.Robot2Status);
-			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
-			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(250, 673);
-			this.flowLayoutPanel1.TabIndex = 0;
+			this.StatisticsTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.StatisticsTabButton.FlatAppearance.BorderSize = 0;
+			this.StatisticsTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.StatisticsTabButton.Location = new System.Drawing.Point(512, 40);
+			this.StatisticsTabButton.Margin = new System.Windows.Forms.Padding(0);
+			this.StatisticsTabButton.Name = "StatisticsTabButton";
+			this.StatisticsTabButton.Size = new System.Drawing.Size(256, 40);
+			this.StatisticsTabButton.TabIndex = 4;
+			this.StatisticsTabButton.Text = "통계";
+			this.StatisticsTabButton.UseVisualStyleBackColor = true;
+			this.StatisticsTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
-			// Sensor1Status
+			// ConfigTabButton
 			// 
-			this.Sensor1Status.BackColor = System.Drawing.Color.OrangeRed;
-			this.Sensor1Status.ForeColor = System.Drawing.Color.White;
-			this.Sensor1Status.Location = new System.Drawing.Point(0, 5);
-			this.Sensor1Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-			this.Sensor1Status.Name = "Sensor1Status";
-			this.Sensor1Status.Size = new System.Drawing.Size(250, 70);
-			this.Sensor1Status.TabIndex = 0;
-			this.Sensor1Status.Text = "센서 1";
-			this.Sensor1Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.ConfigTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.ConfigTabButton.FlatAppearance.BorderSize = 0;
+			this.ConfigTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ConfigTabButton.Location = new System.Drawing.Point(256, 40);
+			this.ConfigTabButton.Margin = new System.Windows.Forms.Padding(0);
+			this.ConfigTabButton.Name = "ConfigTabButton";
+			this.ConfigTabButton.Size = new System.Drawing.Size(256, 40);
+			this.ConfigTabButton.TabIndex = 5;
+			this.ConfigTabButton.Text = "설정";
+			this.ConfigTabButton.UseVisualStyleBackColor = true;
+			this.ConfigTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
-			// Sensor2Status
+			// BypassTabButton
 			// 
-			this.Sensor2Status.BackColor = System.Drawing.Color.OrangeRed;
-			this.Sensor2Status.ForeColor = System.Drawing.Color.White;
-			this.Sensor2Status.Location = new System.Drawing.Point(0, 85);
-			this.Sensor2Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-			this.Sensor2Status.Name = "Sensor2Status";
-			this.Sensor2Status.Size = new System.Drawing.Size(250, 70);
-			this.Sensor2Status.TabIndex = 1;
-			this.Sensor2Status.Text = "센서 2";
-			this.Sensor2Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.BypassTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.BypassTabButton.FlatAppearance.BorderSize = 0;
+			this.BypassTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BypassTabButton.Location = new System.Drawing.Point(768, 40);
+			this.BypassTabButton.Margin = new System.Windows.Forms.Padding(0);
+			this.BypassTabButton.Name = "BypassTabButton";
+			this.BypassTabButton.Size = new System.Drawing.Size(256, 40);
+			this.BypassTabButton.TabIndex = 6;
+			this.BypassTabButton.Text = "BY PASS";
+			this.BypassTabButton.UseVisualStyleBackColor = true;
+			this.BypassTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
-			// Robot1Status
+			// LogTabButton
 			// 
-			this.Robot1Status.BackColor = System.Drawing.Color.OrangeRed;
-			this.Robot1Status.ForeColor = System.Drawing.Color.White;
-			this.Robot1Status.Location = new System.Drawing.Point(0, 165);
-			this.Robot1Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-			this.Robot1Status.Name = "Robot1Status";
-			this.Robot1Status.Size = new System.Drawing.Size(250, 70);
-			this.Robot1Status.TabIndex = 2;
-			this.Robot1Status.Text = "로봇 1";
-			this.Robot1Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// Robot2Status
-			// 
-			this.Robot2Status.BackColor = System.Drawing.Color.OrangeRed;
-			this.Robot2Status.ForeColor = System.Drawing.Color.White;
-			this.Robot2Status.Location = new System.Drawing.Point(0, 245);
-			this.Robot2Status.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-			this.Robot2Status.Name = "Robot2Status";
-			this.Robot2Status.Size = new System.Drawing.Size(250, 70);
-			this.Robot2Status.TabIndex = 3;
-			this.Robot2Status.Text = "로봇 2";
-			this.Robot2Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.LogTabButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.LogTabButton.FlatAppearance.BorderSize = 0;
+			this.LogTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.LogTabButton.Location = new System.Drawing.Point(1024, 40);
+			this.LogTabButton.Margin = new System.Windows.Forms.Padding(0);
+			this.LogTabButton.Name = "LogTabButton";
+			this.LogTabButton.Size = new System.Drawing.Size(256, 40);
+			this.LogTabButton.TabIndex = 7;
+			this.LogTabButton.Text = "로그";
+			this.LogTabButton.UseVisualStyleBackColor = true;
+			this.LogTabButton.Click += new System.EventHandler(this.TabButton_Click);
 			// 
 			// MainForm
 			// 
@@ -698,21 +663,21 @@
 			this.Text = "Tango_Project";
 			this.TabMenu.ResumeLayout(false);
 			this.Main.ResumeLayout(false);
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1Data)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2Data)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.DoorImage)).EndInit();
+			this.StatusPanel.ResumeLayout(false);
+			this.flowLayoutPanel1.ResumeLayout(false);
 			this.Statistics.ResumeLayout(false);
+			this.StatisticsChartArea.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.SensorChart)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Stats)).EndInit();
 			this.ByPass.ResumeLayout(false);
 			this.ByPass.PerformLayout();
 			this.Logs.ResumeLayout(false);
 			this.Logs.PerformLayout();
-			this.StatisticsChartArea.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.SensorChart)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Stats)).EndInit();
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.DoorImage)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Sensor1Data)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Sensor2Data)).EndInit();
-			this.StatusPanel.ResumeLayout(false);
-			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
