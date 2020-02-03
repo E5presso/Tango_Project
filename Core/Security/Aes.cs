@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Core.Security
 {
@@ -37,7 +38,7 @@ namespace Core.Security
 		{
 			Key = Security.Key.GenerateBytes(32);
 			byte[] iv = new byte[16];
-			Buffer.BlockCopy(Hash.SHA1(Key), 0, iv, 0, 16);
+			Array.Copy(Hash.SHA1(Key), iv, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
@@ -74,7 +75,7 @@ namespace Core.Security
 			if (key.Length > 32) throw new ArgumentException("키의 길이가 32바이트를 넘을 수 없습니다.");
 			Key = key;
 			byte[] iv = new byte[16];
-			Buffer.BlockCopy(Hash.SHA1(key), 0, iv, 0, 16);
+			Array.Copy(Hash.SHA1(key), iv, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
@@ -109,10 +110,9 @@ namespace Core.Security
 		/// <param name="key">지정할 키입니다.</param>
 		public void SetKey(byte[] key)
 		{
-			if (key.Length > 32) throw new ArgumentException("키의 길이가 32바이트를 넘을 수 없습니다.");
 			Key = key;
 			byte[] iv = new byte[16];
-			Buffer.BlockCopy(Hash.SHA1(key), 0, iv, 0, 16);
+			Array.Copy(Hash.SHA1(key), iv, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
@@ -145,6 +145,7 @@ namespace Core.Security
 			{
 				memory1.SetLength(0);
 				encrypt.Write(data, 0, data.Length);
+				encrypt.FlushFinalBlock();
 				encrypted = memory1.ToArray();
 				return true;
 			}
@@ -178,7 +179,30 @@ namespace Core.Security
 				return false;
 			}
 		}
-
+		/// <summary>
+		/// 데이터를 암호화합니다.
+		/// </summary>
+		/// <param name="data">암호화할 데이터입니다.</param>
+		/// <param name="encrypted">암호화된 데이터입니다.</param>
+		/// <returns>암호화 결과입니다.</returns>
+		public bool Encrypt(string data, out string encrypted)
+		{
+			bool result = Encrypt(Encoding.UTF8.GetBytes(data), out byte[] cipher);
+			encrypted = Base64.GetString(cipher);
+			return result;
+		}
+		/// <summary>
+		/// 데이터를 복호화합니다.
+		/// </summary>
+		/// <param name="data">복호화할 데이터입니다.</param>
+		/// <param name="decrypted">복호화된 데이터입니다.</param>
+		/// <returns>복호화 결과입니다.</returns>
+		public bool Decrypt(string data, out string decrypted)
+		{
+			bool result = Decrypt(Base64.GetBytes(data), out byte[] plain);
+			decrypted = Encoding.UTF8.GetString(plain);
+			return result;
+		}
 		#region IDisposable Support
 		private bool disposedValue = false;
 		/// <summary>

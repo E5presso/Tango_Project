@@ -12,14 +12,13 @@ namespace HMI
 {
     public partial class MainForm : Form
     {
-        private Point mousePosition;
-        private readonly Dictionary<object, int> tabList = new Dictionary<object, int>();
-
         public MainForm()
         {
             InitializeComponent();
         }
+
         #region 윈도우 UI 기본동작
+        private Point mousePosition;
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             base.OnMouseDown(e);

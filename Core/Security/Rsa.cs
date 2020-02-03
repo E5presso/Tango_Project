@@ -1,6 +1,6 @@
-﻿using Core.Collections;
-using System;
+﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Core.Security
 {
@@ -32,7 +32,6 @@ namespace Core.Security
 	public class Rsa : IDisposable
 	{
 		private string privateKey;
-		private readonly RingBuffer buffer;
 		private readonly RSACryptoServiceProvider service;
 
 		/// <summary>
@@ -58,7 +57,6 @@ namespace Core.Security
 		/// </summary>
 		public Rsa()
 		{
-			buffer = new RingBuffer();
 			service = new RSACryptoServiceProvider();
 			PrivateKey = service.ToXmlString(true);
 		}
@@ -68,7 +66,6 @@ namespace Core.Security
 		/// <param name="certificate">X.509 인증서를 지정합니다.</param>
 		public Rsa(X509 certificate)
 		{
-			buffer = new RingBuffer();
 			service = new RSACryptoServiceProvider();
 			if (certificate.HasPrivateKey) PrivateKey = certificate.PrivateKey;
 			else
@@ -118,6 +115,30 @@ namespace Core.Security
 				return false;
 			}
 		}
+		/// <summary>
+		/// 데이터를 암호화합니다.
+		/// </summary>
+		/// <param name="data">암호화할 데이터입니다.</param>
+		/// <param name="encrypted">암호화된 데이터입니다.</param>
+		/// <returns>암호화 결과입니다.</returns>
+		public bool Encrypt(string data, out string encrypted)
+		{
+			bool result = Encrypt(Encoding.UTF8.GetBytes(data), out byte[] cipher);
+			encrypted = Base64.GetString(cipher);
+			return result;
+		}
+		/// <summary>
+		/// 데이터를 복호화합니다.
+		/// </summary>
+		/// <param name="data">복호화할 데이터입니다.</param>
+		/// <param name="decrypted">복호화된 데이터입니다.</param>
+		/// <returns>복호화 결과입니다.</returns>
+		public bool Decrypt(string data, out string decrypted)
+		{
+			bool result = Decrypt(Base64.GetBytes(data), out byte[] plain);
+			decrypted = Encoding.UTF8.GetString(plain);
+			return result;
+		}
 
 		/// <summary>
 		/// 데이터에 서명합니다.
@@ -129,7 +150,6 @@ namespace Core.Security
 		{
 			try
 			{
-				buffer.Clear();
 				service.FromXmlString(privateKey);
 
 				byte[] sign;
@@ -161,40 +181,21 @@ namespace Core.Security
 						break;
 					}
 				}
-
-				byte[] dLength = BitConverter.GetBytes(data.Length);
-				byte[] sLength = BitConverter.GetBytes(sign.Length);
-
-				buffer.Write((byte)type);
-				buffer.Write(dLength);
-				buffer.Write(sLength);
-				buffer.Write(data);
-				buffer.Write(sign);
-
-				byte[] result = buffer.ToArray();
-				buffer.Clear();
-				return result;
+				return sign;
 			}
 			catch { throw; }
 		}
 		/// <summary>
 		/// 서명된 데이터를 검증합니다.
 		/// </summary>
-		/// <param name="signedData">서명된 데이터입니다.</param>
+		/// <param name="data">서명의 유효성을 검증할 데이터를 지정합니다.</param>
+		/// <param name="sign">데이터의 서명값을 지정합니다.</param>
+		/// <param name="type">서명에 사용한 해쉬 알고리즘을 지정합니다.</param>
 		/// <returns>검증 결과입니다.</returns>
-		public bool Verify(byte[] signedData)
+		public bool Verify(byte[] data, byte[] sign, HashType type = HashType.SHA256)
 		{
 			try
 			{
-				buffer.Clear();
-				buffer.Write(signedData);
-
-				HashType type = (HashType)buffer.Read();
-				int dLength = BitConverter.ToInt32(buffer.Read(4), 0);
-				int sLength = BitConverter.ToInt32(buffer.Read(4), 0);
-				byte[] data = buffer.Read(dLength);
-				byte[] sign = buffer.Read(sLength);
-
 				service.FromXmlString(PublicKey);
 				switch (type)
 				{
@@ -222,7 +223,27 @@ namespace Core.Security
 			}
 			catch { throw; }
 		}
-
+		/// <summary>
+		/// 데이터에 서명합니다.
+		/// </summary>
+		/// <param name="data">서명할 데이터입니다.</param>
+		/// <param name="type">서명에 사용할 해쉬함수를 지정합니다.</param>
+		/// <returns>서명된 데이터입니다.</returns>
+		public string Sign(string data, HashType type = HashType.SHA256)
+		{
+			return Base64.GetString(Sign(Encoding.UTF8.GetBytes(data), type));
+		}
+		/// <summary>
+		/// 서명된 데이터를 검증합니다.
+		/// </summary>
+		/// <param name="data">서명의 유효성을 검증할 데이터를 지정합니다.</param>
+		/// <param name="sign">데이터의 서명값을 지정합니다.</param>
+		/// <param name="type">서명에 사용한 해쉬 알고리즘을 지정합니다.</param>
+		/// <returns>검증 결과입니다.</returns>
+		public bool Verify(string data, string sign, HashType type = HashType.SHA256)
+		{
+			return Verify(Encoding.UTF8.GetBytes(data), Base64.GetBytes(sign), type);
+		}
 		#region IDisposable Support
 		private bool disposedValue = false;
 		/// <summary>
