@@ -493,9 +493,7 @@ namespace Middleware
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
 		{
 		}
-		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e)
-		{
-		}
+		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
 
 		private void Sensor_Sensor2Connected(object sender, ConnectEventArgs e)
 		{
@@ -617,9 +615,7 @@ namespace Middleware
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
 		{
 		}
-		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e)
-		{
-		}
+		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
 
 		private void Robot_Robot1Connected(object sender, ConnectEventArgs e)
 		{
@@ -747,9 +743,7 @@ namespace Middleware
 		private void Robot_Robot2Disconnected(object sender, DisconnectEventArgs e)
 		{
 		}
-		
-		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e)
-		{
-		}
+
+		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
 	}
 }
