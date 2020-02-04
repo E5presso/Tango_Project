@@ -38,7 +38,7 @@ namespace Core.Security
 		{
 			Key = Security.Key.GenerateBytes(32);
 			byte[] iv = new byte[16];
-			Array.Copy(Hash.SHA1(Key), iv, 16);
+			Buffer.BlockCopy(Hash.SHA1(Key), 0, iv, 0, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
@@ -75,7 +75,7 @@ namespace Core.Security
 			if (key.Length > 32) throw new ArgumentException("키의 길이가 32바이트를 넘을 수 없습니다.");
 			Key = key;
 			byte[] iv = new byte[16];
-			Array.Copy(Hash.SHA1(key), iv, 16);
+			Buffer.BlockCopy(Hash.SHA1(key), 0, iv, 0, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
@@ -112,7 +112,7 @@ namespace Core.Security
 		{
 			Key = key;
 			byte[] iv = new byte[16];
-			Array.Copy(Hash.SHA1(key), iv, 16);
+			Buffer.BlockCopy(Hash.SHA1(key), 0, iv, 0, 16);
 
 			memory1 = new MemoryStream();
 			memory2 = new MemoryStream();
