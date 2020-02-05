@@ -272,7 +272,7 @@ namespace Middleware
 			M[5] = 0x00;
 			M[6] = 0x00;
 		}
-		private void ProcessingSensorData(byte[] data)
+		private void ProcessingSensorData(string IP, byte[] data)
 		{
 			Buffer.BlockCopy(data, 68, Copy_X1, 0, 4);
 			Buffer.BlockCopy(data, 72, Copy_X2, 0, 4);
@@ -377,24 +377,30 @@ namespace Middleware
 
 				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 			}
 			else if (Bending_Cnt == 1)
 			{
 				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Second_Sensing.Sensor1 - First_Sensing.Sensor1, Second_Sensing.Sensor2 - First_Sensing.Sensor2);
-				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+
+				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
 			}
 			else if (Bending_Cnt == 2)
 			{
 				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Third_Sensing.Sensor1 - Second_Sensing.Sensor1, Third_Sensing.Sensor2 - Second_Sensing.Sensor2);
-				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+
+				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
 			}
 		}
 
@@ -437,7 +443,7 @@ namespace Middleware
 			}
 			else if (e.BytesRead == 116 && Sensor1_Receive_Data[3] == Measured_R_ID)
 			{
-				ProcessingSensorData(Sensor1_Receive_Data);
+				ProcessingSensorData(e.IP, Sensor1_Receive_Data);
 
 				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 				{
@@ -556,7 +562,7 @@ namespace Middleware
 			}
 			else if (e.BytesRead == 116 && Sensor2_Receive_Data[3] == Measured_R_ID)
 			{
-				ProcessingSensorData(Sensor2_Receive_Data);
+				ProcessingSensorData(e.IP, Sensor2_Receive_Data);
 
 				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 				{
