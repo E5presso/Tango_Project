@@ -79,6 +79,7 @@ namespace Middleware
 		private SensorValue First_Sensing {get; set;}
 		private SensorValue Second_Sensing { get; set; }
 		private SensorValue Third_Sensing { get; set; }
+		private SensorValue Delta { get; set; }
 
 		private readonly Sensor sensor;
 		private readonly Robot robot;
@@ -371,13 +372,15 @@ namespace Middleware
 			else if (Bending_Cnt == 1)
 			{
 				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
-				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, ));
+				Delta = new SensorValue(Second_Sensing.Sensor1 - First_Sensing.Sensor1, Second_Sensing.Sensor2 - First_Sensing.Sensor2);
+				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
 			}
 
 			else if (Bending_Cnt == 2)
 			{
 				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
-				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, ));
+				Delta = new SensorValue(Third_Sensing.Sensor1 - Second_Sensing.Sensor1, Third_Sensing.Sensor2 - Second_Sensing.Sensor2);
+				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
 			}
 		}
 
