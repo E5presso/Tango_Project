@@ -25,7 +25,7 @@ namespace Middleware
 
 		/* Robot 통신 Data */
 		bool Interlock_R1, Interlock_R2;    // 둘 다 true가 되어야 다음 단계 진행
-		int Door_Information;				// 현재 Door가 FDLH인지 FDRH인지를 구분
+		int Door_Information;               // 현재 Door가 FDLH인지 FDRH인지를 구분
 		const int FDLH = 0x38;
 		const int FDRH = 0x34;
 		const int Robot1_Number = 0x38;
@@ -43,38 +43,42 @@ namespace Middleware
 		bool Timing;    // true이면 Timing on 상태 false이면 Timing off 상태
 
 		/* 기타 Data */
-		int Bending_Cnt;				// Bending 횟수
+		int Bending_Cnt;                // Bending 횟수
 
-		byte[] Copy_X1 = new byte[4];	// Sensor 측정값(Byte)
-		byte[] Copy_X2 = new byte[4];	// Sensor 측정값(Byte)
+		byte[] Copy_X1 = new byte[4];   // Sensor 측정값(Byte)
+		byte[] Copy_X2 = new byte[4];   // Sensor 측정값(Byte)
 		int X1, X2;                     // Sensor 측정값(Int)
-		int X1_DP, X2_DP;				// Sensor 소수점
-		int X1_Multiply;				// T, L 계산시 곱셈으로 사용되는 변수
-		int X2_Multiply;				// T, L 계산시 곱셈으로 사용되는 변수
+		int X1_DP, X2_DP;               // Sensor 소수점
+		int X1_Multiply;                // T, L 계산시 곱셈으로 사용되는 변수
+		int X2_Multiply;                // T, L 계산시 곱셈으로 사용되는 변수
 
-		byte[] Byte_X1;					// 소수점 없는 X1(Byte)
-		byte[] Byte_X2;					// 소수점 없는 X2(Byte)
+		byte[] Byte_X1;                 // 소수점 없는 X1(Byte)
+		byte[] Byte_X2;                 // 소수점 없는 X2(Byte)
 
-		double Double_DP_X1;			// 소수점 있는 X1(Double)
-		double Double_DP_X2;			// 소수점 있는 X2(Double)
+		double Double_DP_X1;            // 소수점 있는 X1(Double)
+		double Double_DP_X2;            // 소수점 있는 X2(Double)
 
-		double X1_Plus_T;				// X1 +Tolerance 
-		double X1_Minus_T;				// X1 -Tolerance
-		double X2_Plus_T;				// X2 +Tolerance 
-		double X2_Minus_T;				// X2 -Tolerance
+		double X1_Plus_T;               // X1 +Tolerance 
+		double X1_Minus_T;              // X1 -Tolerance
+		double X2_Plus_T;               // X2 +Tolerance 
+		double X2_Minus_T;              // X2 -Tolerance
 
-		double X1_Plus_L;				// X1 +Limit
-		double X1_Minus_L;				// X1 -Limit
-		double X2_Plus_L;				// X2 +Limit
-		double X2_Minus_L;				// X2 -Limit
+		double X1_Plus_L;               // X1 +Limit
+		double X1_Minus_L;              // X1 -Limit
+		double X2_Plus_L;               // X2 +Limit
+		double X2_Minus_L;              // X2 -Limit
 
-		const int DP0 = 0;				// (Decimal Point) 소수점 2째짜리(mm)
-		const int DP1 = 1;				// 소수점 3째짜리(mm)
-		const int DP2 = 2;				// 소수점 4째짜리(mm)
-		const int DP3 = 3;				// 소수점 5째짜리(mm)
-		const int DP4 = 4;				// 소수점 1째짜리(um)
-		const int DP5 = 5;				// 소수점 2째짜리(um)
-		const int DP6 = 6;				// 소수점 3째짜리(um)
+		const int DP0 = 0;              // (Decimal Point) 소수점 2째짜리(mm)
+		const int DP1 = 1;              // 소수점 3째짜리(mm)
+		const int DP2 = 2;              // 소수점 4째짜리(mm)
+		const int DP3 = 3;              // 소수점 5째짜리(mm)
+		const int DP4 = 4;              // 소수점 1째짜리(um)
+		const int DP5 = 5;              // 소수점 2째짜리(um)
+		const int DP6 = 6;              // 소수점 3째짜리(um)
+
+		private SensorValue First_Sensing {get; set;}
+		private SensorValue Second_Sensing { get; set; }
+		private SensorValue Third_Sensing { get; set; }
 
 		private readonly Sensor sensor;
 		private readonly Robot robot;
@@ -351,25 +355,29 @@ namespace Middleware
 
 			if (Bending_Cnt == 0)
 			{
-				if ((X1 < X1_Minus_L && X1 > X1_Plus_L) && (X2 < X2_Minus_L && X2 > X2_Plus_L))
+				First_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
+
+				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-						
+					SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
 
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-
+					SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 			}
 
 			else if (Bending_Cnt == 1)
 			{
-
+				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
+				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, ));
 			}
 
 			else if (Bending_Cnt == 2)
 			{
-
+				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
+				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, ));
 			}
 		}
 
@@ -392,6 +400,7 @@ namespace Middleware
 			{
 				Timing_On_Input(Timing_On);
 				Timing = true;
+				// delay 필요
 				SendToSensor1(Timing_On);
 			}
 
@@ -514,6 +523,7 @@ namespace Middleware
 			{
 				Timing_On_Input(Timing_On);
 				Timing = true;
+				// delay필요
 				SendToSensor2(Timing_On);
 			}
 

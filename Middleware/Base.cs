@@ -22,10 +22,10 @@ namespace Middleware
 
 	public struct SensorValue
 	{
-		public float Sensor1 { get; private set; }
-		public float Sensor2 { get; private set; }
+		public double Sensor1 { get; private set; }
+		public double Sensor2 { get; private set; }
 
-		public SensorValue(float sensor1, float sensor2)
+		public SensorValue(double sensor1, double sensor2)
 		{
 			Sensor1 = sensor1;
 			Sensor2 = sensor2;
