@@ -72,14 +72,16 @@
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.LeftDoorImage = new System.Windows.Forms.PictureBox();
 			this.RightDoorImage = new System.Windows.Forms.PictureBox();
-			this.Configuration = new System.Windows.Forms.TabPage();
-			this.ConfigPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.BiasConfig = new System.Windows.Forms.GroupBox();
-			this.BiasConfigPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.FileConfig = new System.Windows.Forms.GroupBox();
-			this.FileSaveConfig = new System.Windows.Forms.TableLayoutPanel();
-			this.NetworkConfig = new System.Windows.Forms.GroupBox();
-			this.SocketsConfig = new System.Windows.Forms.TableLayoutPanel();
+			this.RobotPhase = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+			this.Robot2PhaseGroup = new System.Windows.Forms.GroupBox();
+			this.Robot2PhasePanel = new System.Windows.Forms.TableLayoutPanel();
+			this.Robot2PhaseText = new System.Windows.Forms.TextBox();
+			this.Robot2PhaseImage = new System.Windows.Forms.PictureBox();
+			this.Robot1PhaseGroup = new System.Windows.Forms.GroupBox();
+			this.Robot1PhasePanel = new System.Windows.Forms.TableLayoutPanel();
+			this.Robot1PhaseImage = new System.Windows.Forms.PictureBox();
+			this.Robot1PhaseText = new System.Windows.Forms.TextBox();
 			this.Statistics = new System.Windows.Forms.TabPage();
 			this.StatisticsChartArea = new System.Windows.Forms.TableLayoutPanel();
 			this.SensorChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -91,18 +93,42 @@
 			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
 			this.BypassToggle = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
+			this.Configuration = new System.Windows.Forms.TabPage();
+			this.ConfigPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.BiasConfig = new System.Windows.Forms.GroupBox();
+			this.BiasConfigPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.FileConfig = new System.Windows.Forms.GroupBox();
+			this.FileSaveConfig = new System.Windows.Forms.TableLayoutPanel();
+			this.NetworkConfig = new System.Windows.Forms.GroupBox();
+			this.SocketsConfig = new System.Windows.Forms.TableLayoutPanel();
+			this.RobotConnectionConfig = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+			this.Robot2IpAddress = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+			this.Robot1IpAddress = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.SensorConnectionConfig = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+			this.Sensor2IpAddress = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.Sensor1IpAddress = new System.Windows.Forms.TextBox();
 			this.Logs = new System.Windows.Forms.TabPage();
 			this.LogConsole = new System.Windows.Forms.TextBox();
 			this.GlobalFormLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.Exit = new System.Windows.Forms.Button();
 			this.TitleBar = new System.Windows.Forms.Label();
-			this.RobotPhase = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-			this.Robot1Image = new System.Windows.Forms.PictureBox();
-			this.Robot2Image = new System.Windows.Forms.PictureBox();
-			this.Robot1Text = new System.Windows.Forms.TextBox();
-			this.Robot2Text = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.SensorConnectionSave = new System.Windows.Forms.Button();
+			this.RobotConnectionSave = new System.Windows.Forms.Button();
 			this.TabMenu.SuspendLayout();
 			this.Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -114,11 +140,14 @@
 			this.tableLayoutPanel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.LeftDoorImage)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.RightDoorImage)).BeginInit();
-			this.Configuration.SuspendLayout();
-			this.ConfigPanel.SuspendLayout();
-			this.BiasConfig.SuspendLayout();
-			this.FileConfig.SuspendLayout();
-			this.NetworkConfig.SuspendLayout();
+			this.RobotPhase.SuspendLayout();
+			this.tableLayoutPanel9.SuspendLayout();
+			this.Robot2PhaseGroup.SuspendLayout();
+			this.Robot2PhasePanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Robot2PhaseImage)).BeginInit();
+			this.Robot1PhaseGroup.SuspendLayout();
+			this.Robot1PhasePanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Robot1PhaseImage)).BeginInit();
 			this.Statistics.SuspendLayout();
 			this.StatisticsChartArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.SensorChart)).BeginInit();
@@ -128,22 +157,32 @@
 			this.ByPass.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
+			this.Configuration.SuspendLayout();
+			this.ConfigPanel.SuspendLayout();
+			this.BiasConfig.SuspendLayout();
+			this.FileConfig.SuspendLayout();
+			this.NetworkConfig.SuspendLayout();
+			this.SocketsConfig.SuspendLayout();
+			this.RobotConnectionConfig.SuspendLayout();
+			this.tableLayoutPanel12.SuspendLayout();
+			this.tableLayoutPanel14.SuspendLayout();
+			this.tableLayoutPanel15.SuspendLayout();
+			this.SensorConnectionConfig.SuspendLayout();
+			this.tableLayoutPanel10.SuspendLayout();
+			this.tableLayoutPanel13.SuspendLayout();
+			this.tableLayoutPanel11.SuspendLayout();
 			this.Logs.SuspendLayout();
 			this.GlobalFormLayout.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
-			this.RobotPhase.SuspendLayout();
-			this.tableLayoutPanel9.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.Robot1Image)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Robot2Image)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// TabMenu
 			// 
 			this.TabMenu.Controls.Add(this.Main);
 			this.TabMenu.Controls.Add(this.RobotPhase);
-			this.TabMenu.Controls.Add(this.Configuration);
 			this.TabMenu.Controls.Add(this.Statistics);
 			this.TabMenu.Controls.Add(this.ByPass);
+			this.TabMenu.Controls.Add(this.Configuration);
 			this.TabMenu.Controls.Add(this.Logs);
 			this.TabMenu.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TabMenu.ItemSize = new System.Drawing.Size(180, 50);
@@ -361,117 +400,132 @@
 			this.RightDoorImage.TabIndex = 1;
 			this.RightDoorImage.TabStop = false;
 			// 
-			// Configuration
+			// RobotPhase
 			// 
-			this.Configuration.BackColor = System.Drawing.Color.White;
-			this.Configuration.Controls.Add(this.ConfigPanel);
-			this.Configuration.Location = new System.Drawing.Point(4, 54);
-			this.Configuration.Margin = new System.Windows.Forms.Padding(0);
-			this.Configuration.Name = "Configuration";
-			this.Configuration.Size = new System.Drawing.Size(1272, 702);
-			this.Configuration.TabIndex = 1;
-			this.Configuration.Text = "Config";
+			this.RobotPhase.Controls.Add(this.tableLayoutPanel9);
+			this.RobotPhase.Location = new System.Drawing.Point(4, 54);
+			this.RobotPhase.Name = "RobotPhase";
+			this.RobotPhase.Padding = new System.Windows.Forms.Padding(3);
+			this.RobotPhase.Size = new System.Drawing.Size(1272, 702);
+			this.RobotPhase.TabIndex = 5;
+			this.RobotPhase.Text = "Robot Phase";
+			this.RobotPhase.UseVisualStyleBackColor = true;
 			// 
-			// ConfigPanel
+			// tableLayoutPanel9
 			// 
-			this.ConfigPanel.ColumnCount = 3;
-			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ConfigPanel.Controls.Add(this.BiasConfig, 2, 0);
-			this.ConfigPanel.Controls.Add(this.FileConfig, 1, 0);
-			this.ConfigPanel.Controls.Add(this.NetworkConfig, 0, 0);
-			this.ConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ConfigPanel.Location = new System.Drawing.Point(0, 0);
-			this.ConfigPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.ConfigPanel.Name = "ConfigPanel";
-			this.ConfigPanel.RowCount = 1;
-			this.ConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.ConfigPanel.Size = new System.Drawing.Size(1272, 702);
-			this.ConfigPanel.TabIndex = 0;
+			this.tableLayoutPanel9.ColumnCount = 2;
+			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel9.Controls.Add(this.Robot2PhaseGroup, 1, 0);
+			this.tableLayoutPanel9.Controls.Add(this.Robot1PhaseGroup, 0, 0);
+			this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+			this.tableLayoutPanel9.RowCount = 1;
+			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 696F));
+			this.tableLayoutPanel9.Size = new System.Drawing.Size(1266, 696);
+			this.tableLayoutPanel9.TabIndex = 0;
 			// 
-			// BiasConfig
+			// Robot2PhaseGroup
 			// 
-			this.BiasConfig.Controls.Add(this.BiasConfigPanel);
-			this.BiasConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BiasConfig.Location = new System.Drawing.Point(852, 4);
-			this.BiasConfig.Margin = new System.Windows.Forms.Padding(4);
-			this.BiasConfig.Name = "BiasConfig";
-			this.BiasConfig.Padding = new System.Windows.Forms.Padding(0);
-			this.BiasConfig.Size = new System.Drawing.Size(416, 694);
-			this.BiasConfig.TabIndex = 2;
-			this.BiasConfig.TabStop = false;
-			this.BiasConfig.Text = "Offset";
+			this.Robot2PhaseGroup.Controls.Add(this.Robot2PhasePanel);
+			this.Robot2PhaseGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2PhaseGroup.Location = new System.Drawing.Point(637, 4);
+			this.Robot2PhaseGroup.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot2PhaseGroup.Name = "Robot2PhaseGroup";
+			this.Robot2PhaseGroup.Padding = new System.Windows.Forms.Padding(0);
+			this.Robot2PhaseGroup.Size = new System.Drawing.Size(625, 688);
+			this.Robot2PhaseGroup.TabIndex = 1;
+			this.Robot2PhaseGroup.TabStop = false;
+			this.Robot2PhaseGroup.Text = "Robot 2";
 			// 
-			// BiasConfigPanel
+			// Robot2PhasePanel
 			// 
-			this.BiasConfigPanel.ColumnCount = 2;
-			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.BiasConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BiasConfigPanel.Location = new System.Drawing.Point(0, 23);
-			this.BiasConfigPanel.Name = "BiasConfigPanel";
-			this.BiasConfigPanel.RowCount = 2;
-			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.BiasConfigPanel.Size = new System.Drawing.Size(416, 671);
-			this.BiasConfigPanel.TabIndex = 0;
+			this.Robot2PhasePanel.ColumnCount = 1;
+			this.Robot2PhasePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.Robot2PhasePanel.Controls.Add(this.Robot2PhaseText, 0, 1);
+			this.Robot2PhasePanel.Controls.Add(this.Robot2PhaseImage, 0, 0);
+			this.Robot2PhasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2PhasePanel.Location = new System.Drawing.Point(0, 23);
+			this.Robot2PhasePanel.Margin = new System.Windows.Forms.Padding(0);
+			this.Robot2PhasePanel.Name = "Robot2PhasePanel";
+			this.Robot2PhasePanel.RowCount = 2;
+			this.Robot2PhasePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+			this.Robot2PhasePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.Robot2PhasePanel.Size = new System.Drawing.Size(625, 665);
+			this.Robot2PhasePanel.TabIndex = 1;
 			// 
-			// FileConfig
+			// Robot2PhaseText
 			// 
-			this.FileConfig.Controls.Add(this.FileSaveConfig);
-			this.FileConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.FileConfig.Location = new System.Drawing.Point(428, 4);
-			this.FileConfig.Margin = new System.Windows.Forms.Padding(4);
-			this.FileConfig.Name = "FileConfig";
-			this.FileConfig.Padding = new System.Windows.Forms.Padding(0);
-			this.FileConfig.Size = new System.Drawing.Size(416, 694);
-			this.FileConfig.TabIndex = 1;
-			this.FileConfig.TabStop = false;
-			this.FileConfig.Text = "File";
+			this.Robot2PhaseText.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2PhaseText.Location = new System.Drawing.Point(4, 536);
+			this.Robot2PhaseText.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot2PhaseText.Multiline = true;
+			this.Robot2PhaseText.Name = "Robot2PhaseText";
+			this.Robot2PhaseText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.Robot2PhaseText.Size = new System.Drawing.Size(617, 125);
+			this.Robot2PhaseText.TabIndex = 2;
 			// 
-			// FileSaveConfig
+			// Robot2PhaseImage
 			// 
-			this.FileSaveConfig.ColumnCount = 1;
-			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.FileSaveConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.FileSaveConfig.Location = new System.Drawing.Point(0, 23);
-			this.FileSaveConfig.Margin = new System.Windows.Forms.Padding(0);
-			this.FileSaveConfig.Name = "FileSaveConfig";
-			this.FileSaveConfig.RowCount = 2;
-			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.FileSaveConfig.Size = new System.Drawing.Size(416, 671);
-			this.FileSaveConfig.TabIndex = 1;
+			this.Robot2PhaseImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2PhaseImage.Location = new System.Drawing.Point(4, 4);
+			this.Robot2PhaseImage.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot2PhaseImage.Name = "Robot2PhaseImage";
+			this.Robot2PhaseImage.Size = new System.Drawing.Size(617, 524);
+			this.Robot2PhaseImage.TabIndex = 1;
+			this.Robot2PhaseImage.TabStop = false;
 			// 
-			// NetworkConfig
+			// Robot1PhaseGroup
 			// 
-			this.NetworkConfig.Controls.Add(this.SocketsConfig);
-			this.NetworkConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.NetworkConfig.Location = new System.Drawing.Point(4, 4);
-			this.NetworkConfig.Margin = new System.Windows.Forms.Padding(4);
-			this.NetworkConfig.Name = "NetworkConfig";
-			this.NetworkConfig.Padding = new System.Windows.Forms.Padding(0);
-			this.NetworkConfig.Size = new System.Drawing.Size(416, 694);
-			this.NetworkConfig.TabIndex = 0;
-			this.NetworkConfig.TabStop = false;
-			this.NetworkConfig.Text = "Network";
+			this.Robot1PhaseGroup.Controls.Add(this.Robot1PhasePanel);
+			this.Robot1PhaseGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1PhaseGroup.Location = new System.Drawing.Point(4, 4);
+			this.Robot1PhaseGroup.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot1PhaseGroup.Name = "Robot1PhaseGroup";
+			this.Robot1PhaseGroup.Padding = new System.Windows.Forms.Padding(0);
+			this.Robot1PhaseGroup.Size = new System.Drawing.Size(625, 688);
+			this.Robot1PhaseGroup.TabIndex = 0;
+			this.Robot1PhaseGroup.TabStop = false;
+			this.Robot1PhaseGroup.Text = "Robot 1";
 			// 
-			// SocketsConfig
+			// Robot1PhasePanel
 			// 
-			this.SocketsConfig.ColumnCount = 1;
-			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.SocketsConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SocketsConfig.Location = new System.Drawing.Point(0, 23);
-			this.SocketsConfig.Margin = new System.Windows.Forms.Padding(0);
-			this.SocketsConfig.Name = "SocketsConfig";
-			this.SocketsConfig.RowCount = 2;
-			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.SocketsConfig.Size = new System.Drawing.Size(416, 671);
-			this.SocketsConfig.TabIndex = 0;
+			this.Robot1PhasePanel.ColumnCount = 1;
+			this.Robot1PhasePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.Robot1PhasePanel.Controls.Add(this.Robot1PhaseImage, 0, 0);
+			this.Robot1PhasePanel.Controls.Add(this.Robot1PhaseText, 0, 1);
+			this.Robot1PhasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1PhasePanel.Location = new System.Drawing.Point(0, 23);
+			this.Robot1PhasePanel.Margin = new System.Windows.Forms.Padding(0);
+			this.Robot1PhasePanel.Name = "Robot1PhasePanel";
+			this.Robot1PhasePanel.RowCount = 2;
+			this.Robot1PhasePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+			this.Robot1PhasePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.Robot1PhasePanel.Size = new System.Drawing.Size(625, 665);
+			this.Robot1PhasePanel.TabIndex = 0;
+			// 
+			// Robot1PhaseImage
+			// 
+			this.Robot1PhaseImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1PhaseImage.Location = new System.Drawing.Point(4, 4);
+			this.Robot1PhaseImage.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot1PhaseImage.Name = "Robot1PhaseImage";
+			this.Robot1PhaseImage.Size = new System.Drawing.Size(617, 524);
+			this.Robot1PhaseImage.TabIndex = 0;
+			this.Robot1PhaseImage.TabStop = false;
+			// 
+			// Robot1PhaseText
+			// 
+			this.Robot1PhaseText.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1PhaseText.Location = new System.Drawing.Point(4, 536);
+			this.Robot1PhaseText.Margin = new System.Windows.Forms.Padding(4);
+			this.Robot1PhaseText.Multiline = true;
+			this.Robot1PhaseText.Name = "Robot1PhaseText";
+			this.Robot1PhaseText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.Robot1PhaseText.Size = new System.Drawing.Size(617, 125);
+			this.Robot1PhaseText.TabIndex = 1;
 			// 
 			// Statistics
 			// 
@@ -802,8 +856,344 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(416, 155);
 			this.label5.TabIndex = 1;
-			this.label5.Text = "BY PASS MODE";
+			this.label5.Text = "BYPASS MODE";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Configuration
+			// 
+			this.Configuration.BackColor = System.Drawing.Color.White;
+			this.Configuration.Controls.Add(this.ConfigPanel);
+			this.Configuration.Location = new System.Drawing.Point(4, 54);
+			this.Configuration.Margin = new System.Windows.Forms.Padding(0);
+			this.Configuration.Name = "Configuration";
+			this.Configuration.Size = new System.Drawing.Size(1272, 702);
+			this.Configuration.TabIndex = 1;
+			this.Configuration.Text = "Config";
+			// 
+			// ConfigPanel
+			// 
+			this.ConfigPanel.ColumnCount = 3;
+			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ConfigPanel.Controls.Add(this.BiasConfig, 2, 0);
+			this.ConfigPanel.Controls.Add(this.FileConfig, 1, 0);
+			this.ConfigPanel.Controls.Add(this.NetworkConfig, 0, 0);
+			this.ConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ConfigPanel.Location = new System.Drawing.Point(0, 0);
+			this.ConfigPanel.Margin = new System.Windows.Forms.Padding(0);
+			this.ConfigPanel.Name = "ConfigPanel";
+			this.ConfigPanel.RowCount = 1;
+			this.ConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.ConfigPanel.Size = new System.Drawing.Size(1272, 702);
+			this.ConfigPanel.TabIndex = 0;
+			// 
+			// BiasConfig
+			// 
+			this.BiasConfig.Controls.Add(this.BiasConfigPanel);
+			this.BiasConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.BiasConfig.Location = new System.Drawing.Point(852, 4);
+			this.BiasConfig.Margin = new System.Windows.Forms.Padding(4);
+			this.BiasConfig.Name = "BiasConfig";
+			this.BiasConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.BiasConfig.Size = new System.Drawing.Size(416, 694);
+			this.BiasConfig.TabIndex = 2;
+			this.BiasConfig.TabStop = false;
+			this.BiasConfig.Text = "Offset";
+			// 
+			// BiasConfigPanel
+			// 
+			this.BiasConfigPanel.ColumnCount = 2;
+			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.BiasConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.BiasConfigPanel.Location = new System.Drawing.Point(0, 23);
+			this.BiasConfigPanel.Margin = new System.Windows.Forms.Padding(4);
+			this.BiasConfigPanel.Name = "BiasConfigPanel";
+			this.BiasConfigPanel.RowCount = 2;
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.BiasConfigPanel.Size = new System.Drawing.Size(416, 671);
+			this.BiasConfigPanel.TabIndex = 0;
+			// 
+			// FileConfig
+			// 
+			this.FileConfig.Controls.Add(this.FileSaveConfig);
+			this.FileConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.FileConfig.Location = new System.Drawing.Point(428, 4);
+			this.FileConfig.Margin = new System.Windows.Forms.Padding(4);
+			this.FileConfig.Name = "FileConfig";
+			this.FileConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.FileConfig.Size = new System.Drawing.Size(416, 694);
+			this.FileConfig.TabIndex = 1;
+			this.FileConfig.TabStop = false;
+			this.FileConfig.Text = "File";
+			// 
+			// FileSaveConfig
+			// 
+			this.FileSaveConfig.ColumnCount = 1;
+			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.FileSaveConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.FileSaveConfig.Location = new System.Drawing.Point(0, 23);
+			this.FileSaveConfig.Margin = new System.Windows.Forms.Padding(4);
+			this.FileSaveConfig.Name = "FileSaveConfig";
+			this.FileSaveConfig.RowCount = 2;
+			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.FileSaveConfig.Size = new System.Drawing.Size(416, 671);
+			this.FileSaveConfig.TabIndex = 1;
+			// 
+			// NetworkConfig
+			// 
+			this.NetworkConfig.Controls.Add(this.SocketsConfig);
+			this.NetworkConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.NetworkConfig.Location = new System.Drawing.Point(4, 4);
+			this.NetworkConfig.Margin = new System.Windows.Forms.Padding(4);
+			this.NetworkConfig.Name = "NetworkConfig";
+			this.NetworkConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.NetworkConfig.Size = new System.Drawing.Size(416, 694);
+			this.NetworkConfig.TabIndex = 0;
+			this.NetworkConfig.TabStop = false;
+			this.NetworkConfig.Text = "Network";
+			// 
+			// SocketsConfig
+			// 
+			this.SocketsConfig.ColumnCount = 1;
+			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.SocketsConfig.Controls.Add(this.RobotConnectionConfig, 0, 1);
+			this.SocketsConfig.Controls.Add(this.SensorConnectionConfig, 0, 0);
+			this.SocketsConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SocketsConfig.Location = new System.Drawing.Point(0, 23);
+			this.SocketsConfig.Margin = new System.Windows.Forms.Padding(4);
+			this.SocketsConfig.Name = "SocketsConfig";
+			this.SocketsConfig.RowCount = 2;
+			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.SocketsConfig.Size = new System.Drawing.Size(416, 671);
+			this.SocketsConfig.TabIndex = 0;
+			// 
+			// RobotConnectionConfig
+			// 
+			this.RobotConnectionConfig.Controls.Add(this.tableLayoutPanel12);
+			this.RobotConnectionConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RobotConnectionConfig.Location = new System.Drawing.Point(3, 338);
+			this.RobotConnectionConfig.Name = "RobotConnectionConfig";
+			this.RobotConnectionConfig.Padding = new System.Windows.Forms.Padding(4);
+			this.RobotConnectionConfig.Size = new System.Drawing.Size(410, 330);
+			this.RobotConnectionConfig.TabIndex = 1;
+			this.RobotConnectionConfig.TabStop = false;
+			this.RobotConnectionConfig.Text = "Robot Connection";
+			// 
+			// tableLayoutPanel12
+			// 
+			this.tableLayoutPanel12.ColumnCount = 1;
+			this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel12.Controls.Add(this.RobotConnectionSave, 0, 4);
+			this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel14, 0, 2);
+			this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel15, 0, 0);
+			this.tableLayoutPanel12.Controls.Add(this.label8, 0, 1);
+			this.tableLayoutPanel12.Controls.Add(this.label9, 0, 3);
+			this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel12.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(10);
+			this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+			this.tableLayoutPanel12.RowCount = 5;
+			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel12.Size = new System.Drawing.Size(402, 299);
+			this.tableLayoutPanel12.TabIndex = 1;
+			// 
+			// tableLayoutPanel14
+			// 
+			this.tableLayoutPanel14.ColumnCount = 2;
+			this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+			this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanel14.Controls.Add(this.Robot2IpAddress, 0, 0);
+			this.tableLayoutPanel14.Controls.Add(this.label4, 0, 0);
+			this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel14.Location = new System.Drawing.Point(4, 122);
+			this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+			this.tableLayoutPanel14.RowCount = 1;
+			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+			this.tableLayoutPanel14.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel14.TabIndex = 2;
+			// 
+			// Robot2IpAddress
+			// 
+			this.Robot2IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot2IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Robot2IpAddress.Margin = new System.Windows.Forms.Padding(0);
+			this.Robot2IpAddress.Name = "Robot2IpAddress";
+			this.Robot2IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Robot2IpAddress.TabIndex = 3;
+			// 
+			// label4
+			// 
+			this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label4.Location = new System.Drawing.Point(0, 0);
+			this.label4.Margin = new System.Windows.Forms.Padding(0);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(118, 51);
+			this.label4.TabIndex = 2;
+			this.label4.Text = "Robot2 IP";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// tableLayoutPanel15
+			// 
+			this.tableLayoutPanel15.ColumnCount = 2;
+			this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+			this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanel15.Controls.Add(this.Robot1IpAddress, 0, 0);
+			this.tableLayoutPanel15.Controls.Add(this.label3, 0, 0);
+			this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel15.Location = new System.Drawing.Point(4, 4);
+			this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+			this.tableLayoutPanel15.RowCount = 1;
+			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+			this.tableLayoutPanel15.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel15.TabIndex = 0;
+			// 
+			// Robot1IpAddress
+			// 
+			this.Robot1IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot1IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Robot1IpAddress.Margin = new System.Windows.Forms.Padding(0);
+			this.Robot1IpAddress.Name = "Robot1IpAddress";
+			this.Robot1IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Robot1IpAddress.TabIndex = 2;
+			// 
+			// label3
+			// 
+			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label3.Location = new System.Drawing.Point(0, 0);
+			this.label3.Margin = new System.Windows.Forms.Padding(0);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(118, 51);
+			this.label3.TabIndex = 1;
+			this.label3.Text = "Robot1 IP";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// SensorConnectionConfig
+			// 
+			this.SensorConnectionConfig.Controls.Add(this.tableLayoutPanel10);
+			this.SensorConnectionConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SensorConnectionConfig.Location = new System.Drawing.Point(3, 3);
+			this.SensorConnectionConfig.Name = "SensorConnectionConfig";
+			this.SensorConnectionConfig.Padding = new System.Windows.Forms.Padding(4);
+			this.SensorConnectionConfig.Size = new System.Drawing.Size(410, 329);
+			this.SensorConnectionConfig.TabIndex = 0;
+			this.SensorConnectionConfig.TabStop = false;
+			this.SensorConnectionConfig.Text = "Sensor Connection";
+			// 
+			// tableLayoutPanel10
+			// 
+			this.tableLayoutPanel10.ColumnCount = 1;
+			this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel13, 0, 2);
+			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel11, 0, 0);
+			this.tableLayoutPanel10.Controls.Add(this.label6, 0, 1);
+			this.tableLayoutPanel10.Controls.Add(this.label7, 0, 3);
+			this.tableLayoutPanel10.Controls.Add(this.SensorConnectionSave, 0, 4);
+			this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(10);
+			this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+			this.tableLayoutPanel10.RowCount = 5;
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel10.Size = new System.Drawing.Size(402, 298);
+			this.tableLayoutPanel10.TabIndex = 0;
+			// 
+			// tableLayoutPanel13
+			// 
+			this.tableLayoutPanel13.ColumnCount = 2;
+			this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+			this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanel13.Controls.Add(this.Sensor2IpAddress, 0, 0);
+			this.tableLayoutPanel13.Controls.Add(this.label2, 0, 0);
+			this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel13.Location = new System.Drawing.Point(4, 122);
+			this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+			this.tableLayoutPanel13.RowCount = 1;
+			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+			this.tableLayoutPanel13.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel13.TabIndex = 2;
+			// 
+			// Sensor2IpAddress
+			// 
+			this.Sensor2IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor2IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor2IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Sensor2IpAddress.Margin = new System.Windows.Forms.Padding(0);
+			this.Sensor2IpAddress.Name = "Sensor2IpAddress";
+			this.Sensor2IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Sensor2IpAddress.TabIndex = 2;
+			// 
+			// label2
+			// 
+			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label2.Location = new System.Drawing.Point(0, 0);
+			this.label2.Margin = new System.Windows.Forms.Padding(0);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(118, 51);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "Sensor2 IP";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// tableLayoutPanel11
+			// 
+			this.tableLayoutPanel11.ColumnCount = 2;
+			this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+			this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanel11.Controls.Add(this.label1, 0, 0);
+			this.tableLayoutPanel11.Controls.Add(this.Sensor1IpAddress, 1, 0);
+			this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel11.Location = new System.Drawing.Point(4, 4);
+			this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+			this.tableLayoutPanel11.RowCount = 1;
+			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+			this.tableLayoutPanel11.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel11.TabIndex = 0;
+			// 
+			// label1
+			// 
+			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Location = new System.Drawing.Point(0, 0);
+			this.label1.Margin = new System.Windows.Forms.Padding(0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(118, 51);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Sensor1 IP";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Sensor1IpAddress
+			// 
+			this.Sensor1IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor1IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor1IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Sensor1IpAddress.Margin = new System.Windows.Forms.Padding(0);
+			this.Sensor1IpAddress.Name = "Sensor1IpAddress";
+			this.Sensor1IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Sensor1IpAddress.TabIndex = 1;
 			// 
 			// Logs
 			// 
@@ -897,74 +1287,89 @@
 			this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
 			this.TitleBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseMove);
 			// 
-			// RobotPhase
+			// label6
 			// 
-			this.RobotPhase.Controls.Add(this.tableLayoutPanel9);
-			this.RobotPhase.Location = new System.Drawing.Point(4, 54);
-			this.RobotPhase.Name = "RobotPhase";
-			this.RobotPhase.Padding = new System.Windows.Forms.Padding(3);
-			this.RobotPhase.Size = new System.Drawing.Size(1272, 702);
-			this.RobotPhase.TabIndex = 5;
-			this.RobotPhase.Text = "Robot Phase";
-			this.RobotPhase.UseVisualStyleBackColor = true;
+			this.label6.BackColor = System.Drawing.Color.OrangeRed;
+			this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label6.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label6.ForeColor = System.Drawing.Color.White;
+			this.label6.Location = new System.Drawing.Point(3, 62);
+			this.label6.Margin = new System.Windows.Forms.Padding(3);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(396, 53);
+			this.label6.TabIndex = 15;
+			this.label6.Text = "Connection Failed";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// tableLayoutPanel9
+			// label7
 			// 
-			this.tableLayoutPanel9.ColumnCount = 2;
-			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel9.Controls.Add(this.Robot2Text, 1, 1);
-			this.tableLayoutPanel9.Controls.Add(this.Robot2Image, 1, 0);
-			this.tableLayoutPanel9.Controls.Add(this.Robot1Image, 0, 0);
-			this.tableLayoutPanel9.Controls.Add(this.Robot1Text, 0, 1);
-			this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
-			this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-			this.tableLayoutPanel9.RowCount = 2;
-			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel9.Size = new System.Drawing.Size(1266, 696);
-			this.tableLayoutPanel9.TabIndex = 0;
+			this.label7.BackColor = System.Drawing.Color.OrangeRed;
+			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label7.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label7.ForeColor = System.Drawing.Color.White;
+			this.label7.Location = new System.Drawing.Point(3, 180);
+			this.label7.Margin = new System.Windows.Forms.Padding(3);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(396, 53);
+			this.label7.TabIndex = 16;
+			this.label7.Text = "Connection Failed";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Robot1Image
+			// label8
 			// 
-			this.Robot1Image.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot1Image.Location = new System.Drawing.Point(4, 4);
-			this.Robot1Image.Margin = new System.Windows.Forms.Padding(4);
-			this.Robot1Image.Name = "Robot1Image";
-			this.Robot1Image.Size = new System.Drawing.Size(625, 548);
-			this.Robot1Image.TabIndex = 0;
-			this.Robot1Image.TabStop = false;
+			this.label8.BackColor = System.Drawing.Color.OrangeRed;
+			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label8.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label8.ForeColor = System.Drawing.Color.White;
+			this.label8.Location = new System.Drawing.Point(3, 62);
+			this.label8.Margin = new System.Windows.Forms.Padding(3);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(396, 53);
+			this.label8.TabIndex = 17;
+			this.label8.Text = "Connection Failed";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Robot2Image
+			// label9
 			// 
-			this.Robot2Image.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot2Image.Location = new System.Drawing.Point(637, 4);
-			this.Robot2Image.Margin = new System.Windows.Forms.Padding(4);
-			this.Robot2Image.Name = "Robot2Image";
-			this.Robot2Image.Size = new System.Drawing.Size(625, 548);
-			this.Robot2Image.TabIndex = 1;
-			this.Robot2Image.TabStop = false;
+			this.label9.BackColor = System.Drawing.Color.OrangeRed;
+			this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label9.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label9.ForeColor = System.Drawing.Color.White;
+			this.label9.Location = new System.Drawing.Point(3, 180);
+			this.label9.Margin = new System.Windows.Forms.Padding(3);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(396, 53);
+			this.label9.TabIndex = 18;
+			this.label9.Text = "Connection Failed";
+			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Robot1Text
+			// SensorConnectionSave
 			// 
-			this.Robot1Text.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot1Text.Location = new System.Drawing.Point(3, 559);
-			this.Robot1Text.Multiline = true;
-			this.Robot1Text.Name = "Robot1Text";
-			this.Robot1Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.Robot1Text.Size = new System.Drawing.Size(627, 134);
-			this.Robot1Text.TabIndex = 2;
+			this.SensorConnectionSave.BackColor = System.Drawing.Color.Silver;
+			this.SensorConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SensorConnectionSave.FlatAppearance.BorderSize = 0;
+			this.SensorConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.SensorConnectionSave.Location = new System.Drawing.Point(4, 240);
+			this.SensorConnectionSave.Margin = new System.Windows.Forms.Padding(4);
+			this.SensorConnectionSave.Name = "SensorConnectionSave";
+			this.SensorConnectionSave.Size = new System.Drawing.Size(394, 54);
+			this.SensorConnectionSave.TabIndex = 17;
+			this.SensorConnectionSave.Text = "Apply";
+			this.SensorConnectionSave.UseVisualStyleBackColor = false;
 			// 
-			// Robot2Text
+			// RobotConnectionSave
 			// 
-			this.Robot2Text.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot2Text.Location = new System.Drawing.Point(636, 559);
-			this.Robot2Text.Multiline = true;
-			this.Robot2Text.Name = "Robot2Text";
-			this.Robot2Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.Robot2Text.Size = new System.Drawing.Size(627, 134);
-			this.Robot2Text.TabIndex = 3;
+			this.RobotConnectionSave.BackColor = System.Drawing.Color.Silver;
+			this.RobotConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RobotConnectionSave.FlatAppearance.BorderSize = 0;
+			this.RobotConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.RobotConnectionSave.Location = new System.Drawing.Point(4, 240);
+			this.RobotConnectionSave.Margin = new System.Windows.Forms.Padding(4);
+			this.RobotConnectionSave.Name = "RobotConnectionSave";
+			this.RobotConnectionSave.Size = new System.Drawing.Size(394, 55);
+			this.RobotConnectionSave.TabIndex = 19;
+			this.RobotConnectionSave.Text = "Apply";
+			this.RobotConnectionSave.UseVisualStyleBackColor = false;
 			// 
 			// MainForm
 			// 
@@ -992,11 +1397,16 @@
 			this.tableLayoutPanel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.LeftDoorImage)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.RightDoorImage)).EndInit();
-			this.Configuration.ResumeLayout(false);
-			this.ConfigPanel.ResumeLayout(false);
-			this.BiasConfig.ResumeLayout(false);
-			this.FileConfig.ResumeLayout(false);
-			this.NetworkConfig.ResumeLayout(false);
+			this.RobotPhase.ResumeLayout(false);
+			this.tableLayoutPanel9.ResumeLayout(false);
+			this.Robot2PhaseGroup.ResumeLayout(false);
+			this.Robot2PhasePanel.ResumeLayout(false);
+			this.Robot2PhasePanel.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Robot2PhaseImage)).EndInit();
+			this.Robot1PhaseGroup.ResumeLayout(false);
+			this.Robot1PhasePanel.ResumeLayout(false);
+			this.Robot1PhasePanel.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Robot1PhaseImage)).EndInit();
 			this.Statistics.ResumeLayout(false);
 			this.StatisticsChartArea.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.SensorChart)).EndInit();
@@ -1006,15 +1416,28 @@
 			this.ByPass.ResumeLayout(false);
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel6.ResumeLayout(false);
+			this.Configuration.ResumeLayout(false);
+			this.ConfigPanel.ResumeLayout(false);
+			this.BiasConfig.ResumeLayout(false);
+			this.FileConfig.ResumeLayout(false);
+			this.NetworkConfig.ResumeLayout(false);
+			this.SocketsConfig.ResumeLayout(false);
+			this.RobotConnectionConfig.ResumeLayout(false);
+			this.tableLayoutPanel12.ResumeLayout(false);
+			this.tableLayoutPanel14.ResumeLayout(false);
+			this.tableLayoutPanel14.PerformLayout();
+			this.tableLayoutPanel15.ResumeLayout(false);
+			this.tableLayoutPanel15.PerformLayout();
+			this.SensorConnectionConfig.ResumeLayout(false);
+			this.tableLayoutPanel10.ResumeLayout(false);
+			this.tableLayoutPanel13.ResumeLayout(false);
+			this.tableLayoutPanel13.PerformLayout();
+			this.tableLayoutPanel11.ResumeLayout(false);
+			this.tableLayoutPanel11.PerformLayout();
 			this.Logs.ResumeLayout(false);
 			this.Logs.PerformLayout();
 			this.GlobalFormLayout.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
-			this.RobotPhase.ResumeLayout(false);
-			this.tableLayoutPanel9.ResumeLayout(false);
-			this.tableLayoutPanel9.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.Robot1Image)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Robot2Image)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -1062,10 +1485,36 @@
 		private System.Windows.Forms.TableLayoutPanel BiasConfigPanel;
 		private System.Windows.Forms.TabPage RobotPhase;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-		private System.Windows.Forms.PictureBox Robot2Image;
-		private System.Windows.Forms.PictureBox Robot1Image;
-		private System.Windows.Forms.TextBox Robot1Text;
-		private System.Windows.Forms.TextBox Robot2Text;
+		private System.Windows.Forms.GroupBox Robot2PhaseGroup;
+		private System.Windows.Forms.TableLayoutPanel Robot2PhasePanel;
+		private System.Windows.Forms.TextBox Robot2PhaseText;
+		private System.Windows.Forms.PictureBox Robot2PhaseImage;
+		private System.Windows.Forms.GroupBox Robot1PhaseGroup;
+		private System.Windows.Forms.TableLayoutPanel Robot1PhasePanel;
+		private System.Windows.Forms.PictureBox Robot1PhaseImage;
+		private System.Windows.Forms.TextBox Robot1PhaseText;
+		private System.Windows.Forms.GroupBox RobotConnectionConfig;
+		private System.Windows.Forms.GroupBox SensorConnectionConfig;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox Sensor1IpAddress;
+		private System.Windows.Forms.TextBox Sensor2IpAddress;
+		private System.Windows.Forms.TextBox Robot2IpAddress;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox Robot1IpAddress;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Button RobotConnectionSave;
+		private System.Windows.Forms.Button SensorConnectionSave;
 	}
 }
 
