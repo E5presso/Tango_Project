@@ -55,18 +55,18 @@ namespace Middleware
 		byte[] Byte_X1;                 // 소수점 없는 X1(Byte)
 		byte[] Byte_X2;                 // 소수점 없는 X2(Byte)
 
-		double Double_DP_X1;            // 소수점 있는 X1(Double)
-		double Double_DP_X2;            // 소수점 있는 X2(Double)
+		float Double_DP_X1;            // 소수점 있는 X1(Double)
+		float Double_DP_X2;            // 소수점 있는 X2(Double)
 
-		double X1_Plus_T;               // X1 +Tolerance 
-		double X1_Minus_T;              // X1 -Tolerance
-		double X2_Plus_T;               // X2 +Tolerance 
-		double X2_Minus_T;              // X2 -Tolerance
+		float X1_Plus_T;               // X1 +Tolerance 
+		float X1_Minus_T;              // X1 -Tolerance
+		float X2_Plus_T;               // X2 +Tolerance 
+		float X2_Minus_T;              // X2 -Tolerance
 
-		double X1_Plus_L;               // X1 +Limit
-		double X1_Minus_L;              // X1 -Limit
-		double X2_Plus_L;               // X2 +Limit
-		double X2_Minus_L;              // X2 -Limit
+		float X1_Plus_L;               // X1 +Limit
+		float X1_Minus_L;              // X1 -Limit
+		float X2_Plus_L;               // X2 +Limit
+		float X2_Minus_L;              // X2 -Limit
 
 		const int DP0 = 0;              // (Decimal Point) 소수점 2째짜리(mm)
 		const int DP1 = 1;              // 소수점 3째짜리(mm)
@@ -158,7 +158,7 @@ namespace Middleware
 		private void SendToRobot1(byte[] data) => robot.SendToRobot1(data);
 		private void SendToRobot2(byte[] data) => robot.SendToRobot2(data);
 
-		private void Door_Information_R(byte[] D)   // Door_Information_R Data
+		private void Door_Information_R(byte[] D)   // PC에서 Robot으로 보내는 (Door_Information_R) Data Packet
 		{
 			D[0] = 0x39;                // Bytes 0 to 3 -> 고정값
 			D[1] = 0x37;
@@ -179,7 +179,7 @@ namespace Middleware
 			D[16] = 0x0D;               // Bytes 16, 17 -> Packet 끝
 			D[17] = 0x0A;
 		}
-		private void Pass_REQ_Input(byte[] P)   // Pass_REQ_Input Data
+		private void Pass_REQ_Input(byte[] P)   // PC에서 Robot으로 보내는 (Pass_REQ_Input) Data Packet
 		{
 			P[0] = 0x39;				// Bytes 0 to 3 -> 고정값
 			P[1] = 0x37;
@@ -200,7 +200,7 @@ namespace Middleware
 			P[16] = 0x0D;				// Bytes 16, 17 -> Packet 끝
 			P[17] = 0x0A;
 		}
-		private void Bending_REQ_Input(byte[] B)    // Bending_REQ_Input Data
+		private void Bending_REQ_Input(byte[] B)    // PC에서 Robot으로 보내는 (Bending_REQ_Input) Data Packet
 		{
 			B[0] = 0x39;
 			B[1] = 0x37;
@@ -235,7 +235,7 @@ namespace Middleware
 			B[30] = 0x0D;               // Bytes 30, 31 -> Packet 끝
 			B[31] = 0x0A;
 		}
-		private void Reset_Input(byte[] R)  // Reset_Input Data
+		private void Reset_Input(byte[] R)  // PC에서 Sensor로 보내는 (Reset_Input) Data Packet
 		{
 			R[0] = 0x06;
 			R[1] = 0x00;
@@ -244,7 +244,7 @@ namespace Middleware
 			R[4] = 0x6C;
 			R[5] = 0x00;
 		}
-		private void Timing_On_Input(byte[] TOn)    // Timing_On_Input Data
+		private void Timing_On_Input(byte[] TOn)    // PC에서 Sensor로 보내는 (Timing_On_Input) Data Packet
 		{
 			TOn[0] = 0x06;
 			TOn[1] = 0x00;
@@ -253,7 +253,7 @@ namespace Middleware
 			TOn[4] = 0xEC;
 			TOn[5] = 0x00;
 		}
-		private void Timing_Off_Input(byte[] TOff)  // Timing_Off_Input Data
+		private void Timing_Off_Input(byte[] TOff)  // PC에서 Sensor로 보내는 (Timing_Off_Input) Data Packet
 		{
 			TOff[0] = 0x06;
 			TOff[1] = 0x00;
@@ -262,7 +262,7 @@ namespace Middleware
 			TOff[4] = 0x6C;
 			TOff[5] = 0x00;
 		}
-		private void Measured_REQ_Input(byte[] M)   // Measured_REQ_Input Data
+		private void Measured_REQ_Input(byte[] M)   // PC에서 Sensor로 보내는 (Measured_REQ_Input) Data Packet
 		{
 			M[0] = 0x07;
 			M[1] = 0x00;
@@ -290,86 +290,86 @@ namespace Middleware
 			{
 				case DP0:
 					X1_Multiply = 100;
-					Double_DP_X1 = X1 * 0.01;
+					Double_DP_X1 = X1 * 0.01f;
 					break;
 
 				case DP1:
 					X1_Multiply = 1000;
-					Double_DP_X1 = X1 * 0.001;
+					Double_DP_X1 = X1 * 0.001f;
 					break;
 
 				case DP2:
 					X1_Multiply = 10000;
-					Double_DP_X1 = X1 * 0.0001;
+					Double_DP_X1 = X1 * 0.0001f;
 					break;
 
 				case DP3:
 					X1_Multiply = 100000;
-					Double_DP_X1 = X1 * 0.00001;
+					Double_DP_X1 = X1 * 0.00001f;
 					break;
 
 				case DP4:
 					X1_Multiply = 10000;
-					Double_DP_X1 = X1 * 0.1;
+					Double_DP_X1 = X1 * 0.1f;
 					break;
 
 				case DP5:
 					X1_Multiply = 100000;
-					Double_DP_X1 = X1 * 0.01;
+					Double_DP_X1 = X1 * 0.01f;
 					break;
 
 				case DP6:
 					X1_Multiply = 1000000;
-					Double_DP_X1 = X1 * 0.001;
+					Double_DP_X1 = X1 * 0.001f;
 					break;
 			}
 			switch (X2_DP)
 			{
 				case DP0:
 					X2_Multiply = 100;
-					Double_DP_X2 = X2 * 0.01;
+					Double_DP_X2 = X2 * 0.01f;
 					break;
 
 				case DP1:
 					X2_Multiply = 1000;
-					Double_DP_X2 = X2 * 0.001;
+					Double_DP_X2 = X2 * 0.001f;
 					break;
 
 				case DP2:
 					X2_Multiply = 10000;
-					Double_DP_X2 = X2 * 0.0001;
+					Double_DP_X2 = X2 * 0.0001f;
 					break;
 
 				case DP3:
 					X2_Multiply = 100000;
-					Double_DP_X2 = X2 * 0.00001;
+					Double_DP_X2 = X2 * 0.00001f;
 					break;
 
 				case DP4:
 					X2_Multiply = 10000;
-					Double_DP_X2 = X2 * 0.1;
+					Double_DP_X2 = X2 * 0.1f;
 					break;
 
 				case DP5:
 					X2_Multiply = 100000;
-					Double_DP_X2 = X2 * 0.01;
+					Double_DP_X2 = X2 * 0.01f;
 					break;
 
 				case DP6:
 					X2_Multiply = 1000000;
-					Double_DP_X2 = X2 * 0.001;
+					Double_DP_X2 = X2 * 0.001f;
 					break;
 			}
 
-			X1_Plus_L = 3.5 * X1_Multiply;
-			X1_Minus_L = -3.5 * X1_Multiply;
-			X1_Plus_T = 0.75 * X1_Multiply;
-			X1_Minus_T = -0.75 * X1_Multiply;
+			X1_Plus_L = 3.5f * X1_Multiply;
+			X1_Minus_L = -3.5f * X1_Multiply;
+			X1_Plus_T = 0.75f * X1_Multiply;
+			X1_Minus_T = -0.75f * X1_Multiply;
 
-			X2_Plus_L = 3.5 * X2_Multiply;
-			X2_Minus_L = -3.5 * X2_Multiply;
-			X2_Plus_T = 0.75 * X2_Multiply;
-			X2_Minus_T = -0.75 * X2_Multiply;
+			X2_Plus_L = 3.5f * X2_Multiply;
+			X2_Minus_L = -3.5f * X2_Multiply;
+			X2_Plus_T = 0.75f * X2_Multiply;
+			X2_Minus_T = -0.75f * X2_Multiply;
 
 			if (Bending_Cnt == 0)
 			{
