@@ -84,11 +84,36 @@ namespace Middleware
 		private readonly Sensor sensor;
 		private readonly Robot robot;
 
-		public event EventHandler<SensorValueEventArgs> SensorValueReceived;
-		public event EventHandler<RobotPhaseEventArgs> RobotPhaseChanged;
-		
+		public event EventHandler<ConnectEventArgs> Sensor1Connected;
+		public event EventHandler<ConnectEventArgs> Sensor2Connected;
+		public event EventHandler<DisconnectEventArgs> Sensor1Disconnected;
+		public event EventHandler<DisconnectEventArgs> Sensor2Disconnected;
+
+		public event EventHandler<ConnectEventArgs> Robot1Connected;
+		public event EventHandler<ConnectEventArgs> Robot2Connected;
+		public event EventHandler<DisconnectEventArgs> Robot1Disconnected;
+		public event EventHandler<DisconnectEventArgs> Robot2Disconnected;
+
+		public event EventHandler<ExceptionEventArgs> ErrorOccurred;
+
+		public event EventHandler<SensorValueEventArgs> Sensor1ValueReceived;
+		public event EventHandler<SensorValueEventArgs> Sensor2ValueReceived;
+
+		public event EventHandler<RobotPhaseEventArgs> Robot1PhaseChanged;
+		public event EventHandler<RobotPhaseEventArgs> Robot2PhaseChanged;
+
 		public float Bias { get; set; }
 		public bool BypassMode { get; set; }
+		public string Robot1IpAddress
+		{
+			get => robot.Robot1IpAddress;
+			set => robot.Robot1IpAddress = value;
+		}
+		public string Robot2IpAddress
+		{
+			get => robot.Robot2IpAddress;
+			set => robot.Robot2IpAddress = value;
+		}
 
 		public Controller()
 		{
@@ -154,7 +179,6 @@ namespace Middleware
 			D[16] = 0x0D;               // Bytes 16, 17 -> Packet 끝
 			D[17] = 0x0A;
 		}
-
 		private void Pass_REQ_Input(byte[] P)   // Pass_REQ_Input Data
 		{
 			P[0] = 0x39;				// Bytes 0 to 3 -> 고정값
@@ -176,7 +200,6 @@ namespace Middleware
 			P[16] = 0x0D;				// Bytes 16, 17 -> Packet 끝
 			P[17] = 0x0A;
 		}
-
 		private void Bending_REQ_Input(byte[] B)    // Bending_REQ_Input Data
 		{
 			B[0] = 0x39;
@@ -212,7 +235,6 @@ namespace Middleware
 			B[30] = 0x0D;               // Bytes 30, 31 -> Packet 끝
 			B[31] = 0x0A;
 		}
-
 		private void Reset_Input(byte[] R)  // Reset_Input Data
 		{
 			R[0] = 0x06;
@@ -222,7 +244,6 @@ namespace Middleware
 			R[4] = 0x6C;
 			R[5] = 0x00;
 		}
-
 		private void Timing_On_Input(byte[] TOn)    // Timing_On_Input Data
 		{
 			TOn[0] = 0x06;
@@ -232,7 +253,6 @@ namespace Middleware
 			TOn[4] = 0xEC;
 			TOn[5] = 0x00;
 		}
-
 		private void Timing_Off_Input(byte[] TOff)  // Timing_Off_Input Data
 		{
 			TOff[0] = 0x06;
@@ -242,7 +262,6 @@ namespace Middleware
 			TOff[4] = 0x6C;
 			TOff[5] = 0x00;
 		}
-
 		private void Measured_REQ_Input(byte[] M)   // Measured_REQ_Input Data
 		{
 			M[0] = 0x07;
@@ -253,7 +272,6 @@ namespace Middleware
 			M[5] = 0x00;
 			M[6] = 0x00;
 		}
-
 		private void ProcessingSensorData(byte[] data)
 		{
 			Buffer.BlockCopy(data, 68, Copy_X1, 0, 4);
@@ -305,7 +323,6 @@ namespace Middleware
 					Double_DP_X1 = X1 * 0.001;
 					break;
 			}
-
 			switch (X2_DP)
 			{
 				case DP0:
@@ -360,32 +377,30 @@ namespace Middleware
 
 				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-					SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
-
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-					SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 			}
-
 			else if (Bending_Cnt == 1)
 			{
 				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Second_Sensing.Sensor1 - First_Sensing.Sensor1, Second_Sensing.Sensor2 - First_Sensing.Sensor2);
-				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
 			}
-
 			else if (Bending_Cnt == 2)
 			{
 				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Third_Sensing.Sensor1 - Second_Sensing.Sensor1, Third_Sensing.Sensor2 - Second_Sensing.Sensor2);
-				SensorValueReceived.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
 			}
 		}
 
 		private void Sensor_Sensor1Connected(object sender, ConnectEventArgs e)
 		{
+			Sensor1Connected?.Invoke(sender, e);
 		}
 		private void Sensor_Sensor1Sended(object sender, SendEventArgs e)
 		{
@@ -406,7 +421,6 @@ namespace Middleware
 				// delay 필요
 				SendToSensor1(Timing_On);
 			}
-
 			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Timing_R_ID)
 			{
 				if (Timing)
@@ -415,14 +429,12 @@ namespace Middleware
 					Timing = false;
 					SendToSensor1(Timing_Off);
 				}
-
 				else
 				{
 					Measured_REQ_Input(Measured_REQ);
 					SendToSensor1(Measured_REQ);
 				}
 			}
-
 			else if (e.BytesRead == 116 && Sensor1_Receive_Data[3] == Measured_R_ID)
 			{
 				ProcessingSensorData(Sensor1_Receive_Data);
@@ -438,7 +450,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
 				{
 					Pass_REQ_Input(Pass_REQ);
@@ -450,7 +461,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
 				{
 					Pass_REQ_Input(Pass_REQ);
@@ -462,7 +472,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
 				{
 					Bending_REQ_Input(Bending_REQ);
@@ -504,11 +513,13 @@ namespace Middleware
 		}
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
 		{
+			Sensor1Disconnected?.Invoke(sender, e);
 		}
-		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
+		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
 
 		private void Sensor_Sensor2Connected(object sender, ConnectEventArgs e)
 		{
+			Sensor2Connected?.Invoke(sender, e);
 		}
 		private void Sensor_Sensor2Sended(object sender, SendEventArgs e)
 		{
@@ -529,7 +540,6 @@ namespace Middleware
 				// delay필요
 				SendToSensor2(Timing_On);
 			}
-
 			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Timing_R_ID)
 			{
 				if (Timing)
@@ -538,14 +548,12 @@ namespace Middleware
 					Timing = false;
 					SendToSensor2(Timing_Off);
 				}
-
 				else
 				{
 					Measured_REQ_Input(Measured_REQ);
 					SendToSensor2(Measured_REQ);
 				}
 			}
-
 			else if (e.BytesRead == 116 && Sensor2_Receive_Data[3] == Measured_R_ID)
 			{
 				ProcessingSensorData(Sensor2_Receive_Data);
@@ -561,7 +569,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
 				{
 					Pass_REQ_Input(Pass_REQ);
@@ -573,7 +580,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
 				{
 					Pass_REQ_Input(Pass_REQ);
@@ -585,7 +591,6 @@ namespace Middleware
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
 				}
-
 				else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
 				{
 					Bending_REQ_Input(Bending_REQ);
@@ -627,11 +632,13 @@ namespace Middleware
 		}
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
 		{
+			Sensor2Disconnected?.Invoke(sender, e);
 		}
-		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
+		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
 
 		private void Robot_Robot1Connected(object sender, ConnectEventArgs e)
 		{
+			Robot1Connected?.Invoke(sender, e);
 		}
 		private void Robot_Robot1Sended(object sender, SendEventArgs e)
 		{
@@ -707,10 +714,12 @@ namespace Middleware
 		}
 		private void Robot_Robot1Disconnected(object sender, DisconnectEventArgs e)
 		{
+			Robot1Disconnected?.Invoke(sender, e);
 		}
 
 		private void Robot_Robot2Connected(object sender, ConnectEventArgs e)
 		{
+			Robot2Connected?.Invoke(sender, e);
 		}
 		private void Robot_Robot2Sended(object sender, SendEventArgs e)
 		{
@@ -755,8 +764,9 @@ namespace Middleware
 		}
 		private void Robot_Robot2Disconnected(object sender, DisconnectEventArgs e)
 		{
+			Robot2Disconnected?.Invoke(sender, e);
 		}
 
-		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e) => throw e.Exception;
+		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
 	}
 }
