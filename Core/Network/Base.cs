@@ -92,6 +92,22 @@ namespace Core.Network
 		public DisconnectEventArgs(string ip) => IP = ip;
 	}
 	/// <summary>
+	/// 소켓 연결 거부 시 발생하는 이벤트에 대한 정보입니다.
+	/// </summary>
+	public class ConnectionRefusedEventArgs : EventArgs
+	{
+		/// <summary>
+		/// 클라이언트의 IP주소를 가져옵니다.
+		/// </summary>
+		public string IP { get; private set; }
+
+		/// <summary>
+		/// DisconnectEventArgs 클래스를 초기화합니다.
+		/// </summary>
+		/// <param name="ip">클라이언트의 IP주소를 지정합니다.</param>
+		public ConnectionRefusedEventArgs(string ip) => IP = ip;
+	}
+	/// <summary>
 	/// 예외발생 이벤트에 대한 정보를 정의합니다.
 	/// </summary>
 	public class ExceptionEventArgs : EventArgs
@@ -108,6 +124,10 @@ namespace Core.Network
 		/// 에러 코드를 가져옵니다. 시스템 에러가 아니라면 -1을 반환합니다.
 		/// </summary>
 		public int ErrorCode => (Exception is Win32Exception e) ? e.ErrorCode : -1;
+		/// <summary>
+		/// 예외 발생 시 호출된 함수의 콜스택을 가져옵니다.
+		/// </summary>
+		public string StackTrace => Exception.StackTrace;
 
 		/// <summary>
 		/// 지정한 예외발생 정보를 이용해 ExceptionEventArgs 클래스를 초기화합니다.
@@ -125,5 +145,69 @@ namespace Core.Network
 	internal delegate void SendEvent(Session session, int bytesSent);
 	internal delegate void ReceiveEvent(Session session, int bytesRead, byte[] data);
 	internal delegate void DisconnectEvent(Session session);
+	internal delegate void ConnectionRefusedEvent(string ip);
 	internal delegate void ExceptionEvent(Exception e);
+
+	/// <summary>
+	/// 네트워크 관련 유틸리티 클래스입니다.
+	/// </summary>
+	public static class NetworkUtilities
+	{
+		/// <summary>
+		/// IP 주소의 유효성을 검증합니다.
+		/// </summary>
+		/// <param name="ip">검증할 IP 주소를 지정합니다.</param>
+		/// <param name="includesPort">포트 번호를 포함하는지 여부를 지정합니다.</param>
+		/// <returns>IP 주소의 검증 결과를 반환합니다.</returns>
+		public static bool ValidateIPAddress(string ip, bool includesPort)
+		{
+			if (string.IsNullOrWhiteSpace(ip)) return false;
+			if (includesPort)
+			{
+				string[] parsed = ip.Split(':');
+				if (parsed.Length != 2) return false;
+				string address = parsed[0];
+				if (parsed[1].Length == 0) return false;
+				try
+				{
+					int port = Convert.ToInt32(parsed[1]);
+					if (port > 65535) return false;
+				}
+				catch { return false; }
+				string[] ipsections = address.Split('.');
+				if (ipsections.Length != 4) return false;
+				try
+				{
+					foreach (string section in ipsections)
+						if (Convert.ToInt32(section) > 255) return false;
+				}
+				catch { return false; }
+				return true;
+			}
+			else
+			{
+				string[] ipsections = ip.Split('.');
+				if (ipsections.Length != 4) return false;
+				try
+				{
+					foreach (string section in ipsections)
+						if (Convert.ToInt32(section) > 255) return false;
+				}
+				catch { return false; }
+				return true;
+			}
+		}
+		/// <summary>
+		/// 두 IP주소가 같은지 여부를 확인합니다.
+		/// </summary>
+		/// <param name="left">비교할 IP주소를 지정합니다.</param>
+		/// <param name="right">비교할 IP주소를 지정합니다.</param>
+		/// <returns>두 IP주소의 비교 결과를 반환합니다.</returns>
+		public static bool CompareIPAddress(string left, string right)
+		{
+			string[] parsed_left = left.Split(':');
+			string[] parsed_right = right.Split(':');
+			return parsed_left[0] == parsed_right[0];
+		}
+	}
 }

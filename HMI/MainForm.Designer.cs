@@ -101,16 +101,20 @@
 			this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
+			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
-			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+			this.Sensor2X1Offset = new System.Windows.Forms.NumericUpDown();
+			this.Sensor2X2Offset = new System.Windows.Forms.NumericUpDown();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
 			this.Sensor1X1Offset = new System.Windows.Forms.NumericUpDown();
+			this.Sensor1X2Offset = new System.Windows.Forms.NumericUpDown();
 			this.SaveOffset = new System.Windows.Forms.Button();
 			this.FileConfig = new System.Windows.Forms.GroupBox();
 			this.FileSaveConfig = new System.Windows.Forms.TableLayoutPanel();
@@ -165,6 +169,17 @@
 			this.Exit = new System.Windows.Forms.Button();
 			this.TitleBar = new System.Windows.Forms.Label();
 			this.Logo = new System.Windows.Forms.PictureBox();
+			this.Diagnostics = new System.Windows.Forms.TabPage();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.DiagPass = new System.Windows.Forms.Button();
+			this.DiagNg = new System.Windows.Forms.Button();
+			this.DiagPassAfterBending = new System.Windows.Forms.Button();
+			this.DiagNgAfterBending = new System.Windows.Forms.Button();
+			this.DiagPcStatus = new System.Windows.Forms.Button();
+			this.DiagPcComStatus = new System.Windows.Forms.Button();
+			this.DiagSensorStatus = new System.Windows.Forms.Button();
+			this.DiagSensorDataStatus = new System.Windows.Forms.Button();
+			this.DiagByPass = new System.Windows.Forms.Button();
 			this.TabMenu.SuspendLayout();
 			this.Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -200,12 +215,16 @@
 			this.tableLayoutPanel17.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.tableLayoutPanel20.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			this.tableLayoutPanel25.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2X1Offset)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2X2Offset)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel19.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.tableLayoutPanel24.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1X2Offset)).BeginInit();
 			this.FileConfig.SuspendLayout();
 			this.FileSaveConfig.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -230,6 +249,8 @@
 			this.GlobalFormLayout.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
+			this.Diagnostics.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// TabMenu
@@ -240,6 +261,7 @@
 			this.TabMenu.Controls.Add(this.ByPass);
 			this.TabMenu.Controls.Add(this.Configuration);
 			this.TabMenu.Controls.Add(this.Logs);
+			this.TabMenu.Controls.Add(this.Diagnostics);
 			this.TabMenu.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TabMenu.ItemSize = new System.Drawing.Size(180, 50);
 			this.TabMenu.Location = new System.Drawing.Point(0, 40);
@@ -1015,30 +1037,57 @@
 			// tableLayoutPanel20
 			// 
 			this.tableLayoutPanel20.ColumnCount = 2;
-			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-			this.tableLayoutPanel20.Controls.Add(this.label8, 0, 0);
-			this.tableLayoutPanel20.Controls.Add(this.label9, 0, 1);
-			this.tableLayoutPanel20.Controls.Add(this.numericUpDown2, 1, 0);
-			this.tableLayoutPanel20.Controls.Add(this.numericUpDown3, 1, 1);
+			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel20.Controls.Add(this.pictureBox2, 0, 0);
+			this.tableLayoutPanel20.Controls.Add(this.tableLayoutPanel25, 1, 0);
 			this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel20.Location = new System.Drawing.Point(4, 27);
 			this.tableLayoutPanel20.Margin = new System.Windows.Forms.Padding(4);
 			this.tableLayoutPanel20.Name = "tableLayoutPanel20";
 			this.tableLayoutPanel20.Padding = new System.Windows.Forms.Padding(4);
-			this.tableLayoutPanel20.RowCount = 2;
-			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel20.RowCount = 1;
+			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel20.Size = new System.Drawing.Size(392, 259);
 			this.tableLayoutPanel20.TabIndex = 1;
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+			this.pictureBox2.Location = new System.Drawing.Point(4, 4);
+			this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+			this.pictureBox2.Name = "pictureBox2";
+			this.pictureBox2.Size = new System.Drawing.Size(192, 251);
+			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox2.TabIndex = 1;
+			this.pictureBox2.TabStop = false;
+			// 
+			// tableLayoutPanel25
+			// 
+			this.tableLayoutPanel25.ColumnCount = 2;
+			this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel25.Controls.Add(this.label8, 0, 0);
+			this.tableLayoutPanel25.Controls.Add(this.label9, 0, 1);
+			this.tableLayoutPanel25.Controls.Add(this.Sensor2X1Offset, 1, 0);
+			this.tableLayoutPanel25.Controls.Add(this.Sensor2X2Offset, 1, 1);
+			this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel25.Location = new System.Drawing.Point(199, 7);
+			this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+			this.tableLayoutPanel25.RowCount = 2;
+			this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel25.Size = new System.Drawing.Size(186, 245);
+			this.tableLayoutPanel25.TabIndex = 2;
 			// 
 			// label8
 			// 
 			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label8.Location = new System.Drawing.Point(8, 8);
-			this.label8.Margin = new System.Windows.Forms.Padding(4);
+			this.label8.Location = new System.Drawing.Point(0, 0);
+			this.label8.Margin = new System.Windows.Forms.Padding(0);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(145, 117);
+			this.label8.Size = new System.Drawing.Size(74, 122);
 			this.label8.TabIndex = 0;
 			this.label8.Text = "X1";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1046,63 +1095,63 @@
 			// label9
 			// 
 			this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label9.Location = new System.Drawing.Point(8, 133);
-			this.label9.Margin = new System.Windows.Forms.Padding(4);
+			this.label9.Location = new System.Drawing.Point(0, 122);
+			this.label9.Margin = new System.Windows.Forms.Padding(0);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(145, 118);
-			this.label9.TabIndex = 0;
+			this.label9.Size = new System.Drawing.Size(74, 123);
+			this.label9.TabIndex = 1;
 			this.label9.Text = "X2";
 			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// numericUpDown2
+			// Sensor2X1Offset
 			// 
-			this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDown2.DecimalPlaces = 2;
-			this.numericUpDown2.Increment = new decimal(new int[] {
+			this.Sensor2X1Offset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor2X1Offset.DecimalPlaces = 2;
+			this.Sensor2X1Offset.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-			this.numericUpDown2.Location = new System.Drawing.Point(161, 51);
-			this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
-			this.numericUpDown2.Maximum = new decimal(new int[] {
+			this.Sensor2X1Offset.Location = new System.Drawing.Point(74, 46);
+			this.Sensor2X1Offset.Margin = new System.Windows.Forms.Padding(0);
+			this.Sensor2X1Offset.Maximum = new decimal(new int[] {
             35,
             0,
             0,
             65536});
-			this.numericUpDown2.Minimum = new decimal(new int[] {
+			this.Sensor2X1Offset.Minimum = new decimal(new int[] {
             35,
             0,
             0,
             -2147418112});
-			this.numericUpDown2.Name = "numericUpDown2";
-			this.numericUpDown2.Size = new System.Drawing.Size(223, 30);
-			this.numericUpDown2.TabIndex = 1;
+			this.Sensor2X1Offset.Name = "Sensor2X1Offset";
+			this.Sensor2X1Offset.Size = new System.Drawing.Size(112, 30);
+			this.Sensor2X1Offset.TabIndex = 1;
 			// 
-			// numericUpDown3
+			// Sensor2X2Offset
 			// 
-			this.numericUpDown3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDown3.DecimalPlaces = 2;
-			this.numericUpDown3.Increment = new decimal(new int[] {
+			this.Sensor2X2Offset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor2X2Offset.DecimalPlaces = 2;
+			this.Sensor2X2Offset.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-			this.numericUpDown3.Location = new System.Drawing.Point(161, 177);
-			this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
-			this.numericUpDown3.Maximum = new decimal(new int[] {
+			this.Sensor2X2Offset.Location = new System.Drawing.Point(74, 168);
+			this.Sensor2X2Offset.Margin = new System.Windows.Forms.Padding(0);
+			this.Sensor2X2Offset.Maximum = new decimal(new int[] {
             35,
             0,
             0,
             65536});
-			this.numericUpDown3.Minimum = new decimal(new int[] {
+			this.Sensor2X2Offset.Minimum = new decimal(new int[] {
             35,
             0,
             0,
             -2147418112});
-			this.numericUpDown3.Name = "numericUpDown3";
-			this.numericUpDown3.Size = new System.Drawing.Size(223, 30);
-			this.numericUpDown3.TabIndex = 1;
+			this.Sensor2X2Offset.Name = "Sensor2X2Offset";
+			this.Sensor2X2Offset.Size = new System.Drawing.Size(112, 30);
+			this.Sensor2X2Offset.TabIndex = 1;
 			// 
 			// groupBox1
 			// 
@@ -1120,69 +1169,73 @@
 			// tableLayoutPanel19
 			// 
 			this.tableLayoutPanel19.ColumnCount = 2;
-			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-			this.tableLayoutPanel19.Controls.Add(this.label6, 0, 0);
-			this.tableLayoutPanel19.Controls.Add(this.label7, 0, 1);
-			this.tableLayoutPanel19.Controls.Add(this.numericUpDown1, 1, 1);
-			this.tableLayoutPanel19.Controls.Add(this.Sensor1X1Offset, 1, 0);
+			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel19.Controls.Add(this.pictureBox1, 0, 0);
+			this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel24, 1, 0);
 			this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel19.Location = new System.Drawing.Point(4, 27);
 			this.tableLayoutPanel19.Margin = new System.Windows.Forms.Padding(4);
 			this.tableLayoutPanel19.Name = "tableLayoutPanel19";
 			this.tableLayoutPanel19.Padding = new System.Windows.Forms.Padding(4);
-			this.tableLayoutPanel19.RowCount = 2;
-			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel19.RowCount = 1;
+			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel19.Size = new System.Drawing.Size(392, 259);
 			this.tableLayoutPanel19.TabIndex = 0;
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+			this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(192, 251);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox1.TabIndex = 0;
+			this.pictureBox1.TabStop = false;
+			// 
+			// tableLayoutPanel24
+			// 
+			this.tableLayoutPanel24.ColumnCount = 2;
+			this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel24.Controls.Add(this.label6, 0, 0);
+			this.tableLayoutPanel24.Controls.Add(this.label7, 0, 1);
+			this.tableLayoutPanel24.Controls.Add(this.Sensor1X1Offset, 1, 0);
+			this.tableLayoutPanel24.Controls.Add(this.Sensor1X2Offset, 1, 1);
+			this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel24.Location = new System.Drawing.Point(199, 7);
+			this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+			this.tableLayoutPanel24.RowCount = 2;
+			this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel24.Size = new System.Drawing.Size(186, 245);
+			this.tableLayoutPanel24.TabIndex = 1;
+			// 
 			// label6
 			// 
+			this.label6.AutoSize = true;
 			this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label6.Location = new System.Drawing.Point(8, 8);
-			this.label6.Margin = new System.Windows.Forms.Padding(4);
+			this.label6.Location = new System.Drawing.Point(0, 0);
+			this.label6.Margin = new System.Windows.Forms.Padding(0);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(145, 117);
+			this.label6.Size = new System.Drawing.Size(74, 122);
 			this.label6.TabIndex = 0;
 			this.label6.Text = "X1";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label7
 			// 
+			this.label7.AutoSize = true;
 			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label7.Location = new System.Drawing.Point(8, 133);
-			this.label7.Margin = new System.Windows.Forms.Padding(4);
+			this.label7.Location = new System.Drawing.Point(0, 122);
+			this.label7.Margin = new System.Windows.Forms.Padding(0);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(145, 118);
+			this.label7.Size = new System.Drawing.Size(74, 123);
 			this.label7.TabIndex = 0;
 			this.label7.Text = "X2";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// numericUpDown1
-			// 
-			this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.numericUpDown1.DecimalPlaces = 2;
-			this.numericUpDown1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-			this.numericUpDown1.Location = new System.Drawing.Point(161, 177);
-			this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
-			this.numericUpDown1.Maximum = new decimal(new int[] {
-            35,
-            0,
-            0,
-            65536});
-			this.numericUpDown1.Minimum = new decimal(new int[] {
-            35,
-            0,
-            0,
-            -2147418112});
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(223, 30);
-			this.numericUpDown1.TabIndex = 1;
 			// 
 			// Sensor1X1Offset
 			// 
@@ -1193,8 +1246,8 @@
             0,
             0,
             131072});
-			this.Sensor1X1Offset.Location = new System.Drawing.Point(161, 51);
-			this.Sensor1X1Offset.Margin = new System.Windows.Forms.Padding(4);
+			this.Sensor1X1Offset.Location = new System.Drawing.Point(74, 46);
+			this.Sensor1X1Offset.Margin = new System.Windows.Forms.Padding(0);
 			this.Sensor1X1Offset.Maximum = new decimal(new int[] {
             35,
             0,
@@ -1206,8 +1259,33 @@
             0,
             -2147418112});
 			this.Sensor1X1Offset.Name = "Sensor1X1Offset";
-			this.Sensor1X1Offset.Size = new System.Drawing.Size(223, 30);
+			this.Sensor1X1Offset.Size = new System.Drawing.Size(112, 30);
 			this.Sensor1X1Offset.TabIndex = 1;
+			// 
+			// Sensor1X2Offset
+			// 
+			this.Sensor1X2Offset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor1X2Offset.DecimalPlaces = 2;
+			this.Sensor1X2Offset.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.Sensor1X2Offset.Location = new System.Drawing.Point(74, 168);
+			this.Sensor1X2Offset.Margin = new System.Windows.Forms.Padding(0);
+			this.Sensor1X2Offset.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            65536});
+			this.Sensor1X2Offset.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            -2147418112});
+			this.Sensor1X2Offset.Name = "Sensor1X2Offset";
+			this.Sensor1X2Offset.Size = new System.Drawing.Size(112, 30);
+			this.Sensor1X2Offset.TabIndex = 1;
 			// 
 			// SaveOffset
 			// 
@@ -1545,6 +1623,7 @@
 			this.DbIpAddress.Name = "DbIpAddress";
 			this.DbIpAddress.Size = new System.Drawing.Size(271, 30);
 			this.DbIpAddress.TabIndex = 2;
+			this.DbIpAddress.TextChanged += new System.EventHandler(this.DbIpAddress_TextChanged);
 			// 
 			// label11
 			// 
@@ -1559,17 +1638,19 @@
 			// 
 			// DbConnectionStatus
 			// 
-			this.DbConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.DbConnectionStatus.BackColor = System.Drawing.Color.Silver;
 			this.DbConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DbConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.DbConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.DbConnectionStatus.Enabled = false;
+			this.DbConnectionStatus.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.DbConnectionStatus.ForeColor = System.Drawing.Color.Black;
 			this.DbConnectionStatus.Location = new System.Drawing.Point(3, 46);
 			this.DbConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
 			this.DbConnectionStatus.Name = "DbConnectionStatus";
 			this.DbConnectionStatus.Size = new System.Drawing.Size(388, 37);
 			this.DbConnectionStatus.TabIndex = 17;
-			this.DbConnectionStatus.Text = "Connection Failed";
+			this.DbConnectionStatus.Text = "Connection Test";
 			this.DbConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.DbConnectionStatus.Click += new System.EventHandler(this.DbConnectionStatus_Click);
 			// 
 			// RobotConnectionConfig
 			// 
@@ -1645,6 +1726,7 @@
 			this.Robot2IpAddress.Name = "Robot2IpAddress";
 			this.Robot2IpAddress.Size = new System.Drawing.Size(271, 30);
 			this.Robot2IpAddress.TabIndex = 3;
+			this.Robot2IpAddress.TextChanged += new System.EventHandler(this.Robot2IpAddress_TextChanged);
 			// 
 			// label4
 			// 
@@ -1683,6 +1765,7 @@
 			this.Robot1IpAddress.Name = "Robot1IpAddress";
 			this.Robot1IpAddress.Size = new System.Drawing.Size(271, 30);
 			this.Robot1IpAddress.TabIndex = 2;
+			this.Robot1IpAddress.TextChanged += new System.EventHandler(this.Robot1IpAddress_TextChanged);
 			// 
 			// label3
 			// 
@@ -1697,30 +1780,32 @@
 			// 
 			// Robot1ConnectionStatus
 			// 
-			this.Robot1ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot1ConnectionStatus.BackColor = System.Drawing.Color.Silver;
 			this.Robot1ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot1ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Robot1ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Robot1ConnectionStatus.Enabled = false;
+			this.Robot1ConnectionStatus.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot1ConnectionStatus.ForeColor = System.Drawing.Color.Black;
 			this.Robot1ConnectionStatus.Location = new System.Drawing.Point(3, 45);
 			this.Robot1ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
 			this.Robot1ConnectionStatus.Name = "Robot1ConnectionStatus";
 			this.Robot1ConnectionStatus.Size = new System.Drawing.Size(388, 36);
 			this.Robot1ConnectionStatus.TabIndex = 17;
-			this.Robot1ConnectionStatus.Text = "Connection Failed";
+			this.Robot1ConnectionStatus.Text = "Connection Test";
 			this.Robot1ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Robot2ConnectionStatus
 			// 
-			this.Robot2ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot2ConnectionStatus.BackColor = System.Drawing.Color.Silver;
 			this.Robot2ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot2ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Robot2ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Robot2ConnectionStatus.Enabled = false;
+			this.Robot2ConnectionStatus.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot2ConnectionStatus.ForeColor = System.Drawing.Color.Black;
 			this.Robot2ConnectionStatus.Location = new System.Drawing.Point(3, 129);
 			this.Robot2ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
 			this.Robot2ConnectionStatus.Name = "Robot2ConnectionStatus";
 			this.Robot2ConnectionStatus.Size = new System.Drawing.Size(388, 36);
 			this.Robot2ConnectionStatus.TabIndex = 18;
-			this.Robot2ConnectionStatus.Text = "Connection Failed";
+			this.Robot2ConnectionStatus.Text = "Connection Test";
 			this.Robot2ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// SensorConnectionConfig
@@ -1785,6 +1870,7 @@
 			this.Sensor2IpAddress.Name = "Sensor2IpAddress";
 			this.Sensor2IpAddress.Size = new System.Drawing.Size(269, 30);
 			this.Sensor2IpAddress.TabIndex = 2;
+			this.Sensor2IpAddress.TextChanged += new System.EventHandler(this.Sensor2IpAddress_TextChanged);
 			// 
 			// label2
 			// 
@@ -1834,34 +1920,39 @@
 			this.Sensor1IpAddress.Name = "Sensor1IpAddress";
 			this.Sensor1IpAddress.Size = new System.Drawing.Size(269, 30);
 			this.Sensor1IpAddress.TabIndex = 1;
+			this.Sensor1IpAddress.TextChanged += new System.EventHandler(this.Sensor1IpAddress_TextChanged);
 			// 
 			// Sensor1ConnectionStatus
 			// 
-			this.Sensor1ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor1ConnectionStatus.BackColor = System.Drawing.Color.Silver;
 			this.Sensor1ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor1ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Sensor1ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Sensor1ConnectionStatus.Enabled = false;
+			this.Sensor1ConnectionStatus.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor1ConnectionStatus.ForeColor = System.Drawing.Color.Black;
 			this.Sensor1ConnectionStatus.Location = new System.Drawing.Point(3, 44);
 			this.Sensor1ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
 			this.Sensor1ConnectionStatus.Name = "Sensor1ConnectionStatus";
 			this.Sensor1ConnectionStatus.Size = new System.Drawing.Size(386, 35);
 			this.Sensor1ConnectionStatus.TabIndex = 15;
-			this.Sensor1ConnectionStatus.Text = "Connection Failed";
+			this.Sensor1ConnectionStatus.Text = "Connection Test";
 			this.Sensor1ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.Sensor1ConnectionStatus.Click += new System.EventHandler(this.Sensor1ConnectionStatus_Click);
 			// 
 			// Sensor2ConnectionStatus
 			// 
-			this.Sensor2ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor2ConnectionStatus.BackColor = System.Drawing.Color.Silver;
 			this.Sensor2ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor2ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Sensor2ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Sensor2ConnectionStatus.Enabled = false;
+			this.Sensor2ConnectionStatus.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor2ConnectionStatus.ForeColor = System.Drawing.Color.Black;
 			this.Sensor2ConnectionStatus.Location = new System.Drawing.Point(3, 126);
 			this.Sensor2ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
 			this.Sensor2ConnectionStatus.Name = "Sensor2ConnectionStatus";
 			this.Sensor2ConnectionStatus.Size = new System.Drawing.Size(386, 35);
 			this.Sensor2ConnectionStatus.TabIndex = 16;
-			this.Sensor2ConnectionStatus.Text = "Connection Failed";
+			this.Sensor2ConnectionStatus.Text = "Connection Test";
 			this.Sensor2ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.Sensor2ConnectionStatus.Click += new System.EventHandler(this.Sensor2ConnectionStatus_Click);
 			// 
 			// SensorConnectionSave
 			// 
@@ -1900,7 +1991,7 @@
 			this.LogConsole.MaxLength = 65536;
 			this.LogConsole.Multiline = true;
 			this.LogConsole.Name = "LogConsole";
-			this.LogConsole.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+			this.LogConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.LogConsole.Size = new System.Drawing.Size(1272, 702);
 			this.LogConsole.TabIndex = 0;
 			// 
@@ -1983,6 +2074,124 @@
 			this.Logo.TabIndex = 2;
 			this.Logo.TabStop = false;
 			// 
+			// Diagnostics
+			// 
+			this.Diagnostics.Controls.Add(this.flowLayoutPanel1);
+			this.Diagnostics.Location = new System.Drawing.Point(4, 54);
+			this.Diagnostics.Name = "Diagnostics";
+			this.Diagnostics.Padding = new System.Windows.Forms.Padding(3);
+			this.Diagnostics.Size = new System.Drawing.Size(1272, 702);
+			this.Diagnostics.TabIndex = 6;
+			this.Diagnostics.Text = "Diagnostics";
+			this.Diagnostics.UseVisualStyleBackColor = true;
+			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Controls.Add(this.DiagPass);
+			this.flowLayoutPanel1.Controls.Add(this.DiagNg);
+			this.flowLayoutPanel1.Controls.Add(this.DiagPassAfterBending);
+			this.flowLayoutPanel1.Controls.Add(this.DiagNgAfterBending);
+			this.flowLayoutPanel1.Controls.Add(this.DiagPcStatus);
+			this.flowLayoutPanel1.Controls.Add(this.DiagPcComStatus);
+			this.flowLayoutPanel1.Controls.Add(this.DiagSensorStatus);
+			this.flowLayoutPanel1.Controls.Add(this.DiagSensorDataStatus);
+			this.flowLayoutPanel1.Controls.Add(this.DiagByPass);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(1266, 696);
+			this.flowLayoutPanel1.TabIndex = 0;
+			// 
+			// DiagPass
+			// 
+			this.DiagPass.Location = new System.Drawing.Point(4, 4);
+			this.DiagPass.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagPass.Name = "DiagPass";
+			this.DiagPass.Size = new System.Drawing.Size(308, 136);
+			this.DiagPass.TabIndex = 0;
+			this.DiagPass.Text = "PASS";
+			this.DiagPass.UseVisualStyleBackColor = true;
+			// 
+			// DiagNg
+			// 
+			this.DiagNg.Location = new System.Drawing.Point(320, 4);
+			this.DiagNg.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagNg.Name = "DiagNg";
+			this.DiagNg.Size = new System.Drawing.Size(308, 136);
+			this.DiagNg.TabIndex = 1;
+			this.DiagNg.Text = "NOT GOOD";
+			this.DiagNg.UseVisualStyleBackColor = true;
+			// 
+			// DiagPassAfterBending
+			// 
+			this.DiagPassAfterBending.Location = new System.Drawing.Point(636, 4);
+			this.DiagPassAfterBending.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagPassAfterBending.Name = "DiagPassAfterBending";
+			this.DiagPassAfterBending.Size = new System.Drawing.Size(308, 136);
+			this.DiagPassAfterBending.TabIndex = 2;
+			this.DiagPassAfterBending.Text = "PASS AFTER BENDING";
+			this.DiagPassAfterBending.UseVisualStyleBackColor = true;
+			// 
+			// DiagNgAfterBending
+			// 
+			this.DiagNgAfterBending.Location = new System.Drawing.Point(952, 4);
+			this.DiagNgAfterBending.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagNgAfterBending.Name = "DiagNgAfterBending";
+			this.DiagNgAfterBending.Size = new System.Drawing.Size(308, 136);
+			this.DiagNgAfterBending.TabIndex = 3;
+			this.DiagNgAfterBending.Text = "NG AFTER BENDING";
+			this.DiagNgAfterBending.UseVisualStyleBackColor = true;
+			// 
+			// DiagPcStatus
+			// 
+			this.DiagPcStatus.Location = new System.Drawing.Point(4, 148);
+			this.DiagPcStatus.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagPcStatus.Name = "DiagPcStatus";
+			this.DiagPcStatus.Size = new System.Drawing.Size(308, 136);
+			this.DiagPcStatus.TabIndex = 4;
+			this.DiagPcStatus.Text = "PC STATUS";
+			this.DiagPcStatus.UseVisualStyleBackColor = true;
+			// 
+			// DiagPcComStatus
+			// 
+			this.DiagPcComStatus.Location = new System.Drawing.Point(320, 148);
+			this.DiagPcComStatus.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagPcComStatus.Name = "DiagPcComStatus";
+			this.DiagPcComStatus.Size = new System.Drawing.Size(308, 136);
+			this.DiagPcComStatus.TabIndex = 5;
+			this.DiagPcComStatus.Text = "PC COM ERROR";
+			this.DiagPcComStatus.UseVisualStyleBackColor = true;
+			// 
+			// DiagSensorStatus
+			// 
+			this.DiagSensorStatus.Location = new System.Drawing.Point(636, 148);
+			this.DiagSensorStatus.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagSensorStatus.Name = "DiagSensorStatus";
+			this.DiagSensorStatus.Size = new System.Drawing.Size(308, 136);
+			this.DiagSensorStatus.TabIndex = 6;
+			this.DiagSensorStatus.Text = "SENSOR STATUS";
+			this.DiagSensorStatus.UseVisualStyleBackColor = true;
+			// 
+			// DiagSensorDataStatus
+			// 
+			this.DiagSensorDataStatus.Location = new System.Drawing.Point(952, 148);
+			this.DiagSensorDataStatus.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagSensorDataStatus.Name = "DiagSensorDataStatus";
+			this.DiagSensorDataStatus.Size = new System.Drawing.Size(308, 136);
+			this.DiagSensorDataStatus.TabIndex = 7;
+			this.DiagSensorDataStatus.Text = "SENSOR DATA STATUS";
+			this.DiagSensorDataStatus.UseVisualStyleBackColor = true;
+			// 
+			// DiagByPass
+			// 
+			this.DiagByPass.Location = new System.Drawing.Point(4, 292);
+			this.DiagByPass.Margin = new System.Windows.Forms.Padding(4);
+			this.DiagByPass.Name = "DiagByPass";
+			this.DiagByPass.Size = new System.Drawing.Size(308, 136);
+			this.DiagByPass.TabIndex = 8;
+			this.DiagByPass.Text = "BYPASS";
+			this.DiagByPass.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
@@ -2035,12 +2244,17 @@
 			this.tableLayoutPanel17.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.tableLayoutPanel20.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+			this.tableLayoutPanel25.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2X1Offset)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor2X2Offset)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.tableLayoutPanel19.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.tableLayoutPanel24.ResumeLayout(false);
+			this.tableLayoutPanel24.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1X2Offset)).EndInit();
 			this.FileConfig.ResumeLayout(false);
 			this.FileSaveConfig.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
@@ -2071,6 +2285,8 @@
 			this.GlobalFormLayout.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
+			this.Diagnostics.ResumeLayout(false);
+			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -2157,16 +2373,8 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.NumericUpDown numericUpDown2;
-		private System.Windows.Forms.NumericUpDown numericUpDown3;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
-		private System.Windows.Forms.NumericUpDown Sensor1X1Offset;
 		private System.Windows.Forms.Button SaveOffset;
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
@@ -2183,6 +2391,29 @@
 		private System.Windows.Forms.ComboBox AutoSaveInterval;
 		private System.Windows.Forms.Label TitleBar;
 		private System.Windows.Forms.PictureBox Logo;
+		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.NumericUpDown Sensor2X1Offset;
+		private System.Windows.Forms.NumericUpDown Sensor2X2Offset;
+		private System.Windows.Forms.NumericUpDown Sensor1X1Offset;
+		private System.Windows.Forms.NumericUpDown Sensor1X2Offset;
+		private System.Windows.Forms.TabPage Diagnostics;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.Button DiagPass;
+		private System.Windows.Forms.Button DiagNg;
+		private System.Windows.Forms.Button DiagPassAfterBending;
+		private System.Windows.Forms.Button DiagNgAfterBending;
+		private System.Windows.Forms.Button DiagPcStatus;
+		private System.Windows.Forms.Button DiagPcComStatus;
+		private System.Windows.Forms.Button DiagSensorStatus;
+		private System.Windows.Forms.Button DiagSensorDataStatus;
+		private System.Windows.Forms.Button DiagByPass;
 	}
 }
 

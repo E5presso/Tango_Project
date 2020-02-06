@@ -40,11 +40,11 @@ namespace Middleware
 		public void Stop() => server.Close();
 		public void SendToRobot1(byte[] data)
 		{
-			server.Send(Robot1IpAddress, data);
+			if (Robot1IpAddress != null) server.Send(Robot1IpAddress, data);
 		}
 		public void SendToRobot2(byte[] data)
 		{
-			server.Send(Robot2IpAddress, data);
+			if (Robot1IpAddress != null) server.Send(Robot2IpAddress, data);
 		}
 
 		private void Server_Connected(object sender, ConnectEventArgs e)

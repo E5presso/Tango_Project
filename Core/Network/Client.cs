@@ -40,6 +40,10 @@ namespace Core.Network
 		/// </summary>
 		public event EventHandler<DisconnectEventArgs> Disconnected;
 		/// <summary>
+		/// 원격 연결 거부 시 발생하는 이벤트입니다.
+		/// </summary>
+		public event EventHandler<ConnectionRefusedEventArgs> ConnectionRefused;
+		/// <summary>
 		/// 에러 시 발생하는 이벤트입니다.
 		/// </summary>
 		public event EventHandler<ExceptionEventArgs> ErrorOccurred;
@@ -51,8 +55,10 @@ namespace Core.Network
 		{
 			connector = new Connector();
 			connector.Connected += OnConnected;
+			connector.ConnectionRefused += OnConnectionRefused;
 			connector.ErrorOccurred += OnErrorOccurred;
 		}
+
 		/// <summary>
 		/// 클라이언트를 시작합니다.
 		/// </summary>
@@ -131,6 +137,15 @@ namespace Core.Network
 				IsActive = false;
 
 				Disconnected?.Invoke(this, new DisconnectEventArgs(session.IP));
+			}
+			catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+		}
+		private void OnConnectionRefused(string ip)
+		{
+			try
+			{
+				IsActive = false;
+				ConnectionRefused?.Invoke(this, new ConnectionRefusedEventArgs(ip));
 			}
 			catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
 		}

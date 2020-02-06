@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 
@@ -13,6 +14,7 @@ namespace Core.Network
 		public string LocalIP;
 
 		public event ConnectEvent Connected;
+		public event ConnectionRefusedEvent ConnectionRefused;
 		public event ExceptionEvent ErrorOccurred;
 
 		public void Start(string address, int port, int buffersize, bool enableMultiBytes)
@@ -32,7 +34,14 @@ namespace Core.Network
 						LocalIP = socket.LocalEndPoint.ToString();
 						Connected?.Invoke(new Session(socket, size, enableMultiBytes));
 					}
-					catch (Exception e) { ErrorOccurred?.Invoke(e); }
+					catch (Exception e)
+					{
+						if (e is Win32Exception w && w.ErrorCode == 10061)
+						{
+							ConnectionRefused?.Invoke(ip.MapToIPv4().ToString());
+						}
+						ErrorOccurred?.Invoke(e);
+					}
 				}
 				socket.BeginConnect(point, new AsyncCallback(Callback), null);
 			}

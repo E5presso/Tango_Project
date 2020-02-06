@@ -48,8 +48,6 @@ namespace Middleware
 		/* 기타 Data */
 		int Bending_Cnt;                // Bending 횟수
 
-		byte[] Copy_X1 = new byte[4];   // Sensor 측정값(Byte)
-		byte[] Copy_X2 = new byte[4];   // Sensor 측정값(Byte)
 		int X1, X2;                     // Sensor 측정값(Int)
 		int X1_DP, X2_DP;               // Sensor 소수점
 		int X1_Multiply;                // T, L 계산시 곱셈으로 사용되는 변수
@@ -95,21 +93,21 @@ namespace Middleware
 
 		public event EventHandler<ConnectEventArgs> Sensor1Connected;
 		public event EventHandler<ConnectEventArgs> Sensor2Connected;
+		public event EventHandler<SensorValueEventArgs> Sensor1ValueReceived;
+		public event EventHandler<SensorValueEventArgs> Sensor2ValueReceived;
+		public event EventHandler<ConnectionRefusedEventArgs> Sensor1ConnectionRefused;
+		public event EventHandler<ConnectionRefusedEventArgs> Sensor2ConnectionRefused;
 		public event EventHandler<DisconnectEventArgs> Sensor1Disconnected;
 		public event EventHandler<DisconnectEventArgs> Sensor2Disconnected;
 
 		public event EventHandler<ConnectEventArgs> Robot1Connected;
 		public event EventHandler<ConnectEventArgs> Robot2Connected;
+		public event EventHandler<RobotPhaseEventArgs> Robot1PhaseChanged;
+		public event EventHandler<RobotPhaseEventArgs> Robot2PhaseChanged;
 		public event EventHandler<DisconnectEventArgs> Robot1Disconnected;
 		public event EventHandler<DisconnectEventArgs> Robot2Disconnected;
 
 		public event EventHandler<ExceptionEventArgs> ErrorOccurred;
-
-		public event EventHandler<SensorValueEventArgs> Sensor1ValueReceived;
-		public event EventHandler<SensorValueEventArgs> Sensor2ValueReceived;
-
-		public event EventHandler<RobotPhaseEventArgs> Robot1PhaseChanged;
-		public event EventHandler<RobotPhaseEventArgs> Robot2PhaseChanged;
 
 		public float Bias { get; set; }
 		public bool BypassMode { get; set; }
@@ -143,12 +141,14 @@ namespace Middleware
 			sensor.Sensor1Sended += Sensor_Sensor1Sended;
 			sensor.Sensor1Received += Sensor_Sensor1Received;
 			sensor.Sensor1Disconnected += Sensor_Sensor1Disconnected;
+			sensor.Sensor1ConnectionRefused += Sensor_Sensor1ConnectionRefused;
 			sensor.Sensor1ErrorOccurred += Sensor_Sensor1ErrorOccurred;
 
 			sensor.Sensor2Connected += Sensor_Sensor2Connected;
 			sensor.Sensor2Sended += Sensor_Sensor2Sended;
 			sensor.Sensor2Received += Sensor_Sensor2Received;
 			sensor.Sensor2Disconnected += Sensor_Sensor2Disconnected;
+			sensor.Sensor2ConnectionRefused += Sensor_Sensor2ConnectionRefused;
 			sensor.Sensor2ErrorOccurred += Sensor_Sensor2ErrorOccurred;
 
 			robot.Robot1Connected += Robot_Robot1Connected;
@@ -293,17 +293,14 @@ namespace Middleware
 		}
 		private void ProcessingSensorData(string IP, byte[] data)
 		{
-			Buffer.BlockCopy(data, 68, Copy_X1, 0, 4);
-			Buffer.BlockCopy(data, 72, Copy_X2, 0, 4);
-
-			X1 = Convert.ToInt32(Copy_X1);
-			X1 = Convert.ToInt32(Copy_X2);
+			X1 = BitConverter.ToInt32(data, 68);
+			X2 = BitConverter.ToInt32(data, 72);
 
 			Byte_X1 = Encoding.Default.GetBytes(Convert.ToString(X1));
 			Byte_X2 = Encoding.Default.GetBytes(Convert.ToString(X2));
 
-			X1_DP = data[12];
-			X2_DP = data[13];
+			X1_DP = data[11];
+			X2_DP = data[12];
 
 			switch (X1_DP)
 			{
@@ -379,6 +376,9 @@ namespace Middleware
 					Double_DP_X2 = X2 * 0.001f;
 					break;
 			}
+
+			Double_DP_X1 = (float)Math.Round(Double_DP_X1, 2);
+			Double_DP_X2 = (float)Math.Round(Double_DP_X2, 2);
 
 			X1_Plus_L = 3.5f * X1_Multiply;
 			X1_Minus_L = -3.5f * X1_Multiply;
@@ -540,6 +540,10 @@ namespace Middleware
 		{
 			Sensor1Disconnected?.Invoke(sender, e);
 		}
+		private void Sensor_Sensor1ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
+		{
+			Sensor1ConnectionRefused?.Invoke(sender, e);
+		}
 		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e)
 		{
 			ErrorOccurred?.Invoke(sender, e);
@@ -661,6 +665,10 @@ namespace Middleware
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
 		{
 			Sensor2Disconnected?.Invoke(sender, e);
+		}
+		private void Sensor_Sensor2ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
+		{
+			Sensor2ConnectionRefused?.Invoke(sender, e);
 		}
 		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e)
 		{
