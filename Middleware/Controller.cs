@@ -93,6 +93,10 @@ namespace Middleware
 
 		public event EventHandler<ConnectEventArgs> Sensor1Connected;
 		public event EventHandler<ConnectEventArgs> Sensor2Connected;
+		public event EventHandler<SendEventArgs> Sensor1Sended;
+		public event EventHandler<SendEventArgs> Sensor2Sended;
+		public event EventHandler<ReceiveEventArgs> Sensor1Received;
+		public event EventHandler<ReceiveEventArgs> Sensor2Received;
 		public event EventHandler<SensorValueEventArgs> Sensor1ValueReceived;
 		public event EventHandler<SensorValueEventArgs> Sensor2ValueReceived;
 		public event EventHandler<ConnectionRefusedEventArgs> Sensor1ConnectionRefused;
@@ -102,6 +106,10 @@ namespace Middleware
 
 		public event EventHandler<ConnectEventArgs> Robot1Connected;
 		public event EventHandler<ConnectEventArgs> Robot2Connected;
+		public event EventHandler<SendEventArgs> Robot1Sended;
+		public event EventHandler<SendEventArgs> Robot2Sended;
+		public event EventHandler<ReceiveEventArgs> Robot1Received;
+		public event EventHandler<ReceiveEventArgs> Robot2Received;
 		public event EventHandler<RobotPhaseEventArgs> Robot1PhaseChanged;
 		public event EventHandler<RobotPhaseEventArgs> Robot2PhaseChanged;
 		public event EventHandler<DisconnectEventArgs> Robot1Disconnected;
@@ -433,9 +441,12 @@ namespace Middleware
 		}
 		private void Sensor_Sensor1Sended(object sender, SendEventArgs e)
 		{
+			Sensor1Sended?.Invoke(sender, e);
 		}
 		private void Sensor_Sensor1Received(object sender, ReceiveEventArgs e)
 		{
+			Sensor1Received?.Invoke(sender, e);
+
 			byte[] Timing_On = new byte[6];
 			byte[] Timing_Off = new byte[6];
 			byte[] Measured_REQ = new byte[7];
@@ -559,9 +570,12 @@ namespace Middleware
 		}
 		private void Sensor_Sensor2Sended(object sender, SendEventArgs e)
 		{
+			Sensor2Sended?.Invoke(sender, e);
 		}
 		private void Sensor_Sensor2Received(object sender, ReceiveEventArgs e)
 		{
+			Sensor2Received?.Invoke(sender, e);
+
 			byte[] Timing_On = new byte[6];
 			byte[] Timing_Off = new byte[6];
 			byte[] Measured_REQ = new byte[7];
@@ -685,9 +699,12 @@ namespace Middleware
 		}
 		private void Robot_Robot1Sended(object sender, SendEventArgs e)
 		{
+			Robot1Sended?.Invoke(sender, e);
 		}
 		private void Robot_Robot1Received(object sender, ReceiveEventArgs e)
 		{
+			Robot1Received?.Invoke(sender, e);
+
 			Door_Information = 0;
 			Interlock_R1 = false;
 			byte[] Door_Info_R_R1 = new byte[18];
@@ -789,9 +806,12 @@ namespace Middleware
 		}
 		private void Robot_Robot2Sended(object sender, SendEventArgs e)
 		{
+			Robot2Sended?.Invoke(sender, e);
 		}
 		private void Robot_Robot2Received(object sender, ReceiveEventArgs e)
 		{
+			Robot2Received?.Invoke(sender, e);
+
 			byte[] Door_Info_R_R2 = new byte[18];
 			byte[] Robot2_Receive_Data = e.Data;
 

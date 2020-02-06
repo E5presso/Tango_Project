@@ -17,7 +17,7 @@ namespace HMI
     public partial class MainForm : Form
     {
         private const int buffersize = 1500;
-        private Controller controller = new Controller();
+        private readonly Controller controller = new Controller();
 
         public MainForm()
         {
@@ -25,6 +25,10 @@ namespace HMI
 
             controller.Sensor1Connected += Controller_Sensor1Connected;
             controller.Sensor2Connected += Controller_Sensor2Connected;
+            controller.Sensor1Sended += Controller_Sensor1Sended;
+            controller.Sensor2Sended += Controller_Sensor2Sended;
+            controller.Sensor1Received += Controller_Sensor1Received;
+            controller.Sensor2Received += Controller_Sensor2Received;
             controller.Sensor1ValueReceived += Controller_Sensor1ValueReceived;
             controller.Sensor2ValueReceived += Controller_Sensor2ValueReceived;
             controller.Sensor1ConnectionRefused += Controller_Sensor1ConnectionRefused;
@@ -34,6 +38,10 @@ namespace HMI
 
             controller.Robot1Connected += Controller_Robot1Connected;
             controller.Robot2Connected += Controller_Robot2Connected;
+            controller.Robot1Sended += Controller_Robot1Sended;
+            controller.Robot2Sended += Controller_Robot2Sended;
+            controller.Robot1Received += Controller_Robot1Received;
+            controller.Robot2Received += Controller_Robot2Received;
             controller.Robot1PhaseChanged += Controller_Robot1PhaseChanged;
             controller.Robot2PhaseChanged += Controller_Robot2PhaseChanged;
             controller.Robot1Disconnected += Controller_Robot1Disconnected;
@@ -41,7 +49,6 @@ namespace HMI
 
             controller.ErrorOccurred += Controller_ErrorOccurred;
         }
-
         #region 윈도우 UI 기본동작
         private Point mousePosition;
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -88,13 +95,55 @@ namespace HMI
                 x.Text = "Connection Succeed";
             });
         }
+        private void Controller_Sensor1Sended(object sender, SendEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Sensor2Sended(object sender, SendEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Sensor1Received(object sender, ReceiveEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Sensor2Received(object sender, ReceiveEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+            });
+        }
         private void Controller_Sensor1ValueReceived(object sender, SensorValueEventArgs e)
         {
-            SensorChart.SyncInvoke(x =>
+            DateTime time = DateTime.Now;
+            Sensor1Data.AsyncInvoke(x =>
+            {
+                x.Rows.Add(new object[]
+                {
+                    time, 
+                    e.Status, 
+                    e.Before.Sensor1, 
+                    e.Before.Sensor2,
+                    e.After == null ? 0f : e.After.Value.Sensor1,
+                    e.After == null ? 0f : e.After.Value.Sensor2,
+                    e.Delta == null ? 0f : e.Delta.Value.Sensor1,
+                    e.Delta == null ? 0f : e.Delta.Value.Sensor2
+                });
+            });
+            SensorChart.AsyncInvoke(x =>
             {
                 if (!x.IsDisposed)
                 {
-                    DateTime time = DateTime.Now;
                     x.Series["Sensor1Before"].Points.AddXY(time, e.Before.Sensor1);
                     x.Series["Sensor1After"].Points.AddXY(time, e.After == null ? 0f : e.After.Value.Sensor1);
                     x.Series["Sensor1MaxPlus"].Points.AddXY(time, 3.5f);
@@ -183,6 +232,110 @@ namespace HMI
         }
         private void Controller_Sensor2ValueReceived(object sender, SensorValueEventArgs e)
         {
+            DateTime time = DateTime.Now;
+            Sensor2Data.AsyncInvoke(x =>
+            {
+                x.Rows.Add(new object[]
+                {
+                    time,
+                    e.Status,
+                    e.Before.Sensor1,
+                    e.Before.Sensor2,
+                    e.After == null ? 0f : e.After.Value.Sensor1,
+                    e.After == null ? 0f : e.After.Value.Sensor2,
+                    e.Delta == null ? 0f : e.Delta.Value.Sensor1,
+                    e.Delta == null ? 0f : e.Delta.Value.Sensor2
+                });
+            });
+            SensorChart.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Series["Sensor1Before"].Points.AddXY(time, e.Before.Sensor1);
+                    x.Series["Sensor1After"].Points.AddXY(time, e.After == null ? 0f : e.After.Value.Sensor1);
+                    x.Series["Sensor1MaxPlus"].Points.AddXY(time, 3.5f);
+                    x.Series["Sensor1MaxMinus"].Points.AddXY(time, -3.5f);
+                    x.Series["Sensor1MinPlus"].Points.AddXY(time, 0.75f);
+                    x.Series["Sensor1MinMinus"].Points.AddXY(time, -0.75f);
+
+                    x.Series["Sensor2Before"].Points.AddXY(time, e.Before.Sensor2);
+                    x.Series["Sensor2After"].Points.AddXY(time, e.After == null ? 0f : e.After.Value.Sensor2);
+                    x.Series["Sensor2MaxPlus"].Points.AddXY(time, 3.5f);
+                    x.Series["Sensor2MaxMinus"].Points.AddXY(time, -3.5f);
+                    x.Series["Sensor2MinPlus"].Points.AddXY(time, 0.75f);
+                    x.Series["Sensor2MinMinus"].Points.AddXY(time, -0.75f);
+
+                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor1);
+                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor2);
+                }
+            });
+            switch (e.Status)
+            {
+                case StatusCode.PASS:
+                {
+                    Stats1.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["Passed"].Points.Count > 0)
+                            {
+                                x.Series["Passed"].Points[0].SetValueXY("Passed", x.Series["Passed"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["Passed"].Points.AddXY("Passed", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.FAILED:
+                {
+                    Stats1.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["Failed"].Points.Count > 0)
+                            {
+                                x.Series["Failed"].Points[0].SetValueXY("Failed", x.Series["Failed"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["Failed"].Points.AddXY("Failed", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.FIRST_BENDED:
+                {
+                    Stats2.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["FirstBended"].Points.Count > 0)
+                            {
+                                x.Series["FirstBended"].Points[0].SetValueXY("FirstBended", x.Series["FirstBended"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["FirstBended"].Points.AddXY("FirstBended", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.SECOND_BENDED:
+                {
+                    Stats2.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["SecondBended"].Points.Count > 0)
+                            {
+                                x.Series["SecondBended"].Points[0].SetValueXY("SecondBended", x.Series["SecondBended"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["SecondBended"].Points.AddXY("SecondBended", 1);
+                        }
+                    });
+                    break;
+                }
+            }
         }
         private void Controller_Sensor1ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
         {
@@ -247,6 +400,34 @@ namespace HMI
                 x.BackColor = Color.OliveDrab;
             });
         }
+        private void Controller_Robot1Sended(object sender, SendEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Robot2Sended(object sender, SendEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Robot1Received(object sender, ReceiveEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+            });
+        }
+        private void Controller_Robot2Received(object sender, ReceiveEventArgs e)
+        {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+            });
+        }
         private void Controller_Robot1PhaseChanged(object sender, RobotPhaseEventArgs e)
         {
         }
@@ -285,7 +466,7 @@ namespace HMI
         }
         private void Sensor2IpAddress_TextChanged(object sender, EventArgs e)
         {
-            if (NetworkUtilities.ValidateIPAddress(Sensor1IpAddress.Text, true))
+            if (NetworkUtilities.ValidateIPAddress(Sensor2IpAddress.Text, true))
                 Sensor2ConnectionStatus.Enabled = true;
             else Sensor2ConnectionStatus.Enabled = false;
         }

@@ -14,29 +14,9 @@ namespace TestConsole
 	{
 		private static readonly Server server = new Server();
 		private static readonly Random random = new Random();
-
-		private static void Main()
+		private static Thread thread = new Thread(new ThreadStart(() =>
 		{
-			server.Connected += Server_Connected;
-			server.Sended += Server_Sended;
-			server.Received += Server_Received;
-			server.Disconnected += Server_Disconnected;
-			server.Open(11000, 100, 1500, false);
-			Console.ReadKey();
-		}
-
-		private static void Server_Sended(object sender, SendEventArgs e)
-		{
-			Console.WriteLine($"{e.BytesSent} BytesSended to {e.IP}");
-		}
-
-		private static void Server_Connected(object sender, ConnectEventArgs e)
-		{
-			Console.WriteLine($"[{e.IP}] Connected");
-		}
-		private static void Server_Received(object sender, ReceiveEventArgs e)
-		{
-			if (e.BytesRead == 7)
+			while (true)
 			{
 				RingBuffer buffer = new RingBuffer();
 				buffer.Write(new byte[]
@@ -55,7 +35,32 @@ namespace TestConsole
 				buffer.Write(BitConverter.GetBytes(i2));
 				buffer.Write(Key.GenerateBytes(40));
 				server.Send(buffer.ToArray());
+				Thread.Sleep(100);
 			}
+		}));
+
+		private static void Main()
+		{
+			server.Connected += Server_Connected;
+			server.Sended += Server_Sended;
+			server.Received += Server_Received;
+			server.Disconnected += Server_Disconnected;
+			server.Open(11000, 100, 1500, false);
+			Console.ReadKey();
+			thread.Abort();
+		}
+
+		private static void Server_Connected(object sender, ConnectEventArgs e)
+		{
+			Console.WriteLine($"[{e.IP}] Connected");
+			thread.Start();
+		}
+		private static void Server_Sended(object sender, SendEventArgs e)
+		{
+			Console.WriteLine($"{e.BytesSent} BytesSended to {e.IP}");
+		}
+		private static void Server_Received(object sender, ReceiveEventArgs e)
+		{
 		}
 		private static void Server_Disconnected(object sender, DisconnectEventArgs e)
 		{
