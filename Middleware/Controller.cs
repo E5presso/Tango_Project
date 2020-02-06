@@ -14,6 +14,8 @@ namespace Middleware
 		const int Door_Info_ID_2 = 0x31;
 		const int Door_Info_R_ID_1 = 0x31;
 		const int Door_Info_R_ID_2 = 0x32;
+		const int Robot_Info_ID_1 = 0x31;
+		const int Robot_Info_ID_2 = 0x33;
 		const int Bending_REQ_ID_1 = 0x32;
 		const int Bending_REQ_ID_2 = 0x33;
 		const int Bending_R_ID_1 = 0x32;
@@ -53,20 +55,20 @@ namespace Middleware
 		int X2_Multiply;                // T, L 계산시 곱셈으로 사용되는 변수
 
 		byte[] Byte_X1;                 // 소수점 없는 X1(Byte)
-		byte[] Byte_X2;                 // 소수점 없는 X2(Byte)
+		byte[] Byte_X2;					// 소수점 없는 X2(Byte)
 
-		float Double_DP_X1;            // 소수점 있는 X1(Double)
-		float Double_DP_X2;            // 소수점 있는 X2(Double)
+		float Double_DP_X1;				// 소수점 있는 X1(Double)
+		float Double_DP_X2;				// 소수점 있는 X2(Double)
 
-		float X1_Plus_T;               // X1 +Tolerance 
-		float X1_Minus_T;              // X1 -Tolerance
-		float X2_Plus_T;               // X2 +Tolerance 
-		float X2_Minus_T;              // X2 -Tolerance
+		float X1_Plus_T;				// X1 +Tolerance 
+		float X1_Minus_T;				// X1 -Tolerance
+		float X2_Plus_T;				// X2 +Tolerance 
+		float X2_Minus_T;				// X2 -Tolerance
 
-		float X1_Plus_L;               // X1 +Limit
-		float X1_Minus_L;              // X1 -Limit
-		float X2_Plus_L;               // X2 +Limit
-		float X2_Minus_L;              // X2 -Limit
+		float X1_Plus_L;				// X1 +Limit
+		float X1_Minus_L;				// X1 -Limit
+		float X2_Plus_L;				// X2 +Limit
+		float X2_Minus_L;				// X2 -Limit
 
 		const int DP0 = 0;              // (Decimal Point) 소수점 2째짜리(mm)
 		const int DP1 = 1;              // 소수점 3째짜리(mm)
@@ -75,6 +77,12 @@ namespace Middleware
 		const int DP4 = 4;              // 소수점 1째짜리(um)
 		const int DP5 = 5;              // 소수점 2째짜리(um)
 		const int DP6 = 6;              // 소수점 3째짜리(um)
+
+		const int Home = 0x31;          // Home 위치
+		const int Ready = 0x32;         // 준비 위치
+		const int B_Ready = 0x33;       // Bending 준비 위치
+		const int B_Strat = 0x34;       // Bending 시작(Door까지의 위치)
+		const int B_End = 0x35;			// Bending 후(실제 Door를 미는 위치)
 
 		private SensorValue First_Sensing {get; set;}
 		private SensorValue Second_Sensing { get; set; }
@@ -104,6 +112,16 @@ namespace Middleware
 
 		public float Bias { get; set; }
 		public bool BypassMode { get; set; }
+		public string Sensor1IpAddress
+		{
+			get => sensor.Sensor1IpAddress;
+			set => sensor.Sensor1IpAddress = value;
+		}
+		public string Sensor2IpAddress
+		{
+			get => sensor.Sensor2IpAddress;
+			set => sensor.Sensor2IpAddress = value;
+		}
 		public string Robot1IpAddress
 		{
 			get => robot.Robot1IpAddress;
@@ -157,7 +175,7 @@ namespace Middleware
 		private void SendToSensor2(byte[] data) => sensor.SendToSensor2(data);
 		private void SendToRobot1(byte[] data) => robot.SendToRobot1(data);
 		private void SendToRobot2(byte[] data) => robot.SendToRobot2(data);
-
+	
 		private void Door_Information_R(byte[] D)   // PC에서 Robot으로 보내는 (Door_Information_R) Data Packet
 		{
 			D[0] = 0x39;                // Bytes 0 to 3 -> 고정값
@@ -272,7 +290,7 @@ namespace Middleware
 			M[5] = 0x00;
 			M[6] = 0x00;
 		}
-		private void ProcessingSensorData(byte[] data)
+		private void ProcessingSensorData(string IP, byte[] data)
 		{
 			Buffer.BlockCopy(data, 68, Copy_X1, 0, 4);
 			Buffer.BlockCopy(data, 72, Copy_X2, 0, 4);
@@ -377,24 +395,30 @@ namespace Middleware
 
 				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-					Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 			}
 			else if (Bending_Cnt == 1)
 			{
 				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Second_Sensing.Sensor1 - First_Sensing.Sensor1, Second_Sensing.Sensor2 - First_Sensing.Sensor2);
-				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+
+				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
 			}
 			else if (Bending_Cnt == 2)
 			{
 				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Third_Sensing.Sensor1 - Second_Sensing.Sensor1, Third_Sensing.Sensor2 - Second_Sensing.Sensor2);
-				Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+
+				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
 			}
 		}
 
@@ -437,7 +461,7 @@ namespace Middleware
 			}
 			else if (e.BytesRead == 116 && Sensor1_Receive_Data[3] == Measured_R_ID)
 			{
-				ProcessingSensorData(Sensor1_Receive_Data);
+				ProcessingSensorData(e.IP, Sensor1_Receive_Data);
 
 				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 				{
@@ -515,7 +539,10 @@ namespace Middleware
 		{
 			Sensor1Disconnected?.Invoke(sender, e);
 		}
-		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
+		private void Sensor_Sensor1ErrorOccurred(object sender, ExceptionEventArgs e)
+		{
+			ErrorOccurred?.Invoke(sender, e);
+		}
 
 		private void Sensor_Sensor2Connected(object sender, ConnectEventArgs e)
 		{
@@ -556,7 +583,7 @@ namespace Middleware
 			}
 			else if (e.BytesRead == 116 && Sensor2_Receive_Data[3] == Measured_R_ID)
 			{
-				ProcessingSensorData(Sensor2_Receive_Data);
+				ProcessingSensorData(e.IP, Sensor2_Receive_Data);
 
 				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 				{
@@ -634,7 +661,10 @@ namespace Middleware
 		{
 			Sensor2Disconnected?.Invoke(sender, e);
 		}
-		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
+		private void Sensor_Sensor2ErrorOccurred(object sender, ExceptionEventArgs e)
+		{
+			ErrorOccurred?.Invoke(sender, e);
+		}
 
 		private void Robot_Robot1Connected(object sender, ConnectEventArgs e)
 		{
@@ -650,7 +680,7 @@ namespace Middleware
 			byte[] Door_Info_R_R1 = new byte[18];
 			byte[] Reset = new byte[6];
 			byte[] Robot1_Receive_Data = e.Data;
-
+			
 			if (Robot1_Receive_Data[4] == Door_Info_ID_1 && Robot1_Receive_Data[5] == Door_Info_ID_2)
 			{
 				if (Robot1_Receive_Data[9] == FDLH)
@@ -685,14 +715,12 @@ namespace Middleware
 					SendToSensor2(Reset);
 				}
 			}
-
 			else if(Robot1_Receive_Data[4] == Pass_R_ID_1 && Robot1_Receive_Data[5] == Pass_R_ID_2)
 			{
 				Interlock_R1 = true;
 				while (!(Interlock_R1 && Interlock_R2)) ;
 				Bending_Cnt = 0;
 			}
-
 			else if (Robot1_Receive_Data[4] == Bending_R_ID_1 && Robot1_Receive_Data[5] == Bending_R_ID_2)
 			{
 				Interlock_R1 = true;
@@ -709,6 +737,31 @@ namespace Middleware
 				{
 					Reset_Input(Reset);
 					SendToSensor2(Reset);
+				}
+			}
+			else if (Robot1_Receive_Data[4] == Robot_Info_ID_1 && Robot1_Receive_Data[5] == Robot_Info_ID_2)
+			{
+				switch (Robot1_Receive_Data[8])
+				{
+					case Home:
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.HOME));
+						break;
+
+					case Ready:
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.READY));
+						break;
+
+					case B_Ready:
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_READY));
+						break;
+
+					case B_Strat:
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_START));
+						break;
+
+					case B_End:
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_END));
+						break;
 				}
 			}
 		}
@@ -751,15 +804,38 @@ namespace Middleware
 					SendToRobot2(Door_Info_R_R2);
 				}
 			}
-
 			else if (Robot2_Receive_Data[4] == Pass_R_ID_1 && Robot2_Receive_Data[5] == Pass_R_ID_2)
 			{
 				Interlock_R2 = true;
 			}
-
 			else if (Robot2_Receive_Data[4] == Bending_R_ID_1 && Robot2_Receive_Data[5] == Bending_R_ID_2)
 			{
 				Interlock_R2 = true;
+			}
+			else if (Robot2_Receive_Data[4] == Robot_Info_ID_1 && Robot2_Receive_Data[5] == Robot_Info_ID_2)
+			{
+				switch (Robot2_Receive_Data[8])
+				{
+					case Home:
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.HOME));
+						break;
+
+					case Ready:
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.READY));
+						break;
+
+					case B_Ready:
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_READY));
+						break;
+
+					case B_Strat:
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_START));
+						break;
+
+					case B_End:
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_END));
+						break;
+				}
 			}
 		}
 		private void Robot_Robot2Disconnected(object sender, DisconnectEventArgs e)
@@ -767,6 +843,9 @@ namespace Middleware
 			Robot2Disconnected?.Invoke(sender, e);
 		}
 
-		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e) => ErrorOccurred?.Invoke(sender, e);
+		private void Robot_RobotErrorOccurred(object sender, ExceptionEventArgs e)
+		{
+			ErrorOccurred?.Invoke(sender, e);
+		}
 	}
 }

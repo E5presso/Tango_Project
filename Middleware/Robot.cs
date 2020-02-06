@@ -68,6 +68,9 @@ namespace Middleware
 			if (e.IP == Robot1IpAddress) Robot1Disconnected?.Invoke(sender, e);
 			else if (e.IP == Robot2IpAddress) Robot2Disconnected?.Invoke(sender, e);
 		}
-		private void Server_ErrorOccurred(object sender, ExceptionEventArgs e) => RobotErrorOccurred?.Invoke(sender, e);
+		private void Server_ErrorOccurred(object sender, ExceptionEventArgs e)
+		{
+			RobotErrorOccurred?.Invoke(sender, e);
+		}
 	}
 }

@@ -11,13 +11,11 @@ namespace Middleware
 	}
 	public enum PhaseCode
 	{
-		A_PHASE,
-		B_PHASE,
-		C_PHASE,
-		D_PHASE,
-		E_PHASE,
-		F_PHASE,
-		G_PHASE
+		HOME,
+		READY,
+		BENDING_READY,
+		BENDING_START,
+		BENDING_END
 	}
 
 	public struct SensorValue
