@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.TabMenu = new System.Windows.Forms.TabControl();
 			this.Main = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -114,6 +114,19 @@
 			this.SaveOffset = new System.Windows.Forms.Button();
 			this.FileConfig = new System.Windows.Forms.GroupBox();
 			this.FileSaveConfig = new System.Windows.Forms.TableLayoutPanel();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
+			this.AutoSaveApply = new System.Windows.Forms.Button();
+			this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+			this.AutoSaveDirectory = new System.Windows.Forms.Button();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.EnableAutoSave = new System.Windows.Forms.Button();
+			this.AutoSaveInterval = new System.Windows.Forms.ComboBox();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
+			this.SaveNow = new System.Windows.Forms.Button();
 			this.NetworkConfig = new System.Windows.Forms.GroupBox();
 			this.SocketsConfig = new System.Windows.Forms.TableLayoutPanel();
 			this.DbConnectionConfig = new System.Windows.Forms.GroupBox();
@@ -150,19 +163,6 @@
 			this.GlobalFormLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.Exit = new System.Windows.Forms.Button();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-			this.AutoSaveApply = new System.Windows.Forms.Button();
-			this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label12 = new System.Windows.Forms.Label();
-			this.label13 = new System.Windows.Forms.Label();
-			this.EnableAutoSave = new System.Windows.Forms.Button();
-			this.AutoSaveDirectory = new System.Windows.Forms.Button();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
-			this.SaveNow = new System.Windows.Forms.Button();
-			this.AutoSaveInterval = new System.Windows.Forms.ComboBox();
 			this.TitleBar = new System.Windows.Forms.Label();
 			this.Logo = new System.Windows.Forms.PictureBox();
 			this.TabMenu.SuspendLayout();
@@ -208,6 +208,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).BeginInit();
 			this.FileConfig.SuspendLayout();
 			this.FileSaveConfig.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.tableLayoutPanel21.SuspendLayout();
+			this.tableLayoutPanel22.SuspendLayout();
+			this.groupBox4.SuspendLayout();
+			this.tableLayoutPanel23.SuspendLayout();
 			this.NetworkConfig.SuspendLayout();
 			this.SocketsConfig.SuspendLayout();
 			this.DbConnectionConfig.SuspendLayout();
@@ -224,11 +229,6 @@
 			this.Logs.SuspendLayout();
 			this.GlobalFormLayout.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.tableLayoutPanel21.SuspendLayout();
-			this.tableLayoutPanel22.SuspendLayout();
-			this.groupBox4.SuspendLayout();
-			this.tableLayoutPanel23.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -439,20 +439,24 @@
 			// LeftDoorImage
 			// 
 			this.LeftDoorImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LeftDoorImage.Image = ((System.Drawing.Image)(resources.GetObject("LeftDoorImage.Image")));
 			this.LeftDoorImage.Location = new System.Drawing.Point(2, 2);
 			this.LeftDoorImage.Margin = new System.Windows.Forms.Padding(2);
 			this.LeftDoorImage.Name = "LeftDoorImage";
 			this.LeftDoorImage.Size = new System.Drawing.Size(504, 347);
+			this.LeftDoorImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.LeftDoorImage.TabIndex = 0;
 			this.LeftDoorImage.TabStop = false;
 			// 
 			// RightDoorImage
 			// 
 			this.RightDoorImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RightDoorImage.Image = ((System.Drawing.Image)(resources.GetObject("RightDoorImage.Image")));
 			this.RightDoorImage.Location = new System.Drawing.Point(2, 353);
 			this.RightDoorImage.Margin = new System.Windows.Forms.Padding(2);
 			this.RightDoorImage.Name = "RightDoorImage";
 			this.RightDoorImage.Size = new System.Drawing.Size(504, 347);
+			this.RightDoorImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.RightDoorImage.TabIndex = 1;
 			this.RightDoorImage.TabStop = false;
 			// 
@@ -612,149 +616,149 @@
 			// 
 			// SensorChart
 			// 
-			chartArea6.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea6.AxisY.Maximum = 5D;
-			chartArea6.AxisY.Minimum = -5D;
-			chartArea6.Name = "Sensor1";
-			chartArea6.Position.Auto = false;
-			chartArea6.Position.Height = 33F;
-			chartArea6.Position.Width = 85F;
-			chartArea6.Position.X = 2.5F;
-			chartArea6.Position.Y = 3F;
-			chartArea7.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea7.AxisY.Maximum = 5D;
-			chartArea7.AxisY.Minimum = -5D;
-			chartArea7.Name = "Sensor2";
-			chartArea7.Position.Auto = false;
-			chartArea7.Position.Height = 33F;
-			chartArea7.Position.Width = 85F;
-			chartArea7.Position.X = 2.5F;
-			chartArea7.Position.Y = 36F;
-			chartArea8.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea8.Name = "Delta";
-			chartArea8.Position.Auto = false;
-			chartArea8.Position.Height = 31F;
-			chartArea8.Position.Width = 85F;
-			chartArea8.Position.X = 2.5F;
-			chartArea8.Position.Y = 69F;
-			this.SensorChart.ChartAreas.Add(chartArea6);
-			this.SensorChart.ChartAreas.Add(chartArea7);
-			this.SensorChart.ChartAreas.Add(chartArea8);
+			chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea1.AxisY.Maximum = 5D;
+			chartArea1.AxisY.Minimum = -5D;
+			chartArea1.Name = "Sensor1";
+			chartArea1.Position.Auto = false;
+			chartArea1.Position.Height = 33F;
+			chartArea1.Position.Width = 85F;
+			chartArea1.Position.X = 2.5F;
+			chartArea1.Position.Y = 3F;
+			chartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea2.AxisY.Maximum = 5D;
+			chartArea2.AxisY.Minimum = -5D;
+			chartArea2.Name = "Sensor2";
+			chartArea2.Position.Auto = false;
+			chartArea2.Position.Height = 33F;
+			chartArea2.Position.Width = 85F;
+			chartArea2.Position.X = 2.5F;
+			chartArea2.Position.Y = 36F;
+			chartArea3.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea3.Name = "Delta";
+			chartArea3.Position.Auto = false;
+			chartArea3.Position.Height = 31F;
+			chartArea3.Position.Width = 85F;
+			chartArea3.Position.X = 2.5F;
+			chartArea3.Position.Y = 69F;
+			this.SensorChart.ChartAreas.Add(chartArea1);
+			this.SensorChart.ChartAreas.Add(chartArea2);
+			this.SensorChart.ChartAreas.Add(chartArea3);
 			this.SensorChart.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SensorChart.Enabled = false;
-			legend7.DockedToChartArea = "Sensor1";
-			legend7.IsDockedInsideChartArea = false;
-			legend7.Name = "Sensor1";
-			legend7.Title = "Sensor 1";
-			legend8.DockedToChartArea = "Sensor2";
-			legend8.IsDockedInsideChartArea = false;
-			legend8.Name = "Sensor2";
-			legend8.Title = "Sensor 2";
-			legend9.DockedToChartArea = "Delta";
-			legend9.IsDockedInsideChartArea = false;
-			legend9.Name = "Delta";
-			legend9.Title = "Delta";
-			legend10.Enabled = false;
-			legend10.Name = "Hidden";
-			this.SensorChart.Legends.Add(legend7);
-			this.SensorChart.Legends.Add(legend8);
-			this.SensorChart.Legends.Add(legend9);
-			this.SensorChart.Legends.Add(legend10);
+			legend1.DockedToChartArea = "Sensor1";
+			legend1.IsDockedInsideChartArea = false;
+			legend1.Name = "Sensor1";
+			legend1.Title = "Sensor 1";
+			legend2.DockedToChartArea = "Sensor2";
+			legend2.IsDockedInsideChartArea = false;
+			legend2.Name = "Sensor2";
+			legend2.Title = "Sensor 2";
+			legend3.DockedToChartArea = "Delta";
+			legend3.IsDockedInsideChartArea = false;
+			legend3.Name = "Delta";
+			legend3.Title = "Delta";
+			legend4.Enabled = false;
+			legend4.Name = "Hidden";
+			this.SensorChart.Legends.Add(legend1);
+			this.SensorChart.Legends.Add(legend2);
+			this.SensorChart.Legends.Add(legend3);
+			this.SensorChart.Legends.Add(legend4);
 			this.SensorChart.Location = new System.Drawing.Point(0, 0);
 			this.SensorChart.Margin = new System.Windows.Forms.Padding(0);
 			this.SensorChart.Name = "SensorChart";
-			series19.BorderWidth = 3;
-			series19.ChartArea = "Sensor1";
-			series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series19.Color = System.Drawing.Color.SeaGreen;
-			series19.Legend = "Sensor1";
-			series19.LegendText = "Before";
-			series19.Name = "Sensor1Before";
-			series20.BorderWidth = 3;
-			series20.ChartArea = "Sensor1";
-			series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series20.Color = System.Drawing.Color.Orange;
-			series20.Legend = "Sensor1";
-			series20.LegendText = "After";
-			series20.Name = "Sensor1After";
-			series21.ChartArea = "Sensor1";
-			series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series21.Color = System.Drawing.Color.OrangeRed;
-			series21.Legend = "Hidden";
-			series21.Name = "Sensor1MaxPlus";
-			series22.ChartArea = "Sensor1";
-			series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series22.Color = System.Drawing.Color.OrangeRed;
-			series22.Legend = "Hidden";
-			series22.Name = "Sensor1MaxMinus";
-			series23.ChartArea = "Sensor1";
-			series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series23.Color = System.Drawing.Color.RoyalBlue;
-			series23.Legend = "Hidden";
-			series23.Name = "Sensor1MinPlus";
-			series24.ChartArea = "Sensor1";
-			series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series24.Color = System.Drawing.Color.RoyalBlue;
-			series24.Legend = "Hidden";
-			series24.Name = "Sensor1MinMinus";
-			series25.BorderWidth = 3;
-			series25.ChartArea = "Sensor2";
-			series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series25.Color = System.Drawing.Color.SeaGreen;
-			series25.Legend = "Sensor2";
-			series25.LegendText = "Before";
-			series25.Name = "Sensor2Before";
-			series26.BorderWidth = 3;
-			series26.ChartArea = "Sensor2";
-			series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series26.Color = System.Drawing.Color.Orange;
-			series26.Legend = "Sensor2";
-			series26.LegendText = "After";
-			series26.Name = "Sensor2After";
-			series27.ChartArea = "Sensor2";
-			series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series27.Color = System.Drawing.Color.OrangeRed;
-			series27.Legend = "Hidden";
-			series27.Name = "Sensor2MaxPlus";
-			series28.ChartArea = "Sensor2";
-			series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series28.Color = System.Drawing.Color.OrangeRed;
-			series28.Legend = "Hidden";
-			series28.Name = "Sensor2MaxMinus";
-			series29.ChartArea = "Sensor2";
-			series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series29.Color = System.Drawing.Color.RoyalBlue;
-			series29.Legend = "Hidden";
-			series29.Name = "Sensor2MinPlus";
-			series30.ChartArea = "Sensor2";
-			series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series30.Color = System.Drawing.Color.RoyalBlue;
-			series30.Legend = "Hidden";
-			series30.Name = "Sensor2MinMinus";
-			series31.ChartArea = "Delta";
-			series31.Color = System.Drawing.Color.RoyalBlue;
-			series31.Legend = "Delta";
-			series31.LegendText = "Sensor1";
-			series31.Name = "Sensor1Delta";
-			series32.ChartArea = "Delta";
-			series32.Color = System.Drawing.Color.Orange;
-			series32.Legend = "Delta";
-			series32.LegendText = "Sensor2";
-			series32.Name = "Sensor2Delta";
-			this.SensorChart.Series.Add(series19);
-			this.SensorChart.Series.Add(series20);
-			this.SensorChart.Series.Add(series21);
-			this.SensorChart.Series.Add(series22);
-			this.SensorChart.Series.Add(series23);
-			this.SensorChart.Series.Add(series24);
-			this.SensorChart.Series.Add(series25);
-			this.SensorChart.Series.Add(series26);
-			this.SensorChart.Series.Add(series27);
-			this.SensorChart.Series.Add(series28);
-			this.SensorChart.Series.Add(series29);
-			this.SensorChart.Series.Add(series30);
-			this.SensorChart.Series.Add(series31);
-			this.SensorChart.Series.Add(series32);
+			series1.BorderWidth = 3;
+			series1.ChartArea = "Sensor1";
+			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series1.Color = System.Drawing.Color.SeaGreen;
+			series1.Legend = "Sensor1";
+			series1.LegendText = "Before";
+			series1.Name = "Sensor1Before";
+			series2.BorderWidth = 3;
+			series2.ChartArea = "Sensor1";
+			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series2.Color = System.Drawing.Color.Orange;
+			series2.Legend = "Sensor1";
+			series2.LegendText = "After";
+			series2.Name = "Sensor1After";
+			series3.ChartArea = "Sensor1";
+			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series3.Color = System.Drawing.Color.OrangeRed;
+			series3.Legend = "Hidden";
+			series3.Name = "Sensor1MaxPlus";
+			series4.ChartArea = "Sensor1";
+			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series4.Color = System.Drawing.Color.OrangeRed;
+			series4.Legend = "Hidden";
+			series4.Name = "Sensor1MaxMinus";
+			series5.ChartArea = "Sensor1";
+			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series5.Color = System.Drawing.Color.RoyalBlue;
+			series5.Legend = "Hidden";
+			series5.Name = "Sensor1MinPlus";
+			series6.ChartArea = "Sensor1";
+			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series6.Color = System.Drawing.Color.RoyalBlue;
+			series6.Legend = "Hidden";
+			series6.Name = "Sensor1MinMinus";
+			series7.BorderWidth = 3;
+			series7.ChartArea = "Sensor2";
+			series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series7.Color = System.Drawing.Color.SeaGreen;
+			series7.Legend = "Sensor2";
+			series7.LegendText = "Before";
+			series7.Name = "Sensor2Before";
+			series8.BorderWidth = 3;
+			series8.ChartArea = "Sensor2";
+			series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series8.Color = System.Drawing.Color.Orange;
+			series8.Legend = "Sensor2";
+			series8.LegendText = "After";
+			series8.Name = "Sensor2After";
+			series9.ChartArea = "Sensor2";
+			series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series9.Color = System.Drawing.Color.OrangeRed;
+			series9.Legend = "Hidden";
+			series9.Name = "Sensor2MaxPlus";
+			series10.ChartArea = "Sensor2";
+			series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series10.Color = System.Drawing.Color.OrangeRed;
+			series10.Legend = "Hidden";
+			series10.Name = "Sensor2MaxMinus";
+			series11.ChartArea = "Sensor2";
+			series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series11.Color = System.Drawing.Color.RoyalBlue;
+			series11.Legend = "Hidden";
+			series11.Name = "Sensor2MinPlus";
+			series12.ChartArea = "Sensor2";
+			series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series12.Color = System.Drawing.Color.RoyalBlue;
+			series12.Legend = "Hidden";
+			series12.Name = "Sensor2MinMinus";
+			series13.ChartArea = "Delta";
+			series13.Color = System.Drawing.Color.RoyalBlue;
+			series13.Legend = "Delta";
+			series13.LegendText = "Sensor1";
+			series13.Name = "Sensor1Delta";
+			series14.ChartArea = "Delta";
+			series14.Color = System.Drawing.Color.Orange;
+			series14.Legend = "Delta";
+			series14.LegendText = "Sensor2";
+			series14.Name = "Sensor2Delta";
+			this.SensorChart.Series.Add(series1);
+			this.SensorChart.Series.Add(series2);
+			this.SensorChart.Series.Add(series3);
+			this.SensorChart.Series.Add(series4);
+			this.SensorChart.Series.Add(series5);
+			this.SensorChart.Series.Add(series6);
+			this.SensorChart.Series.Add(series7);
+			this.SensorChart.Series.Add(series8);
+			this.SensorChart.Series.Add(series9);
+			this.SensorChart.Series.Add(series10);
+			this.SensorChart.Series.Add(series11);
+			this.SensorChart.Series.Add(series12);
+			this.SensorChart.Series.Add(series13);
+			this.SensorChart.Series.Add(series14);
 			this.SensorChart.Size = new System.Drawing.Size(1272, 421);
 			this.SensorChart.TabIndex = 0;
 			// 
@@ -777,66 +781,66 @@
 			// 
 			// chart1
 			// 
-			chartArea9.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea9.Name = "StatsArea";
-			this.chart1.ChartAreas.Add(chartArea9);
+			chartArea4.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
+			chartArea4.Name = "StatsArea";
+			this.chart1.ChartAreas.Add(chartArea4);
 			this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.chart1.Enabled = false;
-			legend11.Alignment = System.Drawing.StringAlignment.Center;
-			legend11.DockedToChartArea = "StatsArea";
-			legend11.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend11.IsDockedInsideChartArea = false;
-			legend11.Name = "StatsLegend";
-			this.chart1.Legends.Add(legend11);
+			legend5.Alignment = System.Drawing.StringAlignment.Center;
+			legend5.DockedToChartArea = "StatsArea";
+			legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend5.IsDockedInsideChartArea = false;
+			legend5.Name = "StatsLegend";
+			this.chart1.Legends.Add(legend5);
 			this.chart1.Location = new System.Drawing.Point(636, 0);
 			this.chart1.Margin = new System.Windows.Forms.Padding(0);
 			this.chart1.Name = "chart1";
 			this.chart1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			series33.ChartArea = "StatsArea";
-			series33.Color = System.Drawing.Color.SteelBlue;
-			series33.Legend = "StatsLegend";
-			series33.LegendText = "1st Bending";
-			series33.Name = "FirstBended";
-			series34.ChartArea = "StatsArea";
-			series34.Color = System.Drawing.Color.CornflowerBlue;
-			series34.Legend = "StatsLegend";
-			series34.LegendText = "2nd Bending";
-			series34.Name = "SecondBended";
-			this.chart1.Series.Add(series33);
-			this.chart1.Series.Add(series34);
+			series15.ChartArea = "StatsArea";
+			series15.Color = System.Drawing.Color.SteelBlue;
+			series15.Legend = "StatsLegend";
+			series15.LegendText = "1st Bending";
+			series15.Name = "FirstBended";
+			series16.ChartArea = "StatsArea";
+			series16.Color = System.Drawing.Color.CornflowerBlue;
+			series16.Legend = "StatsLegend";
+			series16.LegendText = "2nd Bending";
+			series16.Name = "SecondBended";
+			this.chart1.Series.Add(series15);
+			this.chart1.Series.Add(series16);
 			this.chart1.Size = new System.Drawing.Size(636, 281);
 			this.chart1.TabIndex = 3;
 			this.chart1.Text = "chart2";
 			// 
 			// Stats
 			// 
-			chartArea10.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea10.Name = "StatsArea";
-			this.Stats.ChartAreas.Add(chartArea10);
+			chartArea5.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
+			chartArea5.Name = "StatsArea";
+			this.Stats.ChartAreas.Add(chartArea5);
 			this.Stats.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Stats.Enabled = false;
-			legend12.Alignment = System.Drawing.StringAlignment.Center;
-			legend12.DockedToChartArea = "StatsArea";
-			legend12.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend12.IsDockedInsideChartArea = false;
-			legend12.Name = "StatsLegend";
-			this.Stats.Legends.Add(legend12);
+			legend6.Alignment = System.Drawing.StringAlignment.Center;
+			legend6.DockedToChartArea = "StatsArea";
+			legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend6.IsDockedInsideChartArea = false;
+			legend6.Name = "StatsLegend";
+			this.Stats.Legends.Add(legend6);
 			this.Stats.Location = new System.Drawing.Point(0, 0);
 			this.Stats.Margin = new System.Windows.Forms.Padding(0);
 			this.Stats.Name = "Stats";
 			this.Stats.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			series35.ChartArea = "StatsArea";
-			series35.Color = System.Drawing.Color.OrangeRed;
-			series35.Legend = "StatsLegend";
-			series35.LegendText = "Failed";
-			series35.Name = "Failed";
-			series36.ChartArea = "StatsArea";
-			series36.Color = System.Drawing.Color.RoyalBlue;
-			series36.Legend = "StatsLegend";
-			series36.LegendText = "Passed";
-			series36.Name = "Passed";
-			this.Stats.Series.Add(series35);
-			this.Stats.Series.Add(series36);
+			series17.ChartArea = "StatsArea";
+			series17.Color = System.Drawing.Color.OrangeRed;
+			series17.Legend = "StatsLegend";
+			series17.LegendText = "Failed";
+			series17.Name = "Failed";
+			series18.ChartArea = "StatsArea";
+			series18.Color = System.Drawing.Color.RoyalBlue;
+			series18.Legend = "StatsLegend";
+			series18.LegendText = "Passed";
+			series18.Name = "Passed";
+			this.Stats.Series.Add(series17);
+			this.Stats.Series.Add(series18);
 			this.Stats.Size = new System.Drawing.Size(636, 281);
 			this.Stats.TabIndex = 2;
 			this.Stats.Text = "chart2";
@@ -1250,6 +1254,193 @@
 			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.29008F));
 			this.FileSaveConfig.Size = new System.Drawing.Size(408, 663);
 			this.FileSaveConfig.TabIndex = 1;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.tableLayoutPanel21);
+			this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox3.Location = new System.Drawing.Point(8, 8);
+			this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox3.Size = new System.Drawing.Size(392, 369);
+			this.groupBox3.TabIndex = 0;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Auto Save";
+			// 
+			// tableLayoutPanel21
+			// 
+			this.tableLayoutPanel21.ColumnCount = 1;
+			this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel21.Controls.Add(this.AutoSaveApply, 0, 1);
+			this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel22, 0, 0);
+			this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel21.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel21.Name = "tableLayoutPanel21";
+			this.tableLayoutPanel21.RowCount = 2;
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel21.Size = new System.Drawing.Size(384, 338);
+			this.tableLayoutPanel21.TabIndex = 0;
+			// 
+			// AutoSaveApply
+			// 
+			this.AutoSaveApply.BackColor = System.Drawing.Color.Silver;
+			this.AutoSaveApply.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AutoSaveApply.FlatAppearance.BorderSize = 0;
+			this.AutoSaveApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AutoSaveApply.Location = new System.Drawing.Point(4, 257);
+			this.AutoSaveApply.Margin = new System.Windows.Forms.Padding(4);
+			this.AutoSaveApply.Name = "AutoSaveApply";
+			this.AutoSaveApply.Size = new System.Drawing.Size(376, 77);
+			this.AutoSaveApply.TabIndex = 18;
+			this.AutoSaveApply.Text = "Apply";
+			this.AutoSaveApply.UseVisualStyleBackColor = false;
+			// 
+			// tableLayoutPanel22
+			// 
+			this.tableLayoutPanel22.ColumnCount = 2;
+			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel22.Controls.Add(this.AutoSaveDirectory, 1, 2);
+			this.tableLayoutPanel22.Controls.Add(this.label10, 0, 0);
+			this.tableLayoutPanel22.Controls.Add(this.label12, 0, 1);
+			this.tableLayoutPanel22.Controls.Add(this.label13, 0, 2);
+			this.tableLayoutPanel22.Controls.Add(this.EnableAutoSave, 1, 0);
+			this.tableLayoutPanel22.Controls.Add(this.AutoSaveInterval, 1, 1);
+			this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel22.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel22.Name = "tableLayoutPanel22";
+			this.tableLayoutPanel22.RowCount = 3;
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.Size = new System.Drawing.Size(384, 253);
+			this.tableLayoutPanel22.TabIndex = 19;
+			// 
+			// AutoSaveDirectory
+			// 
+			this.AutoSaveDirectory.BackColor = System.Drawing.Color.Silver;
+			this.AutoSaveDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AutoSaveDirectory.FlatAppearance.BorderSize = 0;
+			this.AutoSaveDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AutoSaveDirectory.Location = new System.Drawing.Point(157, 172);
+			this.AutoSaveDirectory.Margin = new System.Windows.Forms.Padding(4);
+			this.AutoSaveDirectory.Name = "AutoSaveDirectory";
+			this.AutoSaveDirectory.Size = new System.Drawing.Size(223, 77);
+			this.AutoSaveDirectory.TabIndex = 21;
+			this.AutoSaveDirectory.Text = "Browse";
+			this.AutoSaveDirectory.UseVisualStyleBackColor = false;
+			// 
+			// label10
+			// 
+			this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label10.Location = new System.Drawing.Point(4, 4);
+			this.label10.Margin = new System.Windows.Forms.Padding(4);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(145, 76);
+			this.label10.TabIndex = 1;
+			this.label10.Text = "Auto Save";
+			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label12
+			// 
+			this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label12.Location = new System.Drawing.Point(4, 88);
+			this.label12.Margin = new System.Windows.Forms.Padding(4);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(145, 76);
+			this.label12.TabIndex = 1;
+			this.label12.Text = "Save Interval";
+			this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label13
+			// 
+			this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label13.Location = new System.Drawing.Point(4, 172);
+			this.label13.Margin = new System.Windows.Forms.Padding(4);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(145, 77);
+			this.label13.TabIndex = 1;
+			this.label13.Text = "Directory";
+			this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// EnableAutoSave
+			// 
+			this.EnableAutoSave.BackColor = System.Drawing.Color.Silver;
+			this.EnableAutoSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.EnableAutoSave.FlatAppearance.BorderSize = 0;
+			this.EnableAutoSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.EnableAutoSave.Location = new System.Drawing.Point(157, 4);
+			this.EnableAutoSave.Margin = new System.Windows.Forms.Padding(4);
+			this.EnableAutoSave.Name = "EnableAutoSave";
+			this.EnableAutoSave.Size = new System.Drawing.Size(223, 76);
+			this.EnableAutoSave.TabIndex = 19;
+			this.EnableAutoSave.Text = "Disabled";
+			this.EnableAutoSave.UseVisualStyleBackColor = false;
+			// 
+			// AutoSaveInterval
+			// 
+			this.AutoSaveInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.AutoSaveInterval.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.AutoSaveInterval.FormattingEnabled = true;
+			this.AutoSaveInterval.Items.AddRange(new object[] {
+            "Hour",
+            "Day",
+            "Week",
+            "Month",
+            "Year"});
+			this.AutoSaveInterval.Location = new System.Drawing.Point(156, 108);
+			this.AutoSaveInterval.Name = "AutoSaveInterval";
+			this.AutoSaveInterval.Size = new System.Drawing.Size(225, 35);
+			this.AutoSaveInterval.TabIndex = 20;
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.tableLayoutPanel23);
+			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox4.Location = new System.Drawing.Point(8, 385);
+			this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox4.Size = new System.Drawing.Size(392, 270);
+			this.groupBox4.TabIndex = 1;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Manual Save";
+			// 
+			// tableLayoutPanel23
+			// 
+			this.tableLayoutPanel23.ColumnCount = 1;
+			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel23.Controls.Add(this.SaveNow, 0, 0);
+			this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel23.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel23.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel23.Name = "tableLayoutPanel23";
+			this.tableLayoutPanel23.RowCount = 1;
+			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 246F));
+			this.tableLayoutPanel23.Size = new System.Drawing.Size(384, 239);
+			this.tableLayoutPanel23.TabIndex = 0;
+			// 
+			// SaveNow
+			// 
+			this.SaveNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.SaveNow.BackColor = System.Drawing.Color.Silver;
+			this.SaveNow.FlatAppearance.BorderSize = 0;
+			this.SaveNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.SaveNow.Location = new System.Drawing.Point(4, 81);
+			this.SaveNow.Margin = new System.Windows.Forms.Padding(4);
+			this.SaveNow.Name = "SaveNow";
+			this.SaveNow.Size = new System.Drawing.Size(376, 77);
+			this.SaveNow.TabIndex = 19;
+			this.SaveNow.Text = "Save Now";
+			this.SaveNow.UseVisualStyleBackColor = false;
 			// 
 			// NetworkConfig
 			// 
@@ -1764,193 +1955,6 @@
 			this.Exit.UseVisualStyleBackColor = false;
 			this.Exit.Click += new System.EventHandler(this.Exit_Click);
 			// 
-			// groupBox3
-			// 
-			this.groupBox3.Controls.Add(this.tableLayoutPanel21);
-			this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox3.Location = new System.Drawing.Point(8, 8);
-			this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-			this.groupBox3.Size = new System.Drawing.Size(392, 369);
-			this.groupBox3.TabIndex = 0;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Auto Save";
-			// 
-			// tableLayoutPanel21
-			// 
-			this.tableLayoutPanel21.ColumnCount = 1;
-			this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel21.Controls.Add(this.AutoSaveApply, 0, 1);
-			this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel22, 0, 0);
-			this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel21.Location = new System.Drawing.Point(4, 27);
-			this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(4);
-			this.tableLayoutPanel21.Name = "tableLayoutPanel21";
-			this.tableLayoutPanel21.RowCount = 2;
-			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel21.Size = new System.Drawing.Size(384, 338);
-			this.tableLayoutPanel21.TabIndex = 0;
-			// 
-			// AutoSaveApply
-			// 
-			this.AutoSaveApply.BackColor = System.Drawing.Color.Silver;
-			this.AutoSaveApply.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AutoSaveApply.FlatAppearance.BorderSize = 0;
-			this.AutoSaveApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.AutoSaveApply.Location = new System.Drawing.Point(4, 257);
-			this.AutoSaveApply.Margin = new System.Windows.Forms.Padding(4);
-			this.AutoSaveApply.Name = "AutoSaveApply";
-			this.AutoSaveApply.Size = new System.Drawing.Size(376, 77);
-			this.AutoSaveApply.TabIndex = 18;
-			this.AutoSaveApply.Text = "Apply";
-			this.AutoSaveApply.UseVisualStyleBackColor = false;
-			// 
-			// tableLayoutPanel22
-			// 
-			this.tableLayoutPanel22.ColumnCount = 2;
-			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-			this.tableLayoutPanel22.Controls.Add(this.AutoSaveDirectory, 1, 2);
-			this.tableLayoutPanel22.Controls.Add(this.label10, 0, 0);
-			this.tableLayoutPanel22.Controls.Add(this.label12, 0, 1);
-			this.tableLayoutPanel22.Controls.Add(this.label13, 0, 2);
-			this.tableLayoutPanel22.Controls.Add(this.EnableAutoSave, 1, 0);
-			this.tableLayoutPanel22.Controls.Add(this.AutoSaveInterval, 1, 1);
-			this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel22.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel22.Name = "tableLayoutPanel22";
-			this.tableLayoutPanel22.RowCount = 3;
-			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel22.Size = new System.Drawing.Size(384, 253);
-			this.tableLayoutPanel22.TabIndex = 19;
-			// 
-			// label10
-			// 
-			this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label10.Location = new System.Drawing.Point(4, 4);
-			this.label10.Margin = new System.Windows.Forms.Padding(4);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(145, 76);
-			this.label10.TabIndex = 1;
-			this.label10.Text = "Auto Save";
-			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label12
-			// 
-			this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label12.Location = new System.Drawing.Point(4, 88);
-			this.label12.Margin = new System.Windows.Forms.Padding(4);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(145, 76);
-			this.label12.TabIndex = 1;
-			this.label12.Text = "Save Interval";
-			this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label13
-			// 
-			this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label13.Location = new System.Drawing.Point(4, 172);
-			this.label13.Margin = new System.Windows.Forms.Padding(4);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(145, 77);
-			this.label13.TabIndex = 1;
-			this.label13.Text = "Directory";
-			this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// EnableAutoSave
-			// 
-			this.EnableAutoSave.BackColor = System.Drawing.Color.Silver;
-			this.EnableAutoSave.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.EnableAutoSave.FlatAppearance.BorderSize = 0;
-			this.EnableAutoSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.EnableAutoSave.Location = new System.Drawing.Point(157, 4);
-			this.EnableAutoSave.Margin = new System.Windows.Forms.Padding(4);
-			this.EnableAutoSave.Name = "EnableAutoSave";
-			this.EnableAutoSave.Size = new System.Drawing.Size(223, 76);
-			this.EnableAutoSave.TabIndex = 19;
-			this.EnableAutoSave.Text = "Disabled";
-			this.EnableAutoSave.UseVisualStyleBackColor = false;
-			// 
-			// AutoSaveDirectory
-			// 
-			this.AutoSaveDirectory.BackColor = System.Drawing.Color.Silver;
-			this.AutoSaveDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AutoSaveDirectory.FlatAppearance.BorderSize = 0;
-			this.AutoSaveDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.AutoSaveDirectory.Location = new System.Drawing.Point(157, 172);
-			this.AutoSaveDirectory.Margin = new System.Windows.Forms.Padding(4);
-			this.AutoSaveDirectory.Name = "AutoSaveDirectory";
-			this.AutoSaveDirectory.Size = new System.Drawing.Size(223, 77);
-			this.AutoSaveDirectory.TabIndex = 21;
-			this.AutoSaveDirectory.Text = "Browse";
-			this.AutoSaveDirectory.UseVisualStyleBackColor = false;
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Controls.Add(this.tableLayoutPanel23);
-			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox4.Location = new System.Drawing.Point(8, 385);
-			this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-			this.groupBox4.Size = new System.Drawing.Size(392, 270);
-			this.groupBox4.TabIndex = 1;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Manual Save";
-			// 
-			// tableLayoutPanel23
-			// 
-			this.tableLayoutPanel23.ColumnCount = 1;
-			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel23.Controls.Add(this.SaveNow, 0, 0);
-			this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel23.Location = new System.Drawing.Point(4, 27);
-			this.tableLayoutPanel23.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel23.Name = "tableLayoutPanel23";
-			this.tableLayoutPanel23.RowCount = 1;
-			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel23.Size = new System.Drawing.Size(384, 239);
-			this.tableLayoutPanel23.TabIndex = 0;
-			// 
-			// SaveNow
-			// 
-			this.SaveNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.SaveNow.BackColor = System.Drawing.Color.Silver;
-			this.SaveNow.FlatAppearance.BorderSize = 0;
-			this.SaveNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.SaveNow.Location = new System.Drawing.Point(4, 81);
-			this.SaveNow.Margin = new System.Windows.Forms.Padding(4);
-			this.SaveNow.Name = "SaveNow";
-			this.SaveNow.Size = new System.Drawing.Size(376, 77);
-			this.SaveNow.TabIndex = 19;
-			this.SaveNow.Text = "Save Now";
-			this.SaveNow.UseVisualStyleBackColor = false;
-			// 
-			// AutoSaveInterval
-			// 
-			this.AutoSaveInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.AutoSaveInterval.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.AutoSaveInterval.FormattingEnabled = true;
-			this.AutoSaveInterval.Items.AddRange(new object[] {
-            "Hour",
-            "Day",
-            "Week",
-            "Month",
-            "Year"});
-			this.AutoSaveInterval.Location = new System.Drawing.Point(156, 108);
-			this.AutoSaveInterval.Name = "AutoSaveInterval";
-			this.AutoSaveInterval.Size = new System.Drawing.Size(225, 35);
-			this.AutoSaveInterval.TabIndex = 20;
-			// 
 			// TitleBar
 			// 
 			this.TitleBar.BackColor = System.Drawing.Color.RoyalBlue;
@@ -2039,6 +2043,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).EndInit();
 			this.FileConfig.ResumeLayout(false);
 			this.FileSaveConfig.ResumeLayout(false);
+			this.groupBox3.ResumeLayout(false);
+			this.tableLayoutPanel21.ResumeLayout(false);
+			this.tableLayoutPanel22.ResumeLayout(false);
+			this.groupBox4.ResumeLayout(false);
+			this.tableLayoutPanel23.ResumeLayout(false);
 			this.NetworkConfig.ResumeLayout(false);
 			this.SocketsConfig.ResumeLayout(false);
 			this.DbConnectionConfig.ResumeLayout(false);
@@ -2061,11 +2070,6 @@
 			this.Logs.PerformLayout();
 			this.GlobalFormLayout.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
-			this.groupBox3.ResumeLayout(false);
-			this.tableLayoutPanel21.ResumeLayout(false);
-			this.tableLayoutPanel22.ResumeLayout(false);
-			this.groupBox4.ResumeLayout(false);
-			this.tableLayoutPanel23.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
 			this.ResumeLayout(false);
 
