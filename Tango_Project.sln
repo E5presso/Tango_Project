@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware", "Middleware\Middleware.csproj", "{D6F6676D-885A-4850-8856-802901A0269A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterlockTest", "InterlockTest\InterlockTest.csproj", "{708342D3-B55D-4FAA-AFDE-061732E54D50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D6F6676D-885A-4850-8856-802901A0269A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F6676D-885A-4850-8856-802901A0269A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F6676D-885A-4850-8856-802901A0269A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
