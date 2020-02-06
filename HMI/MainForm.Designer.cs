@@ -57,6 +57,7 @@
 			System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.TabMenu = new System.Windows.Forms.TabControl();
 			this.Main = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -97,18 +98,42 @@
 			this.ConfigPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.BiasConfig = new System.Windows.Forms.GroupBox();
 			this.BiasConfigPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.Sensor1X1Offset = new System.Windows.Forms.NumericUpDown();
+			this.SaveOffset = new System.Windows.Forms.Button();
 			this.FileConfig = new System.Windows.Forms.GroupBox();
 			this.FileSaveConfig = new System.Windows.Forms.TableLayoutPanel();
 			this.NetworkConfig = new System.Windows.Forms.GroupBox();
 			this.SocketsConfig = new System.Windows.Forms.TableLayoutPanel();
+			this.DbConnectionConfig = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+			this.DbConnectionSave = new System.Windows.Forms.Button();
+			this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+			this.DbIpAddress = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
+			this.DbConnectionStatus = new System.Windows.Forms.Label();
 			this.RobotConnectionConfig = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+			this.RobotConnectionSave = new System.Windows.Forms.Button();
 			this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
 			this.Robot2IpAddress = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
 			this.Robot1IpAddress = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.Robot1ConnectionStatus = new System.Windows.Forms.Label();
+			this.Robot2ConnectionStatus = new System.Windows.Forms.Label();
 			this.SensorConnectionConfig = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
@@ -117,18 +142,29 @@
 			this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.Sensor1IpAddress = new System.Windows.Forms.TextBox();
+			this.Sensor1ConnectionStatus = new System.Windows.Forms.Label();
+			this.Sensor2ConnectionStatus = new System.Windows.Forms.Label();
+			this.SensorConnectionSave = new System.Windows.Forms.Button();
 			this.Logs = new System.Windows.Forms.TabPage();
 			this.LogConsole = new System.Windows.Forms.TextBox();
 			this.GlobalFormLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.Exit = new System.Windows.Forms.Button();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
+			this.AutoSaveApply = new System.Windows.Forms.Button();
+			this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.EnableAutoSave = new System.Windows.Forms.Button();
+			this.AutoSaveDirectory = new System.Windows.Forms.Button();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
+			this.SaveNow = new System.Windows.Forms.Button();
+			this.AutoSaveInterval = new System.Windows.Forms.ComboBox();
 			this.TitleBar = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
-			this.SensorConnectionSave = new System.Windows.Forms.Button();
-			this.RobotConnectionSave = new System.Windows.Forms.Button();
+			this.Logo = new System.Windows.Forms.PictureBox();
 			this.TabMenu.SuspendLayout();
 			this.Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -160,9 +196,23 @@
 			this.Configuration.SuspendLayout();
 			this.ConfigPanel.SuspendLayout();
 			this.BiasConfig.SuspendLayout();
+			this.BiasConfigPanel.SuspendLayout();
+			this.tableLayoutPanel17.SuspendLayout();
+			this.groupBox2.SuspendLayout();
+			this.tableLayoutPanel20.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+			this.groupBox1.SuspendLayout();
+			this.tableLayoutPanel19.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).BeginInit();
 			this.FileConfig.SuspendLayout();
+			this.FileSaveConfig.SuspendLayout();
 			this.NetworkConfig.SuspendLayout();
 			this.SocketsConfig.SuspendLayout();
+			this.DbConnectionConfig.SuspendLayout();
+			this.tableLayoutPanel16.SuspendLayout();
+			this.tableLayoutPanel18.SuspendLayout();
 			this.RobotConnectionConfig.SuspendLayout();
 			this.tableLayoutPanel12.SuspendLayout();
 			this.tableLayoutPanel14.SuspendLayout();
@@ -174,6 +224,12 @@
 			this.Logs.SuspendLayout();
 			this.GlobalFormLayout.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.tableLayoutPanel21.SuspendLayout();
+			this.tableLayoutPanel22.SuspendLayout();
+			this.groupBox4.SuspendLayout();
+			this.tableLayoutPanel23.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// TabMenu
@@ -895,7 +951,7 @@
 			this.BiasConfig.Location = new System.Drawing.Point(852, 4);
 			this.BiasConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.BiasConfig.Name = "BiasConfig";
-			this.BiasConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.BiasConfig.Padding = new System.Windows.Forms.Padding(4);
 			this.BiasConfig.Size = new System.Drawing.Size(416, 694);
 			this.BiasConfig.TabIndex = 2;
 			this.BiasConfig.TabStop = false;
@@ -903,18 +959,266 @@
 			// 
 			// BiasConfigPanel
 			// 
-			this.BiasConfigPanel.ColumnCount = 2;
-			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.BiasConfigPanel.ColumnCount = 1;
+			this.BiasConfigPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.BiasConfigPanel.Controls.Add(this.tableLayoutPanel17, 0, 0);
+			this.BiasConfigPanel.Controls.Add(this.SaveOffset, 0, 1);
 			this.BiasConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BiasConfigPanel.Location = new System.Drawing.Point(0, 23);
+			this.BiasConfigPanel.Location = new System.Drawing.Point(4, 27);
 			this.BiasConfigPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.BiasConfigPanel.Name = "BiasConfigPanel";
 			this.BiasConfigPanel.RowCount = 2;
-			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.BiasConfigPanel.Size = new System.Drawing.Size(416, 671);
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.BiasConfigPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.BiasConfigPanel.Size = new System.Drawing.Size(408, 663);
 			this.BiasConfigPanel.TabIndex = 0;
+			// 
+			// tableLayoutPanel17
+			// 
+			this.tableLayoutPanel17.ColumnCount = 1;
+			this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel17.Controls.Add(this.groupBox2, 0, 1);
+			this.tableLayoutPanel17.Controls.Add(this.groupBox1, 0, 0);
+			this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel17.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel17.Name = "tableLayoutPanel17";
+			this.tableLayoutPanel17.RowCount = 2;
+			this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel17.Size = new System.Drawing.Size(408, 596);
+			this.tableLayoutPanel17.TabIndex = 0;
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.tableLayoutPanel20);
+			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox2.Location = new System.Drawing.Point(4, 302);
+			this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox2.Size = new System.Drawing.Size(400, 290);
+			this.groupBox2.TabIndex = 1;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Sensor 2";
+			// 
+			// tableLayoutPanel20
+			// 
+			this.tableLayoutPanel20.ColumnCount = 2;
+			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel20.Controls.Add(this.label8, 0, 0);
+			this.tableLayoutPanel20.Controls.Add(this.label9, 0, 1);
+			this.tableLayoutPanel20.Controls.Add(this.numericUpDown2, 1, 0);
+			this.tableLayoutPanel20.Controls.Add(this.numericUpDown3, 1, 1);
+			this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel20.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel20.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel20.Name = "tableLayoutPanel20";
+			this.tableLayoutPanel20.Padding = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel20.RowCount = 2;
+			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel20.Size = new System.Drawing.Size(392, 259);
+			this.tableLayoutPanel20.TabIndex = 1;
+			// 
+			// label8
+			// 
+			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label8.Location = new System.Drawing.Point(8, 8);
+			this.label8.Margin = new System.Windows.Forms.Padding(4);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(145, 117);
+			this.label8.TabIndex = 0;
+			this.label8.Text = "X1";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label9
+			// 
+			this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label9.Location = new System.Drawing.Point(8, 133);
+			this.label9.Margin = new System.Windows.Forms.Padding(4);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(145, 118);
+			this.label9.TabIndex = 0;
+			this.label9.Text = "X2";
+			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// numericUpDown2
+			// 
+			this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDown2.DecimalPlaces = 2;
+			this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numericUpDown2.Location = new System.Drawing.Point(161, 51);
+			this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
+			this.numericUpDown2.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            65536});
+			this.numericUpDown2.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            -2147418112});
+			this.numericUpDown2.Name = "numericUpDown2";
+			this.numericUpDown2.Size = new System.Drawing.Size(223, 30);
+			this.numericUpDown2.TabIndex = 1;
+			// 
+			// numericUpDown3
+			// 
+			this.numericUpDown3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDown3.DecimalPlaces = 2;
+			this.numericUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numericUpDown3.Location = new System.Drawing.Point(161, 177);
+			this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
+			this.numericUpDown3.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            65536});
+			this.numericUpDown3.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            -2147418112});
+			this.numericUpDown3.Name = "numericUpDown3";
+			this.numericUpDown3.Size = new System.Drawing.Size(223, 30);
+			this.numericUpDown3.TabIndex = 1;
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.tableLayoutPanel19);
+			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox1.Location = new System.Drawing.Point(4, 4);
+			this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox1.Size = new System.Drawing.Size(400, 290);
+			this.groupBox1.TabIndex = 0;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Sensor 1";
+			// 
+			// tableLayoutPanel19
+			// 
+			this.tableLayoutPanel19.ColumnCount = 2;
+			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel19.Controls.Add(this.label6, 0, 0);
+			this.tableLayoutPanel19.Controls.Add(this.label7, 0, 1);
+			this.tableLayoutPanel19.Controls.Add(this.numericUpDown1, 1, 1);
+			this.tableLayoutPanel19.Controls.Add(this.Sensor1X1Offset, 1, 0);
+			this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel19.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel19.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+			this.tableLayoutPanel19.Padding = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel19.RowCount = 2;
+			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel19.Size = new System.Drawing.Size(392, 259);
+			this.tableLayoutPanel19.TabIndex = 0;
+			// 
+			// label6
+			// 
+			this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label6.Location = new System.Drawing.Point(8, 8);
+			this.label6.Margin = new System.Windows.Forms.Padding(4);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(145, 117);
+			this.label6.TabIndex = 0;
+			this.label6.Text = "X1";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label7
+			// 
+			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label7.Location = new System.Drawing.Point(8, 133);
+			this.label7.Margin = new System.Windows.Forms.Padding(4);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(145, 118);
+			this.label7.TabIndex = 0;
+			this.label7.Text = "X2";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// numericUpDown1
+			// 
+			this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDown1.DecimalPlaces = 2;
+			this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numericUpDown1.Location = new System.Drawing.Point(161, 177);
+			this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
+			this.numericUpDown1.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            65536});
+			this.numericUpDown1.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            -2147418112});
+			this.numericUpDown1.Name = "numericUpDown1";
+			this.numericUpDown1.Size = new System.Drawing.Size(223, 30);
+			this.numericUpDown1.TabIndex = 1;
+			// 
+			// Sensor1X1Offset
+			// 
+			this.Sensor1X1Offset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor1X1Offset.DecimalPlaces = 2;
+			this.Sensor1X1Offset.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.Sensor1X1Offset.Location = new System.Drawing.Point(161, 51);
+			this.Sensor1X1Offset.Margin = new System.Windows.Forms.Padding(4);
+			this.Sensor1X1Offset.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            65536});
+			this.Sensor1X1Offset.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            -2147418112});
+			this.Sensor1X1Offset.Name = "Sensor1X1Offset";
+			this.Sensor1X1Offset.Size = new System.Drawing.Size(223, 30);
+			this.Sensor1X1Offset.TabIndex = 1;
+			// 
+			// SaveOffset
+			// 
+			this.SaveOffset.BackColor = System.Drawing.Color.Silver;
+			this.SaveOffset.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SaveOffset.FlatAppearance.BorderSize = 0;
+			this.SaveOffset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.SaveOffset.ForeColor = System.Drawing.Color.Black;
+			this.SaveOffset.Location = new System.Drawing.Point(4, 600);
+			this.SaveOffset.Margin = new System.Windows.Forms.Padding(4);
+			this.SaveOffset.Name = "SaveOffset";
+			this.SaveOffset.Size = new System.Drawing.Size(400, 59);
+			this.SaveOffset.TabIndex = 1;
+			this.SaveOffset.Text = "Apply";
+			this.SaveOffset.UseVisualStyleBackColor = false;
 			// 
 			// FileConfig
 			// 
@@ -923,7 +1227,7 @@
 			this.FileConfig.Location = new System.Drawing.Point(428, 4);
 			this.FileConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.FileConfig.Name = "FileConfig";
-			this.FileConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.FileConfig.Padding = new System.Windows.Forms.Padding(4);
 			this.FileConfig.Size = new System.Drawing.Size(416, 694);
 			this.FileConfig.TabIndex = 1;
 			this.FileConfig.TabStop = false;
@@ -934,14 +1238,17 @@
 			this.FileSaveConfig.ColumnCount = 1;
 			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.FileSaveConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.FileSaveConfig.Controls.Add(this.groupBox3, 0, 0);
+			this.FileSaveConfig.Controls.Add(this.groupBox4, 0, 1);
 			this.FileSaveConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.FileSaveConfig.Location = new System.Drawing.Point(0, 23);
+			this.FileSaveConfig.Location = new System.Drawing.Point(4, 27);
 			this.FileSaveConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.FileSaveConfig.Name = "FileSaveConfig";
+			this.FileSaveConfig.Padding = new System.Windows.Forms.Padding(4);
 			this.FileSaveConfig.RowCount = 2;
-			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.FileSaveConfig.Size = new System.Drawing.Size(416, 671);
+			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.70992F));
+			this.FileSaveConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.29008F));
+			this.FileSaveConfig.Size = new System.Drawing.Size(408, 663);
 			this.FileSaveConfig.TabIndex = 1;
 			// 
 			// NetworkConfig
@@ -951,7 +1258,7 @@
 			this.NetworkConfig.Location = new System.Drawing.Point(4, 4);
 			this.NetworkConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.NetworkConfig.Name = "NetworkConfig";
-			this.NetworkConfig.Padding = new System.Windows.Forms.Padding(0);
+			this.NetworkConfig.Padding = new System.Windows.Forms.Padding(4);
 			this.NetworkConfig.Size = new System.Drawing.Size(416, 694);
 			this.NetworkConfig.TabIndex = 0;
 			this.NetworkConfig.TabStop = false;
@@ -961,27 +1268,126 @@
 			// 
 			this.SocketsConfig.ColumnCount = 1;
 			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.SocketsConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.SocketsConfig.Controls.Add(this.DbConnectionConfig, 0, 2);
 			this.SocketsConfig.Controls.Add(this.RobotConnectionConfig, 0, 1);
 			this.SocketsConfig.Controls.Add(this.SensorConnectionConfig, 0, 0);
 			this.SocketsConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SocketsConfig.Location = new System.Drawing.Point(0, 23);
+			this.SocketsConfig.Location = new System.Drawing.Point(4, 27);
 			this.SocketsConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.SocketsConfig.Name = "SocketsConfig";
-			this.SocketsConfig.RowCount = 2;
-			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.SocketsConfig.Size = new System.Drawing.Size(416, 671);
+			this.SocketsConfig.RowCount = 3;
+			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+			this.SocketsConfig.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.SocketsConfig.Size = new System.Drawing.Size(408, 663);
 			this.SocketsConfig.TabIndex = 0;
+			// 
+			// DbConnectionConfig
+			// 
+			this.DbConnectionConfig.Controls.Add(this.tableLayoutPanel16);
+			this.DbConnectionConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.DbConnectionConfig.Location = new System.Drawing.Point(3, 499);
+			this.DbConnectionConfig.Name = "DbConnectionConfig";
+			this.DbConnectionConfig.Padding = new System.Windows.Forms.Padding(4);
+			this.DbConnectionConfig.Size = new System.Drawing.Size(402, 161);
+			this.DbConnectionConfig.TabIndex = 2;
+			this.DbConnectionConfig.TabStop = false;
+			this.DbConnectionConfig.Text = "DB Connection";
+			// 
+			// tableLayoutPanel16
+			// 
+			this.tableLayoutPanel16.ColumnCount = 1;
+			this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel16.Controls.Add(this.DbConnectionSave, 0, 2);
+			this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel18, 0, 0);
+			this.tableLayoutPanel16.Controls.Add(this.DbConnectionStatus, 0, 1);
+			this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel16.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(10);
+			this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+			this.tableLayoutPanel16.RowCount = 3;
+			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel16.Size = new System.Drawing.Size(394, 130);
+			this.tableLayoutPanel16.TabIndex = 1;
+			// 
+			// DbConnectionSave
+			// 
+			this.DbConnectionSave.BackColor = System.Drawing.Color.Silver;
+			this.DbConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.DbConnectionSave.FlatAppearance.BorderSize = 0;
+			this.DbConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.DbConnectionSave.Location = new System.Drawing.Point(4, 90);
+			this.DbConnectionSave.Margin = new System.Windows.Forms.Padding(4);
+			this.DbConnectionSave.Name = "DbConnectionSave";
+			this.DbConnectionSave.Size = new System.Drawing.Size(386, 36);
+			this.DbConnectionSave.TabIndex = 19;
+			this.DbConnectionSave.Text = "Apply";
+			this.DbConnectionSave.UseVisualStyleBackColor = false;
+			// 
+			// tableLayoutPanel18
+			// 
+			this.tableLayoutPanel18.ColumnCount = 2;
+			this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+			this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanel18.Controls.Add(this.DbIpAddress, 0, 0);
+			this.tableLayoutPanel18.Controls.Add(this.label11, 0, 0);
+			this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel18.Location = new System.Drawing.Point(4, 4);
+			this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+			this.tableLayoutPanel18.RowCount = 1;
+			this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+			this.tableLayoutPanel18.Size = new System.Drawing.Size(386, 35);
+			this.tableLayoutPanel18.TabIndex = 0;
+			// 
+			// DbIpAddress
+			// 
+			this.DbIpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.DbIpAddress.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.DbIpAddress.Location = new System.Drawing.Point(115, 2);
+			this.DbIpAddress.Margin = new System.Windows.Forms.Padding(0);
+			this.DbIpAddress.Name = "DbIpAddress";
+			this.DbIpAddress.Size = new System.Drawing.Size(271, 30);
+			this.DbIpAddress.TabIndex = 2;
+			// 
+			// label11
+			// 
+			this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label11.Location = new System.Drawing.Point(0, 0);
+			this.label11.Margin = new System.Windows.Forms.Padding(0);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(115, 35);
+			this.label11.TabIndex = 1;
+			this.label11.Text = "DB IP";
+			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// DbConnectionStatus
+			// 
+			this.DbConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.DbConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.DbConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.DbConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.DbConnectionStatus.Location = new System.Drawing.Point(3, 46);
+			this.DbConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
+			this.DbConnectionStatus.Name = "DbConnectionStatus";
+			this.DbConnectionStatus.Size = new System.Drawing.Size(388, 37);
+			this.DbConnectionStatus.TabIndex = 17;
+			this.DbConnectionStatus.Text = "Connection Failed";
+			this.DbConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// RobotConnectionConfig
 			// 
 			this.RobotConnectionConfig.Controls.Add(this.tableLayoutPanel12);
 			this.RobotConnectionConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RobotConnectionConfig.Location = new System.Drawing.Point(3, 338);
+			this.RobotConnectionConfig.Location = new System.Drawing.Point(3, 251);
 			this.RobotConnectionConfig.Name = "RobotConnectionConfig";
 			this.RobotConnectionConfig.Padding = new System.Windows.Forms.Padding(4);
-			this.RobotConnectionConfig.Size = new System.Drawing.Size(410, 330);
+			this.RobotConnectionConfig.Size = new System.Drawing.Size(402, 242);
 			this.RobotConnectionConfig.TabIndex = 1;
 			this.RobotConnectionConfig.TabStop = false;
 			this.RobotConnectionConfig.Text = "Robot Connection";
@@ -993,8 +1399,8 @@
 			this.tableLayoutPanel12.Controls.Add(this.RobotConnectionSave, 0, 4);
 			this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel14, 0, 2);
 			this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel15, 0, 0);
-			this.tableLayoutPanel12.Controls.Add(this.label8, 0, 1);
-			this.tableLayoutPanel12.Controls.Add(this.label9, 0, 3);
+			this.tableLayoutPanel12.Controls.Add(this.Robot1ConnectionStatus, 0, 1);
+			this.tableLayoutPanel12.Controls.Add(this.Robot2ConnectionStatus, 0, 3);
 			this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel12.Location = new System.Drawing.Point(4, 27);
 			this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(10);
@@ -1005,8 +1411,22 @@
 			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 			this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-			this.tableLayoutPanel12.Size = new System.Drawing.Size(402, 299);
+			this.tableLayoutPanel12.Size = new System.Drawing.Size(394, 211);
 			this.tableLayoutPanel12.TabIndex = 1;
+			// 
+			// RobotConnectionSave
+			// 
+			this.RobotConnectionSave.BackColor = System.Drawing.Color.Silver;
+			this.RobotConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RobotConnectionSave.FlatAppearance.BorderSize = 0;
+			this.RobotConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.RobotConnectionSave.Location = new System.Drawing.Point(4, 172);
+			this.RobotConnectionSave.Margin = new System.Windows.Forms.Padding(4);
+			this.RobotConnectionSave.Name = "RobotConnectionSave";
+			this.RobotConnectionSave.Size = new System.Drawing.Size(386, 35);
+			this.RobotConnectionSave.TabIndex = 19;
+			this.RobotConnectionSave.Text = "Apply";
+			this.RobotConnectionSave.UseVisualStyleBackColor = false;
 			// 
 			// tableLayoutPanel14
 			// 
@@ -1016,23 +1436,23 @@
 			this.tableLayoutPanel14.Controls.Add(this.Robot2IpAddress, 0, 0);
 			this.tableLayoutPanel14.Controls.Add(this.label4, 0, 0);
 			this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel14.Location = new System.Drawing.Point(4, 122);
+			this.tableLayoutPanel14.Location = new System.Drawing.Point(4, 88);
 			this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
 			this.tableLayoutPanel14.Name = "tableLayoutPanel14";
 			this.tableLayoutPanel14.RowCount = 1;
 			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-			this.tableLayoutPanel14.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanel14.Size = new System.Drawing.Size(386, 34);
 			this.tableLayoutPanel14.TabIndex = 2;
 			// 
 			// Robot2IpAddress
 			// 
-			this.Robot2IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot2IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Robot2IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Robot2IpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Robot2IpAddress.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot2IpAddress.Location = new System.Drawing.Point(115, 2);
 			this.Robot2IpAddress.Margin = new System.Windows.Forms.Padding(0);
 			this.Robot2IpAddress.Name = "Robot2IpAddress";
-			this.Robot2IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Robot2IpAddress.Size = new System.Drawing.Size(271, 30);
 			this.Robot2IpAddress.TabIndex = 3;
 			// 
 			// label4
@@ -1041,7 +1461,7 @@
 			this.label4.Location = new System.Drawing.Point(0, 0);
 			this.label4.Margin = new System.Windows.Forms.Padding(0);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(118, 51);
+			this.label4.Size = new System.Drawing.Size(115, 34);
 			this.label4.TabIndex = 2;
 			this.label4.Text = "Robot2 IP";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1059,18 +1479,18 @@
 			this.tableLayoutPanel15.Name = "tableLayoutPanel15";
 			this.tableLayoutPanel15.RowCount = 1;
 			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-			this.tableLayoutPanel15.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanel15.Size = new System.Drawing.Size(386, 34);
 			this.tableLayoutPanel15.TabIndex = 0;
 			// 
 			// Robot1IpAddress
 			// 
-			this.Robot1IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Robot1IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Robot1IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Robot1IpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Robot1IpAddress.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot1IpAddress.Location = new System.Drawing.Point(115, 2);
 			this.Robot1IpAddress.Margin = new System.Windows.Forms.Padding(0);
 			this.Robot1IpAddress.Name = "Robot1IpAddress";
-			this.Robot1IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Robot1IpAddress.Size = new System.Drawing.Size(271, 30);
 			this.Robot1IpAddress.TabIndex = 2;
 			// 
 			// label3
@@ -1079,19 +1499,48 @@
 			this.label3.Location = new System.Drawing.Point(0, 0);
 			this.label3.Margin = new System.Windows.Forms.Padding(0);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(118, 51);
+			this.label3.Size = new System.Drawing.Size(115, 34);
 			this.label3.TabIndex = 1;
 			this.label3.Text = "Robot1 IP";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Robot1ConnectionStatus
+			// 
+			this.Robot1ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot1ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot1ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot1ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Robot1ConnectionStatus.Location = new System.Drawing.Point(3, 45);
+			this.Robot1ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
+			this.Robot1ConnectionStatus.Name = "Robot1ConnectionStatus";
+			this.Robot1ConnectionStatus.Size = new System.Drawing.Size(388, 36);
+			this.Robot1ConnectionStatus.TabIndex = 17;
+			this.Robot1ConnectionStatus.Text = "Connection Failed";
+			this.Robot1ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Robot2ConnectionStatus
+			// 
+			this.Robot2ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Robot2ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Robot2ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Robot2ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Robot2ConnectionStatus.Location = new System.Drawing.Point(3, 129);
+			this.Robot2ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
+			this.Robot2ConnectionStatus.Name = "Robot2ConnectionStatus";
+			this.Robot2ConnectionStatus.Size = new System.Drawing.Size(388, 36);
+			this.Robot2ConnectionStatus.TabIndex = 18;
+			this.Robot2ConnectionStatus.Text = "Connection Failed";
+			this.Robot2ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// SensorConnectionConfig
 			// 
 			this.SensorConnectionConfig.Controls.Add(this.tableLayoutPanel10);
 			this.SensorConnectionConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SensorConnectionConfig.Location = new System.Drawing.Point(3, 3);
+			this.SensorConnectionConfig.Location = new System.Drawing.Point(4, 4);
+			this.SensorConnectionConfig.Margin = new System.Windows.Forms.Padding(4);
 			this.SensorConnectionConfig.Name = "SensorConnectionConfig";
 			this.SensorConnectionConfig.Padding = new System.Windows.Forms.Padding(4);
-			this.SensorConnectionConfig.Size = new System.Drawing.Size(410, 329);
+			this.SensorConnectionConfig.Size = new System.Drawing.Size(400, 240);
 			this.SensorConnectionConfig.TabIndex = 0;
 			this.SensorConnectionConfig.TabStop = false;
 			this.SensorConnectionConfig.Text = "Sensor Connection";
@@ -1102,8 +1551,8 @@
 			this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel13, 0, 2);
 			this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel11, 0, 0);
-			this.tableLayoutPanel10.Controls.Add(this.label6, 0, 1);
-			this.tableLayoutPanel10.Controls.Add(this.label7, 0, 3);
+			this.tableLayoutPanel10.Controls.Add(this.Sensor1ConnectionStatus, 0, 1);
+			this.tableLayoutPanel10.Controls.Add(this.Sensor2ConnectionStatus, 0, 3);
 			this.tableLayoutPanel10.Controls.Add(this.SensorConnectionSave, 0, 4);
 			this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 27);
@@ -1116,7 +1565,7 @@
 			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 			this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel10.Size = new System.Drawing.Size(402, 298);
+			this.tableLayoutPanel10.Size = new System.Drawing.Size(392, 209);
 			this.tableLayoutPanel10.TabIndex = 0;
 			// 
 			// tableLayoutPanel13
@@ -1127,23 +1576,23 @@
 			this.tableLayoutPanel13.Controls.Add(this.Sensor2IpAddress, 0, 0);
 			this.tableLayoutPanel13.Controls.Add(this.label2, 0, 0);
 			this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel13.Location = new System.Drawing.Point(4, 122);
+			this.tableLayoutPanel13.Location = new System.Drawing.Point(4, 86);
 			this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
 			this.tableLayoutPanel13.Name = "tableLayoutPanel13";
 			this.tableLayoutPanel13.RowCount = 1;
 			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-			this.tableLayoutPanel13.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanel13.Size = new System.Drawing.Size(384, 33);
 			this.tableLayoutPanel13.TabIndex = 2;
 			// 
 			// Sensor2IpAddress
 			// 
-			this.Sensor2IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor2IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Sensor2IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Sensor2IpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor2IpAddress.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor2IpAddress.Location = new System.Drawing.Point(115, 1);
 			this.Sensor2IpAddress.Margin = new System.Windows.Forms.Padding(0);
 			this.Sensor2IpAddress.Name = "Sensor2IpAddress";
-			this.Sensor2IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Sensor2IpAddress.Size = new System.Drawing.Size(269, 30);
 			this.Sensor2IpAddress.TabIndex = 2;
 			// 
 			// label2
@@ -1152,7 +1601,7 @@
 			this.label2.Location = new System.Drawing.Point(0, 0);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(118, 51);
+			this.label2.Size = new System.Drawing.Size(115, 33);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Sensor2 IP";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1170,8 +1619,8 @@
 			this.tableLayoutPanel11.Name = "tableLayoutPanel11";
 			this.tableLayoutPanel11.RowCount = 1;
 			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-			this.tableLayoutPanel11.Size = new System.Drawing.Size(394, 51);
+			this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+			this.tableLayoutPanel11.Size = new System.Drawing.Size(384, 33);
 			this.tableLayoutPanel11.TabIndex = 0;
 			// 
 			// label1
@@ -1180,20 +1629,62 @@
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Margin = new System.Windows.Forms.Padding(0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(118, 51);
+			this.label1.Size = new System.Drawing.Size(115, 33);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Sensor1 IP";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Sensor1IpAddress
 			// 
-			this.Sensor1IpAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Sensor1IpAddress.Font = new System.Drawing.Font("굴림", 22.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.Sensor1IpAddress.Location = new System.Drawing.Point(118, 0);
+			this.Sensor1IpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.Sensor1IpAddress.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor1IpAddress.Location = new System.Drawing.Point(115, 1);
 			this.Sensor1IpAddress.Margin = new System.Windows.Forms.Padding(0);
 			this.Sensor1IpAddress.Name = "Sensor1IpAddress";
-			this.Sensor1IpAddress.Size = new System.Drawing.Size(276, 51);
+			this.Sensor1IpAddress.Size = new System.Drawing.Size(269, 30);
 			this.Sensor1IpAddress.TabIndex = 1;
+			// 
+			// Sensor1ConnectionStatus
+			// 
+			this.Sensor1ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor1ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor1ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor1ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Sensor1ConnectionStatus.Location = new System.Drawing.Point(3, 44);
+			this.Sensor1ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
+			this.Sensor1ConnectionStatus.Name = "Sensor1ConnectionStatus";
+			this.Sensor1ConnectionStatus.Size = new System.Drawing.Size(386, 35);
+			this.Sensor1ConnectionStatus.TabIndex = 15;
+			this.Sensor1ConnectionStatus.Text = "Connection Failed";
+			this.Sensor1ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Sensor2ConnectionStatus
+			// 
+			this.Sensor2ConnectionStatus.BackColor = System.Drawing.Color.OrangeRed;
+			this.Sensor2ConnectionStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Sensor2ConnectionStatus.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.Sensor2ConnectionStatus.ForeColor = System.Drawing.Color.White;
+			this.Sensor2ConnectionStatus.Location = new System.Drawing.Point(3, 126);
+			this.Sensor2ConnectionStatus.Margin = new System.Windows.Forms.Padding(3);
+			this.Sensor2ConnectionStatus.Name = "Sensor2ConnectionStatus";
+			this.Sensor2ConnectionStatus.Size = new System.Drawing.Size(386, 35);
+			this.Sensor2ConnectionStatus.TabIndex = 16;
+			this.Sensor2ConnectionStatus.Text = "Connection Failed";
+			this.Sensor2ConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// SensorConnectionSave
+			// 
+			this.SensorConnectionSave.BackColor = System.Drawing.Color.Silver;
+			this.SensorConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SensorConnectionSave.FlatAppearance.BorderSize = 0;
+			this.SensorConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.SensorConnectionSave.Location = new System.Drawing.Point(4, 168);
+			this.SensorConnectionSave.Margin = new System.Windows.Forms.Padding(4);
+			this.SensorConnectionSave.Name = "SensorConnectionSave";
+			this.SensorConnectionSave.Size = new System.Drawing.Size(384, 37);
+			this.SensorConnectionSave.TabIndex = 17;
+			this.SensorConnectionSave.Text = "Apply";
+			this.SensorConnectionSave.UseVisualStyleBackColor = false;
 			// 
 			// Logs
 			// 
@@ -1240,11 +1731,13 @@
 			// 
 			// tableLayoutPanel4
 			// 
-			this.tableLayoutPanel4.ColumnCount = 2;
+			this.tableLayoutPanel4.ColumnCount = 3;
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
 			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanel4.Controls.Add(this.Exit, 1, 0);
-			this.tableLayoutPanel4.Controls.Add(this.TitleBar, 0, 0);
+			this.tableLayoutPanel4.Controls.Add(this.Exit, 2, 0);
+			this.tableLayoutPanel4.Controls.Add(this.TitleBar, 1, 0);
+			this.tableLayoutPanel4.Controls.Add(this.Logo, 0, 0);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -1271,105 +1764,220 @@
 			this.Exit.UseVisualStyleBackColor = false;
 			this.Exit.Click += new System.EventHandler(this.Exit_Click);
 			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.tableLayoutPanel21);
+			this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox3.Location = new System.Drawing.Point(8, 8);
+			this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox3.Size = new System.Drawing.Size(392, 369);
+			this.groupBox3.TabIndex = 0;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Auto Save";
+			// 
+			// tableLayoutPanel21
+			// 
+			this.tableLayoutPanel21.ColumnCount = 1;
+			this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel21.Controls.Add(this.AutoSaveApply, 0, 1);
+			this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel22, 0, 0);
+			this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel21.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanel21.Name = "tableLayoutPanel21";
+			this.tableLayoutPanel21.RowCount = 2;
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel21.Size = new System.Drawing.Size(384, 338);
+			this.tableLayoutPanel21.TabIndex = 0;
+			// 
+			// AutoSaveApply
+			// 
+			this.AutoSaveApply.BackColor = System.Drawing.Color.Silver;
+			this.AutoSaveApply.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AutoSaveApply.FlatAppearance.BorderSize = 0;
+			this.AutoSaveApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AutoSaveApply.Location = new System.Drawing.Point(4, 257);
+			this.AutoSaveApply.Margin = new System.Windows.Forms.Padding(4);
+			this.AutoSaveApply.Name = "AutoSaveApply";
+			this.AutoSaveApply.Size = new System.Drawing.Size(376, 77);
+			this.AutoSaveApply.TabIndex = 18;
+			this.AutoSaveApply.Text = "Apply";
+			this.AutoSaveApply.UseVisualStyleBackColor = false;
+			// 
+			// tableLayoutPanel22
+			// 
+			this.tableLayoutPanel22.ColumnCount = 2;
+			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+			this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+			this.tableLayoutPanel22.Controls.Add(this.AutoSaveDirectory, 1, 2);
+			this.tableLayoutPanel22.Controls.Add(this.label10, 0, 0);
+			this.tableLayoutPanel22.Controls.Add(this.label12, 0, 1);
+			this.tableLayoutPanel22.Controls.Add(this.label13, 0, 2);
+			this.tableLayoutPanel22.Controls.Add(this.EnableAutoSave, 1, 0);
+			this.tableLayoutPanel22.Controls.Add(this.AutoSaveInterval, 1, 1);
+			this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel22.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel22.Name = "tableLayoutPanel22";
+			this.tableLayoutPanel22.RowCount = 3;
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel22.Size = new System.Drawing.Size(384, 253);
+			this.tableLayoutPanel22.TabIndex = 19;
+			// 
+			// label10
+			// 
+			this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label10.Location = new System.Drawing.Point(4, 4);
+			this.label10.Margin = new System.Windows.Forms.Padding(4);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(145, 76);
+			this.label10.TabIndex = 1;
+			this.label10.Text = "Auto Save";
+			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label12
+			// 
+			this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label12.Location = new System.Drawing.Point(4, 88);
+			this.label12.Margin = new System.Windows.Forms.Padding(4);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(145, 76);
+			this.label12.TabIndex = 1;
+			this.label12.Text = "Save Interval";
+			this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label13
+			// 
+			this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label13.Location = new System.Drawing.Point(4, 172);
+			this.label13.Margin = new System.Windows.Forms.Padding(4);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(145, 77);
+			this.label13.TabIndex = 1;
+			this.label13.Text = "Directory";
+			this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// EnableAutoSave
+			// 
+			this.EnableAutoSave.BackColor = System.Drawing.Color.Silver;
+			this.EnableAutoSave.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.EnableAutoSave.FlatAppearance.BorderSize = 0;
+			this.EnableAutoSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.EnableAutoSave.Location = new System.Drawing.Point(157, 4);
+			this.EnableAutoSave.Margin = new System.Windows.Forms.Padding(4);
+			this.EnableAutoSave.Name = "EnableAutoSave";
+			this.EnableAutoSave.Size = new System.Drawing.Size(223, 76);
+			this.EnableAutoSave.TabIndex = 19;
+			this.EnableAutoSave.Text = "Disabled";
+			this.EnableAutoSave.UseVisualStyleBackColor = false;
+			// 
+			// AutoSaveDirectory
+			// 
+			this.AutoSaveDirectory.BackColor = System.Drawing.Color.Silver;
+			this.AutoSaveDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AutoSaveDirectory.FlatAppearance.BorderSize = 0;
+			this.AutoSaveDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AutoSaveDirectory.Location = new System.Drawing.Point(157, 172);
+			this.AutoSaveDirectory.Margin = new System.Windows.Forms.Padding(4);
+			this.AutoSaveDirectory.Name = "AutoSaveDirectory";
+			this.AutoSaveDirectory.Size = new System.Drawing.Size(223, 77);
+			this.AutoSaveDirectory.TabIndex = 21;
+			this.AutoSaveDirectory.Text = "Browse";
+			this.AutoSaveDirectory.UseVisualStyleBackColor = false;
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.tableLayoutPanel23);
+			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox4.Location = new System.Drawing.Point(8, 385);
+			this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+			this.groupBox4.Size = new System.Drawing.Size(392, 270);
+			this.groupBox4.TabIndex = 1;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Manual Save";
+			// 
+			// tableLayoutPanel23
+			// 
+			this.tableLayoutPanel23.ColumnCount = 1;
+			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel23.Controls.Add(this.SaveNow, 0, 0);
+			this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel23.Location = new System.Drawing.Point(4, 27);
+			this.tableLayoutPanel23.Margin = new System.Windows.Forms.Padding(0);
+			this.tableLayoutPanel23.Name = "tableLayoutPanel23";
+			this.tableLayoutPanel23.RowCount = 1;
+			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel23.Size = new System.Drawing.Size(384, 239);
+			this.tableLayoutPanel23.TabIndex = 0;
+			// 
+			// SaveNow
+			// 
+			this.SaveNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.SaveNow.BackColor = System.Drawing.Color.Silver;
+			this.SaveNow.FlatAppearance.BorderSize = 0;
+			this.SaveNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.SaveNow.Location = new System.Drawing.Point(4, 81);
+			this.SaveNow.Margin = new System.Windows.Forms.Padding(4);
+			this.SaveNow.Name = "SaveNow";
+			this.SaveNow.Size = new System.Drawing.Size(376, 77);
+			this.SaveNow.TabIndex = 19;
+			this.SaveNow.Text = "Save Now";
+			this.SaveNow.UseVisualStyleBackColor = false;
+			// 
+			// AutoSaveInterval
+			// 
+			this.AutoSaveInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.AutoSaveInterval.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.AutoSaveInterval.FormattingEnabled = true;
+			this.AutoSaveInterval.Items.AddRange(new object[] {
+            "Hour",
+            "Day",
+            "Week",
+            "Month",
+            "Year"});
+			this.AutoSaveInterval.Location = new System.Drawing.Point(156, 108);
+			this.AutoSaveInterval.Name = "AutoSaveInterval";
+			this.AutoSaveInterval.Size = new System.Drawing.Size(225, 35);
+			this.AutoSaveInterval.TabIndex = 20;
+			// 
 			// TitleBar
 			// 
 			this.TitleBar.BackColor = System.Drawing.Color.RoyalBlue;
 			this.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TitleBar.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
 			this.TitleBar.ForeColor = System.Drawing.Color.White;
-			this.TitleBar.Location = new System.Drawing.Point(0, 0);
+			this.TitleBar.Location = new System.Drawing.Point(40, 0);
 			this.TitleBar.Margin = new System.Windows.Forms.Padding(0);
 			this.TitleBar.Name = "TitleBar";
-			this.TitleBar.Size = new System.Drawing.Size(1240, 40);
+			this.TitleBar.Size = new System.Drawing.Size(1200, 40);
 			this.TitleBar.TabIndex = 0;
 			this.TitleBar.Text = "Tango Project";
 			this.TitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.TitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
 			this.TitleBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseMove);
 			// 
-			// label6
+			// Logo
 			// 
-			this.label6.BackColor = System.Drawing.Color.OrangeRed;
-			this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label6.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label6.ForeColor = System.Drawing.Color.White;
-			this.label6.Location = new System.Drawing.Point(3, 62);
-			this.label6.Margin = new System.Windows.Forms.Padding(3);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(396, 53);
-			this.label6.TabIndex = 15;
-			this.label6.Text = "Connection Failed";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label7
-			// 
-			this.label7.BackColor = System.Drawing.Color.OrangeRed;
-			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label7.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label7.ForeColor = System.Drawing.Color.White;
-			this.label7.Location = new System.Drawing.Point(3, 180);
-			this.label7.Margin = new System.Windows.Forms.Padding(3);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(396, 53);
-			this.label7.TabIndex = 16;
-			this.label7.Text = "Connection Failed";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label8
-			// 
-			this.label8.BackColor = System.Drawing.Color.OrangeRed;
-			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label8.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label8.ForeColor = System.Drawing.Color.White;
-			this.label8.Location = new System.Drawing.Point(3, 62);
-			this.label8.Margin = new System.Windows.Forms.Padding(3);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(396, 53);
-			this.label8.TabIndex = 17;
-			this.label8.Text = "Connection Failed";
-			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label9
-			// 
-			this.label9.BackColor = System.Drawing.Color.OrangeRed;
-			this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label9.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label9.ForeColor = System.Drawing.Color.White;
-			this.label9.Location = new System.Drawing.Point(3, 180);
-			this.label9.Margin = new System.Windows.Forms.Padding(3);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(396, 53);
-			this.label9.TabIndex = 18;
-			this.label9.Text = "Connection Failed";
-			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// SensorConnectionSave
-			// 
-			this.SensorConnectionSave.BackColor = System.Drawing.Color.Silver;
-			this.SensorConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SensorConnectionSave.FlatAppearance.BorderSize = 0;
-			this.SensorConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.SensorConnectionSave.Location = new System.Drawing.Point(4, 240);
-			this.SensorConnectionSave.Margin = new System.Windows.Forms.Padding(4);
-			this.SensorConnectionSave.Name = "SensorConnectionSave";
-			this.SensorConnectionSave.Size = new System.Drawing.Size(394, 54);
-			this.SensorConnectionSave.TabIndex = 17;
-			this.SensorConnectionSave.Text = "Apply";
-			this.SensorConnectionSave.UseVisualStyleBackColor = false;
-			// 
-			// RobotConnectionSave
-			// 
-			this.RobotConnectionSave.BackColor = System.Drawing.Color.Silver;
-			this.RobotConnectionSave.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RobotConnectionSave.FlatAppearance.BorderSize = 0;
-			this.RobotConnectionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.RobotConnectionSave.Location = new System.Drawing.Point(4, 240);
-			this.RobotConnectionSave.Margin = new System.Windows.Forms.Padding(4);
-			this.RobotConnectionSave.Name = "RobotConnectionSave";
-			this.RobotConnectionSave.Size = new System.Drawing.Size(394, 55);
-			this.RobotConnectionSave.TabIndex = 19;
-			this.RobotConnectionSave.Text = "Apply";
-			this.RobotConnectionSave.UseVisualStyleBackColor = false;
+			this.Logo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
+			this.Logo.Location = new System.Drawing.Point(0, 0);
+			this.Logo.Margin = new System.Windows.Forms.Padding(0);
+			this.Logo.Name = "Logo";
+			this.Logo.Size = new System.Drawing.Size(40, 40);
+			this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.Logo.TabIndex = 2;
+			this.Logo.TabStop = false;
 			// 
 			// MainForm
 			// 
@@ -1419,9 +2027,24 @@
 			this.Configuration.ResumeLayout(false);
 			this.ConfigPanel.ResumeLayout(false);
 			this.BiasConfig.ResumeLayout(false);
+			this.BiasConfigPanel.ResumeLayout(false);
+			this.tableLayoutPanel17.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
+			this.tableLayoutPanel20.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+			this.groupBox1.ResumeLayout(false);
+			this.tableLayoutPanel19.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Sensor1X1Offset)).EndInit();
 			this.FileConfig.ResumeLayout(false);
+			this.FileSaveConfig.ResumeLayout(false);
 			this.NetworkConfig.ResumeLayout(false);
 			this.SocketsConfig.ResumeLayout(false);
+			this.DbConnectionConfig.ResumeLayout(false);
+			this.tableLayoutPanel16.ResumeLayout(false);
+			this.tableLayoutPanel18.ResumeLayout(false);
+			this.tableLayoutPanel18.PerformLayout();
 			this.RobotConnectionConfig.ResumeLayout(false);
 			this.tableLayoutPanel12.ResumeLayout(false);
 			this.tableLayoutPanel14.ResumeLayout(false);
@@ -1438,6 +2061,12 @@
 			this.Logs.PerformLayout();
 			this.GlobalFormLayout.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
+			this.groupBox3.ResumeLayout(false);
+			this.tableLayoutPanel21.ResumeLayout(false);
+			this.tableLayoutPanel22.ResumeLayout(false);
+			this.groupBox4.ResumeLayout(false);
+			this.tableLayoutPanel23.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -1463,7 +2092,6 @@
 		private System.Windows.Forms.PictureBox RightDoorImage;
 		private System.Windows.Forms.TableLayoutPanel GlobalFormLayout;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-		private System.Windows.Forms.Label TitleBar;
 		private System.Windows.Forms.Button Exit;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
@@ -1509,12 +2137,48 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox Robot1IpAddress;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label Robot1ConnectionStatus;
+		private System.Windows.Forms.Label Robot2ConnectionStatus;
+		private System.Windows.Forms.Label Sensor1ConnectionStatus;
+		private System.Windows.Forms.Label Sensor2ConnectionStatus;
 		private System.Windows.Forms.Button RobotConnectionSave;
 		private System.Windows.Forms.Button SensorConnectionSave;
+		private System.Windows.Forms.GroupBox DbConnectionConfig;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+		private System.Windows.Forms.Button DbConnectionSave;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
+		private System.Windows.Forms.TextBox DbIpAddress;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label DbConnectionStatus;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.NumericUpDown numericUpDown2;
+		private System.Windows.Forms.NumericUpDown numericUpDown3;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private System.Windows.Forms.NumericUpDown Sensor1X1Offset;
+		private System.Windows.Forms.Button SaveOffset;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
+		private System.Windows.Forms.Button AutoSaveApply;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Button EnableAutoSave;
+		private System.Windows.Forms.Button AutoSaveDirectory;
+		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
+		private System.Windows.Forms.Button SaveNow;
+		private System.Windows.Forms.ComboBox AutoSaveInterval;
+		private System.Windows.Forms.Label TitleBar;
+		private System.Windows.Forms.PictureBox Logo;
 	}
 }
 
