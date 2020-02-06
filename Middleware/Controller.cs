@@ -112,6 +112,16 @@ namespace Middleware
 
 		public float Bias { get; set; }
 		public bool BypassMode { get; set; }
+		public string Sensor1IpAddress
+		{
+			get => sensor.Sensor1IpAddress;
+			set => sensor.Sensor1IpAddress = value;
+		}
+		public string Sensor2IpAddress
+		{
+			get => sensor.Sensor2IpAddress;
+			set => sensor.Sensor2IpAddress = value;
+		}
 		public string Robot1IpAddress
 		{
 			get => robot.Robot1IpAddress;
@@ -734,23 +744,23 @@ namespace Middleware
 				switch (Robot1_Receive_Data[8])
 				{
 					case Home:
-						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Home));
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.HOME));
 						break;
 
 					case Ready:
-						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Ready));
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.READY));
 						break;
 
 					case B_Ready:
-						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_Ready));
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_READY));
 						break;
 
 					case B_Strat:
-						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_Start));
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_START));
 						break;
 
 					case B_End:
-						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_End));
+						Robot1PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_END));
 						break;
 				}
 			}
@@ -807,23 +817,23 @@ namespace Middleware
 				switch (Robot2_Receive_Data[8])
 				{
 					case Home:
-						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Home));
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.HOME));
 						break;
 
 					case Ready:
-						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Ready));
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.READY));
 						break;
 
 					case B_Ready:
-						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_Ready));
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_READY));
 						break;
 
 					case B_Strat:
-						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_Start));
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_START));
 						break;
 
 					case B_End:
-						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.Bending_End));
+						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_END));
 						break;
 				}
 			}

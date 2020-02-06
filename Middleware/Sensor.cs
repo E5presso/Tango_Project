@@ -22,6 +22,8 @@ namespace Middleware
 
 		public bool IsSensor1Connected => sensor1.IsActive;
 		public bool IsSensor2Connected => sensor2.IsActive;
+		public string Sensor1IpAddress { get; set; }
+		public string Sensor2IpAddress { get; set; }
 
 		public Sensor()
 		{
