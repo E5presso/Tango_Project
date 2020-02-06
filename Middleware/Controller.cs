@@ -109,6 +109,10 @@ namespace Middleware
 
 		public event EventHandler<ExceptionEventArgs> ErrorOccurred;
 
+		public bool IsRobotServerActive => robot.IsActive;
+		public bool IsSensor1Connected => sensor.IsSensor1Connected;
+		public bool IsSensor2Connected => sensor.IsSensor2Connected;
+
 		public float Bias { get; set; }
 		public bool BypassMode { get; set; }
 		public string Sensor1IpAddress
@@ -396,13 +400,13 @@ namespace Middleware
 
 				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
-					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
-					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
 			}
 			else if (Bending_Cnt == 1)

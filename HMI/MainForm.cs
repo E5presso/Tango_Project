@@ -90,6 +90,96 @@ namespace HMI
         }
         private void Controller_Sensor1ValueReceived(object sender, SensorValueEventArgs e)
         {
+            SensorChart.SyncInvoke(x =>
+            {
+                if (!x.IsDisposed)
+                {
+                    DateTime time = DateTime.Now;
+                    x.Series["Sensor1Before"].Points.AddXY(time, e.Before.Sensor1);
+                    x.Series["Sensor1After"].Points.AddXY(time, e.After == null ? 0f : e.After.Value.Sensor1);
+                    x.Series["Sensor1MaxPlus"].Points.AddXY(time, 3.5f);
+                    x.Series["Sensor1MaxMinus"].Points.AddXY(time, -3.5f);
+                    x.Series["Sensor1MinPlus"].Points.AddXY(time, 0.75f);
+                    x.Series["Sensor1MinMinus"].Points.AddXY(time, -0.75f);
+
+                    x.Series["Sensor2Before"].Points.AddXY(time, e.Before.Sensor2);
+                    x.Series["Sensor2After"].Points.AddXY(time, e.After == null ? 0f : e.After.Value.Sensor2);
+                    x.Series["Sensor2MaxPlus"].Points.AddXY(time, 3.5f);
+                    x.Series["Sensor2MaxMinus"].Points.AddXY(time, -3.5f);
+                    x.Series["Sensor2MinPlus"].Points.AddXY(time, 0.75f);
+                    x.Series["Sensor2MinMinus"].Points.AddXY(time, -0.75f);
+
+                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor1);
+                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor2);
+                }
+            });
+            switch (e.Status)
+            {
+                case StatusCode.PASS:
+                {
+                    Stats1.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["Passed"].Points.Count > 0)
+                            {
+                                x.Series["Passed"].Points[0].SetValueXY("Passed", x.Series["Passed"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["Passed"].Points.AddXY("Passed", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.FAILED:
+                {
+                    Stats1.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["Failed"].Points.Count > 0)
+                            {
+                                x.Series["Failed"].Points[0].SetValueXY("Failed", x.Series["Failed"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["Failed"].Points.AddXY("Failed", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.FIRST_BENDED:
+                {
+                    Stats2.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["FirstBended"].Points.Count > 0)
+                            {
+                                x.Series["FirstBended"].Points[0].SetValueXY("FirstBended", x.Series["FirstBended"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["FirstBended"].Points.AddXY("FirstBended", 1);
+                        }
+                    });
+                    break;
+                }
+                case StatusCode.SECOND_BENDED:
+                {
+                    Stats2.AsyncInvoke(x =>
+                    {
+                        if (!x.IsDisposed)
+                        {
+                            if (x.Series["SecondBended"].Points.Count > 0)
+                            {
+                                x.Series["SecondBended"].Points[0].SetValueXY("SecondBended", x.Series["SecondBended"].Points[0].GetValueByName("Y") + 1);
+                                x.ResetAutoValues();
+                            }
+                            else x.Series["SecondBended"].Points.AddXY("SecondBended", 1);
+                        }
+                    });
+                    break;
+                }
+            }
         }
         private void Controller_Sensor2ValueReceived(object sender, SensorValueEventArgs e)
         {
@@ -149,22 +239,12 @@ namespace HMI
             {
                 x.BackColor = Color.OliveDrab;
             });
-            Robot1ConnectionStatus.AsyncInvoke(x =>
-            {
-                x.BackColor = Color.OliveDrab;
-                x.Text = "Connection Succeed";
-            });
         }
         private void Controller_Robot2Connected(object sender, Core.Network.ConnectEventArgs e)
         {
             Robot2Status.AsyncInvoke(x =>
             {
                 x.BackColor = Color.OliveDrab;
-            });
-            Robot2ConnectionStatus.AsyncInvoke(x =>
-            {
-                x.BackColor = Color.OliveDrab;
-                x.Text = "Connection Succeed";
             });
         }
         private void Controller_Robot1PhaseChanged(object sender, RobotPhaseEventArgs e)
@@ -179,22 +259,12 @@ namespace HMI
             {
                 x.BackColor = Color.OrangeRed;
             });
-            Robot1ConnectionStatus.AsyncInvoke(x =>
-            {
-                x.BackColor = Color.OrangeRed;
-                x.Text = "Connection Failed";
-            });
         }
         private void Controller_Robot2Disconnected(object sender, Core.Network.DisconnectEventArgs e)
         {
             Robot2Status.AsyncInvoke(x =>
             {
                 x.BackColor = Color.OrangeRed;
-            });
-            Robot2ConnectionStatus.AsyncInvoke(x =>
-            {
-                x.BackColor = Color.OrangeRed;
-                x.Text = "Connection Failed";
             });
         }
 
@@ -219,21 +289,17 @@ namespace HMI
                 Sensor2ConnectionStatus.Enabled = true;
             else Sensor2ConnectionStatus.Enabled = false;
         }
-        private void Robot1IpAddress_TextChanged(object sender, EventArgs e)
+        private void RobotConnectionSave_Click(object sender, EventArgs e)
         {
-            if (NetworkUtilities.ValidateIPAddress(Robot1IpAddress.Text, false))
-                controller.Robot1IpAddress = Robot1IpAddress.Text;
+            try
+            {
+                int port = Convert.ToInt32(RobotServerPort.Text);
+                if (port > 65535) return;
+                if (controller.IsRobotServerActive) controller.StopRobotServer();
+                controller.StartRobotServer(port, buffersize);
+            }
+            catch { return; }
         }
-        private void Robot2IpAddress_TextChanged(object sender, EventArgs e)
-        {
-            if (NetworkUtilities.ValidateIPAddress(Robot2IpAddress.Text, false))
-                controller.Robot2IpAddress = Robot2IpAddress.Text;
-        }
-        private void DbIpAddress_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Sensor1ConnectionStatus_Click(object sender, EventArgs e)
         {
             string[] parsed = Sensor1IpAddress.Text.Split(':');
@@ -255,6 +321,16 @@ namespace HMI
         private void DbConnectionStatus_Click(object sender, EventArgs e)
         {
 
+        }
+        private void Robot1IpAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (NetworkUtilities.ValidateIPAddress(Robot1IpAddress.Text, false))
+                controller.Robot1IpAddress = Robot1IpAddress.Text;
+        }
+        private void Robot2IpAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (NetworkUtilities.ValidateIPAddress(Robot2IpAddress.Text, false))
+                controller.Robot1IpAddress = Robot2IpAddress.Text;
         }
         #endregion
     }
