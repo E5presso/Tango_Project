@@ -81,6 +81,10 @@ namespace HMI
                 x.BackColor = Color.OliveDrab;
                 x.Text = "Connection Succeed";
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor1 Connected as {e.IP}{Environment.NewLine}");
+            });
         }
         private void Controller_Sensor2Connected(object sender, Core.Network.ConnectEventArgs e)
         {
@@ -93,6 +97,10 @@ namespace HMI
             {
                 x.BackColor = Color.OliveDrab;
                 x.Text = "Connection Succeed";
+            });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor2 Connected as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1Sended(object sender, SendEventArgs e)
@@ -348,6 +356,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor1 as {e.IP} Refused Connection{Environment.NewLine}");
+            });
         }
         private void Controller_Sensor2ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
         {
@@ -359,6 +371,10 @@ namespace HMI
             {
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
+            });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor2 as {e.IP} Refused Connection{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1Disconnected(object sender, Core.Network.DisconnectEventArgs e)
@@ -372,6 +388,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor1 as {e.IP}{Environment.NewLine}");
+            });
         }
         private void Controller_Sensor2Disconnected(object sender, Core.Network.DisconnectEventArgs e)
         {
@@ -384,6 +404,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor2 as {e.IP}{Environment.NewLine}");
+            });
         }
 
         private void Controller_Robot1Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -392,12 +416,20 @@ namespace HMI
             {
                 x.BackColor = Color.OliveDrab;
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot1 Connected as {e.IP}{Environment.NewLine}");
+            });
         }
         private void Controller_Robot2Connected(object sender, Core.Network.ConnectEventArgs e)
         {
             Robot2Status.AsyncInvoke(x =>
             {
                 x.BackColor = Color.OliveDrab;
+            });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot2 Connected as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1Sended(object sender, SendEventArgs e)
@@ -440,12 +472,20 @@ namespace HMI
             {
                 x.BackColor = Color.OrangeRed;
             });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot1 as {e.IP} Disconnected{Environment.NewLine}");
+            });
         }
         private void Controller_Robot2Disconnected(object sender, Core.Network.DisconnectEventArgs e)
         {
             Robot2Status.AsyncInvoke(x =>
             {
                 x.BackColor = Color.OrangeRed;
+            });
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot2 as {e.IP} Disconnected{Environment.NewLine}");
             });
         }
 
