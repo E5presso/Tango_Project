@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Core.Network;
 
 namespace Middleware
@@ -395,13 +396,13 @@ namespace Middleware
 
 				if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))
 				{
-					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
-					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
+					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.PASS, First_Sensing, null, null));
 				}
 				else if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T))
 				{
-					if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
-					else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
+					else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FAILED, First_Sensing, null, null));
 				}
 			}
 			else if (Bending_Cnt == 1)
@@ -409,16 +410,16 @@ namespace Middleware
 				Second_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Second_Sensing.Sensor1 - First_Sensing.Sensor1, Second_Sensing.Sensor2 - First_Sensing.Sensor2);
 
-				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
-				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+				if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
+				else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.FIRST_BENDED, First_Sensing, Second_Sensing, Delta));
 			}
 			else if (Bending_Cnt == 2)
 			{
 				Third_Sensing = new SensorValue(Double_DP_X1, Double_DP_X2);
 				Delta = new SensorValue(Third_Sensing.Sensor1 - Second_Sensing.Sensor1, Third_Sensing.Sensor2 - Second_Sensing.Sensor2);
 
-				if (IP == "") Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
-				else if (IP == "") Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+				if (IP == Sensor1IpAddress) Sensor1ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
+				else if (IP == Sensor2IpAddress) Sensor2ValueReceived?.Invoke(this, new SensorValueEventArgs(StatusCode.SECOND_BENDED, Second_Sensing, Third_Sensing, Delta));
 			}
 		}
 
@@ -442,7 +443,7 @@ namespace Middleware
 			{
 				Timing_On_Input(Timing_On);
 				Timing = true;
-				// delay 필요
+				Thread.Sleep(100);
 				SendToSensor1(Timing_On);
 			}
 			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Timing_R_ID)
@@ -564,7 +565,7 @@ namespace Middleware
 			{
 				Timing_On_Input(Timing_On);
 				Timing = true;
-				// delay필요
+				Thread.Sleep(100);
 				SendToSensor2(Timing_On);
 			}
 			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Timing_R_ID)
