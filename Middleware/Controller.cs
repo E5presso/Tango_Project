@@ -121,7 +121,10 @@ namespace Middleware
 		public bool IsSensor1Connected => sensor.IsSensor1Connected;
 		public bool IsSensor2Connected => sensor.IsSensor2Connected;
 
-		public float Bias { get; set; }
+		public float S1_X1_Offset { get; set; }
+		public float S1_X2_Offset { get; set; }
+		public float S2_X1_Offset { get; set; }
+		public float S2_X2_Offset { get; set; }
 		public bool BypassMode { get; set; }
 		public string Sensor1IpAddress
 		{

@@ -554,5 +554,25 @@ namespace HMI
                 controller.Robot1IpAddress = Robot2IpAddress.Text;
         }
         #endregion
+
+        private void Sensor1X1Offset_ValueChanged(object sender, EventArgs e)
+        {
+            controller.S1_X1_Offset = Convert.ToSingle(e);
+        }
+
+        private void Sensor1X2Offset_ValueChanged(object sender, EventArgs e)
+        {
+            controller.S1_X2_Offset = Convert.ToSingle(e);
+        }
+
+        private void Sensor2X1Offset_ValueChanged(object sender, EventArgs e)
+        {
+            controller.S2_X1_Offset = Convert.ToSingle(e);
+        }
+
+        private void Sensor2X2Offset_ValueChanged(object sender, EventArgs e)
+        {
+            controller.S2_X2_Offset = Convert.ToSingle(e);
+        }
     }
 }
