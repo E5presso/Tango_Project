@@ -154,6 +154,18 @@ namespace Core.Network
 	public static class NetworkUtilities
 	{
 		/// <summary>
+		/// 주소 문자열을 포트번호와 IP주소로 분리합니다.
+		/// </summary>
+		/// <param name="address">분리할 주소를 지정합니다.</param>
+		/// <param name="ip">분리된 IP주소를 반환합니다.</param>
+		/// <param name="port">분리된 포트번호를 반환합니다.</param>
+		public static void ParseAddressWithPort(string address, out string ip, out int port)
+		{
+			string[] parsed = address.Split(':');
+			ip = parsed[0];
+			port = Convert.ToInt32(parsed[1]);
+		}
+		/// <summary>
 		/// IP 주소의 유효성을 검증합니다.
 		/// </summary>
 		/// <param name="ip">검증할 IP 주소를 지정합니다.</param>

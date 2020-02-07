@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware", "Middleware\Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterlockTest", "InterlockTest\InterlockTest.csproj", "{708342D3-B55D-4FAA-AFDE-061732E54D50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSensor1", "TestSensor1\TestSensor1.csproj", "{645AB8CE-4979-47F1-AEEB-0F6BA271481A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSensor2", "TestSensor2\TestSensor2.csproj", "{A1CD0AFD-9502-4868-BB35-9BE70F0E3599}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{708342D3-B55D-4FAA-AFDE-061732E54D50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645AB8CE-4979-47F1-AEEB-0F6BA271481A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645AB8CE-4979-47F1-AEEB-0F6BA271481A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645AB8CE-4979-47F1-AEEB-0F6BA271481A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645AB8CE-4979-47F1-AEEB-0F6BA271481A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CD0AFD-9502-4868-BB35-9BE70F0E3599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CD0AFD-9502-4868-BB35-9BE70F0E3599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CD0AFD-9502-4868-BB35-9BE70F0E3599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CD0AFD-9502-4868-BB35-9BE70F0E3599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,13 +43,17 @@ namespace InterlockTest
 				{
 					if (PcStatusFlag)
 					{
-						string url1 = "http://124.127.248.84/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
-						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-						request1.GetResponse();
+						try
+						{
+							string url1 = "http://124.127.248.84/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
 
-						string url2 = "http://124.127.248.85/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
-						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-						request2.GetResponse();
+							string url2 = "http://124.127.248.85/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch { }
 					}
 					Thread.Sleep(1000);
 				}
@@ -197,27 +201,35 @@ namespace InterlockTest
 		{
 			if (SensorStatusFlag)
 			{
-				string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-				HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-				request1.GetResponse();
+				try
+				{
+					string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+					HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+					request1.GetResponse();
 
-				string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-				HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-				request2.GetResponse();
+					string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+					HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+					request2.GetResponse();
 
-				SensorStatusFlag = false;
+					SensorStatusFlag = false;
+				}
+				catch { }
 			}
 			else
 			{
-				string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[647]=ON";
-				HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-				request1.GetResponse();
+				try
+				{
+					string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[647]=ON";
+					HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+					request1.GetResponse();
 
-				string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[647]=ON";
-				HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-				request2.GetResponse();
+					string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[647]=ON";
+					HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+					request2.GetResponse();
 
-				SensorStatusFlag = true;
+					SensorStatusFlag = true;
+				}
+				catch { }
 			}
 		}
 		private void SensorDataStatus_Click(object sender, EventArgs e)
@@ -236,27 +248,35 @@ namespace InterlockTest
 		{
 			if (BypassFlag)
 			{
-				string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
-				HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-				request1.GetResponse();
+				try
+				{
+					string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
+					HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+					request1.GetResponse();
 
-				string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
-				HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-				request2.GetResponse();
+					string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
+					HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+					request2.GetResponse();
 
-				BypassFlag = false;
+					BypassFlag = false;
+				}
+				catch { }
 			}
 			else
 			{
-				string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
-				HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-				request1.GetResponse();
+				try
+				{
+					string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
+					HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+					request1.GetResponse();
 
-				string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
-				HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-				request2.GetResponse();
+					string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
+					HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+					request2.GetResponse();
 
-				BypassFlag = true;
+					BypassFlag = true;
+				}
+				catch { }
 			}
 		}
 

@@ -67,6 +67,45 @@ namespace HMI
         {
             Application.Exit();
         }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            if (Sensor1IpAddress.Text != null && NetworkUtilities.ValidateIPAddress(Sensor1IpAddress.Text, true))
+            {
+                NetworkUtilities.ParseAddressWithPort(Sensor1IpAddress.Text, out string ip, out int port);
+                controller.ConnectToSensor1(ip, port, buffersize);
+                Sensor1ConnectionStatus.BackColor = Color.Gold;
+                Sensor1ConnectionStatus.Text = "Testing...";
+                Sensor1IpAddress.Enabled = false;
+            }
+            if (Sensor2IpAddress.Text != null && NetworkUtilities.ValidateIPAddress(Sensor2IpAddress.Text, true))
+            {
+                NetworkUtilities.ParseAddressWithPort(Sensor2IpAddress.Text, out string ip, out int port);
+                controller.ConnectToSensor2(ip, port, buffersize);
+                Sensor2ConnectionStatus.BackColor = Color.Gold;
+                Sensor2ConnectionStatus.Text = "Testing...";
+                Sensor2IpAddress.Enabled = false;
+            }
+            if (Robot1IpAddress.Text != string.Empty && Robot2IpAddress.Text != string.Empty && RobotServerPort.Text != string.Empty)
+            {
+                if (NetworkUtilities.ValidateIPAddress(Robot1IpAddress.Text, false) && NetworkUtilities.ValidateIPAddress(Robot2IpAddress.Text, false))
+                {
+                    int port = Convert.ToInt32(RobotServerPort.Text);
+                    controller.Robot1IpAddress = Robot1IpAddress.Text;
+                    controller.Robot2IpAddress = Robot2IpAddress.Text;
+                    controller.StartRobotServer(port, buffersize);
+                    RobotConnectionSave.BackColor = Color.OliveDrab;
+                    RobotConnectionSave.ForeColor = Color.White;
+                    RobotConnectionSave.Text = "Server Started";
+                    RobotConnectionSave.Enabled = false;
+                }
+            }
+        }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            controller.DisconnectFromSensor1();
+            controller.DisconnectFromSensor2();
+            controller.StopRobotServer();
+        }
         #endregion
         #region 로보틱스 네트워크 제어
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -83,7 +122,11 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor1 Connected as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor 1 Connected as {e.IP}{Environment.NewLine}");
+            });
+            Sensor1IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
         private void Controller_Sensor2Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -100,35 +143,39 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor2 Connected as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor 2 Connected as {e.IP}{Environment.NewLine}");
+            });
+            Sensor2IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
         private void Controller_Sensor1Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Sensor 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor2Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Sensor 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Sensor 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor2Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Sensor 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1ValueReceived(object sender, SensorValueEventArgs e)
@@ -358,7 +405,11 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor1 as {e.IP} Refused Connection{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor 1 as {e.IP} Refused Connection{Environment.NewLine}");
+            });
+            Sensor1IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
         private void Controller_Sensor2ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
@@ -374,7 +425,11 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor2 as {e.IP} Refused Connection{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Sensor 2 as {e.IP} Refused Connection{Environment.NewLine}");
+            });
+            Sensor2IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
         private void Controller_Sensor1Disconnected(object sender, Core.Network.DisconnectEventArgs e)
@@ -390,7 +445,11 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor1 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 1 as {e.IP}{Environment.NewLine}");
+            });
+            Sensor1IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
         private void Controller_Sensor2Disconnected(object sender, Core.Network.DisconnectEventArgs e)
@@ -406,7 +465,11 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor2 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 2 as {e.IP}{Environment.NewLine}");
+            });
+            Sensor2IpAddress.AsyncInvoke(x =>
+            {
+                x.Enabled = true;
             });
         }
 
@@ -418,7 +481,7 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot1 Connected as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot 1 Connected as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -429,35 +492,35 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot2 Connected as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot 2 Connected as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Robot 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Robot 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Robot 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Robot 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1PhaseChanged(object sender, RobotPhaseEventArgs e)
@@ -474,7 +537,7 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot1 as {e.IP} Disconnected{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot 1 as {e.IP} Disconnected{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Disconnected(object sender, Core.Network.DisconnectEventArgs e)
@@ -485,7 +548,7 @@ namespace HMI
             });
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot2 as {e.IP} Disconnected{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Robot 2 as {e.IP} Disconnected{Environment.NewLine}");
             });
         }
 
@@ -523,21 +586,19 @@ namespace HMI
         }
         private void Sensor1ConnectionStatus_Click(object sender, EventArgs e)
         {
-            string[] parsed = Sensor1IpAddress.Text.Split(':');
-            string ip = parsed[0];
-            int port = Convert.ToInt32(parsed[1]);
+            NetworkUtilities.ParseAddressWithPort(Sensor1IpAddress.Text, out string ip, out int port);
             controller.ConnectToSensor1(ip, port, buffersize);
             Sensor1ConnectionStatus.BackColor = Color.Gold;
             Sensor1ConnectionStatus.Text = "Testing...";
+            Sensor1IpAddress.Enabled = false;
         }
         private void Sensor2ConnectionStatus_Click(object sender, EventArgs e)
         {
-            string[] parsed = Sensor2IpAddress.Text.Split(':');
-            string ip = parsed[0];
-            int port = Convert.ToInt32(parsed[1]);
+            NetworkUtilities.ParseAddressWithPort(Sensor2IpAddress.Text, out string ip, out int port);
             controller.ConnectToSensor2(ip, port, buffersize);
             Sensor2ConnectionStatus.BackColor = Color.Gold;
             Sensor2ConnectionStatus.Text = "Testing...";
+            Sensor2IpAddress.Enabled = false;
         }
         private void DbConnectionStatus_Click(object sender, EventArgs e)
         {
@@ -553,26 +614,22 @@ namespace HMI
             if (NetworkUtilities.ValidateIPAddress(Robot2IpAddress.Text, false))
                 controller.Robot1IpAddress = Robot2IpAddress.Text;
         }
-        #endregion
-
         private void Sensor1X1Offset_ValueChanged(object sender, EventArgs e)
         {
-            controller.S1_X1_Offset = Convert.ToSingle(e);
+            controller.S1_X1_Offset = (float)Sensor1X1Offset.Value;
         }
-
         private void Sensor1X2Offset_ValueChanged(object sender, EventArgs e)
         {
-            controller.S1_X2_Offset = Convert.ToSingle(e);
+            controller.S1_X2_Offset = (float)Sensor1X2Offset.Value;
         }
-
         private void Sensor2X1Offset_ValueChanged(object sender, EventArgs e)
         {
-            controller.S2_X1_Offset = Convert.ToSingle(e);
+            controller.S2_X1_Offset = (float)Sensor2X1Offset.Value;
         }
-
         private void Sensor2X2Offset_ValueChanged(object sender, EventArgs e)
         {
-            controller.S2_X2_Offset = Convert.ToSingle(e);
+            controller.S2_X2_Offset = (float)Sensor2X2Offset.Value;
         }
+        #endregion
     }
 }
