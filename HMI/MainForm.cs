@@ -691,11 +691,11 @@ namespace HMI
         }
         private void PcCommError_Click(object sender, EventArgs e)
         {
-            controller.PcCommErrorFlag = false;
+            controller.PcCommErrorFlag = !controller.PcCommErrorFlag;
         }
         private void SensorStatus_Click(object sender, EventArgs e)
         {
-            controller.SensorStatusFlag = false;
+            controller.SensorStatusFlag = !controller.SensorStatusFlag;
         }
         private void SensorDataStatusDiag_Click(object sender, EventArgs e)
         {

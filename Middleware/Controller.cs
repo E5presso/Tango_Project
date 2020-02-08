@@ -237,7 +237,7 @@ namespace Middleware
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
-					Thread.Sleep(1000);
+					Thread.Sleep(100);
 				}
 			}));
 			robotPingThread = new Thread(new ThreadStart(() =>
@@ -445,8 +445,8 @@ namespace Middleware
 			X1 = BitConverter.ToInt32(data, 68);
 			X2 = BitConverter.ToInt32(data, 72);
 
-			Byte_X1 = Encoding.Default.GetBytes(Convert.ToString(X1));
-			Byte_X2 = Encoding.Default.GetBytes(Convert.ToString(X2));
+			Byte_X1 = Encoding.ASCII.GetBytes(Convert.ToString(X1));
+			Byte_X2 = Encoding.ASCII.GetBytes(Convert.ToString(X2));
 
 			X1_DP = data[11];
 			X2_DP = data[12];
@@ -1015,8 +1015,8 @@ namespace Middleware
 					{
 						Bending_REQ_Input(Bending_REQ);
 
-						Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
-						Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
+						Bending_REQ[10] = Encoding.ASCII.GetBytes(X1_DP.ToString())[0];
+						Bending_REQ[11] = Encoding.ASCII.GetBytes(X2_DP.ToString())[0];
 
 						if (X1 >= 0)
 						{
