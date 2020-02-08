@@ -119,17 +119,6 @@ namespace HMI
         }
         private void Controller_DoorInformationReceived(object sender, EventArgs e)
         {
-            this.AsyncInvoke(x =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.PassDiag.Enabled = false;
-                    x.NgDiag.Enabled = false;
-                    x.BPassDiag.Enabled = false;
-                    x.BNgDiag.Enabled = false;
-                    x.SensorDataStatusDiag.Enabled = false;
-                }
-            });
         }
 
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -549,9 +538,17 @@ namespace HMI
         }
         private void Controller_Robot1PhaseChanged(object sender, RobotPhaseEventArgs e)
         {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][PHASE] : Robot 1 at Phase {e.Phase.ToString()}{Environment.NewLine}");
+            });
         }
         private void Controller_Robot2PhaseChanged(object sender, RobotPhaseEventArgs e)
         {
+            LogConsole.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][PHASE] : Robot 2 at Phase {e.Phase.ToString()}{Environment.NewLine}");
+            });
         }
         private void Controller_Robot1Disconnected(object sender, Core.Network.DisconnectEventArgs e)
         {
@@ -675,42 +672,18 @@ namespace HMI
         private void PassDiag_Click(object sender, EventArgs e)
         {
             controller.PassFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void NgDiag_Click(object sender, EventArgs e)
         {
             controller.NgFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void BPassDiag_Click(object sender, EventArgs e)
         {
             controller.BPassFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void BNgDiag_Click(object sender, EventArgs e)
         {
             controller.BNgFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void PcStatus_Click(object sender, EventArgs e)
         {
@@ -726,13 +699,7 @@ namespace HMI
         }
         private void SensorDataStatusDiag_Click(object sender, EventArgs e)
         {
-            controller.SensorDataStatusFlag = false;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
+            controller.SensorDataStatusFlag = true;
         }
         private void BypassDiag_Click(object sender, EventArgs e)
         {

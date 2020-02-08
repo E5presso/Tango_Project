@@ -19,7 +19,7 @@ namespace Middleware
 		public bool BNgFlag { get; set; } = false; // BENDING NG 테스트 용
 		public bool PcCommErrorFlag { get; set; } = true; // PC_COMM_ERROR 테스트 용
 		public bool SensorStatusFlag { get; set; } = true; // SENSOR_STATUS 테스트 용
-		public bool SensorDataStatusFlag { get; set; } = true; // SENSOR_DATA_STATUS 테스트 용
+		public bool SensorDataStatusFlag { get; set; } = false; // SENSOR_DATA_STATUS 테스트 용
 
 		public bool BYPASS_MODE { get; set; } = false; // BYPASS 모드 스위치
 
@@ -42,16 +42,16 @@ namespace Middleware
 		/* Robot 통신 Data */
 		bool Interlock_R1, Interlock_R2;    // 둘 다 true가 되어야 다음 단계 진행
 		int Door_Information;               // 현재 Door가 FDLH인지 FDRH인지를 구분
-		const int FDLH = 0x38;
-		const int FDRH = 0x34;
-		const int Robot1_Number = 0x38;
-		const int Robot2_Number = 0x34;
+		const int RDLH = 0x32;
+		const int RDRH = 0x31;
+		const int Robot1_Number = 0x32;
+		const int Robot2_Number = 0x31;
 		const int OK_Pass = 0x30;
 		const int NG1_Pass = 0x33;
 		const int NG2_Pass = 0x32;
 
 		/* Sensor Data Packet 구분 */
-		const int Reset_R_ID = 0x10;
+		const int Reset_R_ID = 0x11;
 		const int Timing_R_ID = 0x0f;
 		const int Measured_R_ID = 0x15;
 		const int Sensor_Ping_Res = 0x07;
@@ -207,8 +207,36 @@ namespace Middleware
 			{
 				while (true)
 				{
-					SendToSensor1(SENSOR_PING_REQ);
-					SendToSensor2(SENSOR_PING_REQ);
+					//SendToSensor1(SENSOR_PING_REQ);
+					//SendToSensor2(SENSOR_PING_REQ);
+					if (SensorStatusFlag)
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
+					else
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
 					Thread.Sleep(1000);
 				}
 			}));
@@ -230,7 +258,7 @@ namespace Middleware
 						}
 						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
 					}
-					Thread.Sleep(1000);
+					Thread.Sleep(100);
 				}
 			}));
 			bypassPingThread = new Thread(new ThreadStart(() =>
@@ -622,13 +650,13 @@ namespace Middleware
 							0x38, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
 							0x0D, 0x0A
 						};
+						InternalFlag = false;
+						BPassFlag = false;
 						packet[8] = Robot1_Number;
 						SendToRobot1(packet);
 
 						packet[8] = Robot2_Number;
 						SendToRobot2(packet);
-						InternalFlag = false;
-						BPassFlag = false;
 					}
 					else if (BNgFlag && InternalFlag)
 					{
@@ -638,13 +666,13 @@ namespace Middleware
 							0x38, 0x33, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
 							0x0D, 0x0A
 						};
+						InternalFlag = false;
+						BNgFlag = false;
 						packet[8] = Robot1_Number;
 						SendToRobot1(packet);
 
 						packet[8] = Robot2_Number;
 						SendToRobot2(packet);
-						InternalFlag = false;
-						BNgFlag = false;
 					}
 					else
 					{
@@ -755,7 +783,7 @@ namespace Middleware
 			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Sensor_Ping_Res)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
-				if (Sensor1_Receive_Data[5] == 0x00 && Sensor1_Receive_Data[9] == 0x00)
+				if (Sensor1_Receive_Data[4] == 0x00 && Sensor1_Receive_Data[8] == 0x00)
 				{
 					if (SensorStatusFlag)
 					{
@@ -892,13 +920,13 @@ namespace Middleware
 							0x38, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
 							0x0D, 0x0A
 						};
+						InternalFlag = false;
+						BPassFlag = false;
 						packet[8] = Robot1_Number;
 						SendToRobot1(packet);
 
 						packet[8] = Robot2_Number;
 						SendToRobot2(packet);
-						InternalFlag = false;
-						BPassFlag = false;
 					}
 					else if (BNgFlag && InternalFlag)
 					{
@@ -908,13 +936,13 @@ namespace Middleware
 							0x38, 0x33, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
 							0x0D, 0x0A
 						};
+						InternalFlag = false;
+						BNgFlag = false;
 						packet[8] = Robot1_Number;
 						SendToRobot1(packet);
 
 						packet[8] = Robot2_Number;
 						SendToRobot2(packet);
-						InternalFlag = false;
-						BNgFlag = false;
 					}
 					else
 					{
@@ -1025,7 +1053,7 @@ namespace Middleware
 			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Sensor_Ping_Res)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
-				if (Sensor2_Receive_Data[5] == 0x00 && Sensor2_Receive_Data[9] == 0x00)
+				if (Sensor2_Receive_Data[4] == 0x00 && Sensor2_Receive_Data[8] == 0x00)
 				{
 					if (SensorStatusFlag)
 					{
@@ -1097,7 +1125,6 @@ namespace Middleware
 		{
 			Robot1Received?.Invoke(sender, e);
 
-			Door_Information = 0;
 			Interlock_R1 = false;
 			byte[] Door_Info_R_R1 = new byte[18];
 			byte[] Reset = new byte[6];
@@ -1105,35 +1132,31 @@ namespace Middleware
 			
 			if (Robot1_Receive_Data[4] == Door_Info_ID_1 && Robot1_Receive_Data[5] == Door_Info_ID_2)
 			{
-				if (Robot1_Receive_Data[9] == FDLH)
+				if (Robot1_Receive_Data[9] == RDLH)
 				{
 					Door_Information_R(Door_Info_R_R1);
 					Door_Info_R_R1[8] = Robot1_Receive_Data[8];
 					Door_Info_R_R1[9] = Robot1_Receive_Data[9];
 
-					Interlock_R1 = true;
-					Door_Information = FDLH;
+					Door_Information = RDLH;
 					SendToRobot1(Door_Info_R_R1);
-
-					while (!(Interlock_R1 && Interlock_R2)) ;
-
+					Interlock_R1 = true;
 					Reset_Input(Reset);
+					while (!Interlock_R1 || !Interlock_R2);
 					SendToSensor1(Reset);
 				}
 
-				else if (Robot1_Receive_Data[9] == FDRH)
+				else if (Robot1_Receive_Data[9] == RDRH)
 				{
 					Door_Information_R(Door_Info_R_R1);
 					Door_Info_R_R1[8] = Robot1_Receive_Data[8];
 					Door_Info_R_R1[9] = Robot1_Receive_Data[9];
 
-					Interlock_R1 = true;
-					Door_Information = FDRH;
+					Door_Information = RDRH;
 					SendToRobot1(Door_Info_R_R1);
-
-					while (!(Interlock_R1 && Interlock_R2)) ;
-
+					Interlock_R1 = true;
 					Reset_Input(Reset);
+					while (!Interlock_R1 || !Interlock_R2) ;
 					SendToSensor2(Reset);
 				}
 				DoorInformationReceived?.Invoke(this, new EventArgs());
@@ -1141,27 +1164,28 @@ namespace Middleware
 			else if(Robot1_Receive_Data[4] == Pass_R_ID_1 && Robot1_Receive_Data[5] == Pass_R_ID_2)
 			{
 				Interlock_R1 = true;
-				while (!(Interlock_R1 && Interlock_R2)) ;
 				Bending_Cnt = 0;
+				Door_Information = 0;
 			}
 			else if (Robot1_Receive_Data[4] == Bending_R_ID_1 && Robot1_Receive_Data[5] == Bending_R_ID_2)
 			{
 				Interlock_R1 = true;
-				while (!(Interlock_R1 && Interlock_R2)) ;
 				Bending_Cnt++;
 
-				if (Door_Information == FDLH)
+				if (BPassFlag || BNgFlag) InternalFlag = true;
+				if (Door_Information == RDLH)
 				{
 					Reset_Input(Reset);
+					while (!Interlock_R1 || !Interlock_R2) ;
 					SendToSensor1(Reset);
 				}
 
-				else if (Door_Information == FDRH)
+				else if (Door_Information == RDRH)
 				{
 					Reset_Input(Reset);
+					while (!Interlock_R1 || !Interlock_R2) ;
 					SendToSensor2(Reset);
 				}
-				if (BPassFlag || BNgFlag) InternalFlag = true;
 			}
 			else if (Robot1_Receive_Data[4] == Robot_Info_ID_1 && Robot1_Receive_Data[5] == Robot_Info_ID_2)
 			{
@@ -1211,24 +1235,24 @@ namespace Middleware
 
 			if (Robot2_Receive_Data[4] == Door_Info_ID_1 && Robot2_Receive_Data[5] == Door_Info_ID_2)
 			{
-				if (Robot2_Receive_Data[9] == FDLH)
+				if (Robot2_Receive_Data[9] == RDLH)
 				{
 					Door_Information_R(Door_Info_R_R2);
 					Door_Info_R_R2[8] = Robot2_Receive_Data[8];
 					Door_Info_R_R2[9] = Robot2_Receive_Data[9];
 
-					Interlock_R2 = true;
 					SendToRobot2(Door_Info_R_R2);
+					Interlock_R2 = true;
 				}
 
-				else if (Robot2_Receive_Data[9] == FDRH)
+				else if (Robot2_Receive_Data[9] == RDRH)
 				{
 					Door_Information_R(Door_Info_R_R2);
 					Door_Info_R_R2[8] = Robot2_Receive_Data[8];
 					Door_Info_R_R2[9] = Robot2_Receive_Data[9];
 
-					Interlock_R2 = true;
 					SendToRobot2(Door_Info_R_R2);
+					Interlock_R2 = true;
 				}
 				DoorInformationReceived?.Invoke(this, new EventArgs());
 			}

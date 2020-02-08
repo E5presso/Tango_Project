@@ -23,6 +23,7 @@ namespace Middleware
 
 		public event EventHandler<ExceptionEventArgs> RobotErrorOccurred;
 
+		public bool IsAllRobotsAlive  => server.List.Length == 2;
 		public bool IsActive => server.IsActive;
 		public string Robot1IpAddress { get; set; }
 		public string Robot2IpAddress { get; set; }
