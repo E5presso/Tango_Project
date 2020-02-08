@@ -5,11 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Core.Network;
+using System.Net;
 
 namespace Middleware
 {
 	public class Controller
 	{
+		public bool SensorStatusFlag { get; set; } = true; // SENSOR_STATUS 테스트 용
+		public bool PcStatusFlag { get; set; } = true; // PC_STATUS 테스트 용
+
+		public bool BYPASS_MODE { get; set; } = false; // BYPASS 모드 스위치
+
 		/* Robot Data Packet 구분 */
 		const int Door_Info_ID_1 = 0x31;
 		const int Door_Info_ID_2 = 0x31;
@@ -41,6 +47,7 @@ namespace Middleware
 		const int Reset_R_ID = 0x10;
 		const int Timing_R_ID = 0x0f;
 		const int Measured_R_ID = 0x15;
+		const int Sensor_Ping_Res = 0x07;
 
 		/* Sensor 통신 Data */
 		bool Timing;    // true이면 Timing on 상태 false이면 Timing off 상태
@@ -81,15 +88,26 @@ namespace Middleware
 		const int Ready = 0x32;         // 준비 위치
 		const int B_Ready = 0x33;       // Bending 준비 위치
 		const int B_Strat = 0x34;       // Bending 시작(Door까지의 위치)
-		const int B_End = 0x35;			// Bending 후(실제 Door를 미는 위치)
+		const int B_End = 0x35;         // Bending 후(실제 Door를 미는 위치)
+
+		byte[] SENSOR_PINT_REQ = new byte[]
+		{
+			0x04, 0x00, 0x07, 0x06
+		};
 
 		private SensorValue First_Sensing {get; set;}
 		private SensorValue Second_Sensing { get; set; }
 		private SensorValue Third_Sensing { get; set; }
 		private SensorValue Delta { get; set; }
 
+		private Thread sensorPingThread;
+		private Thread robotPingThread;
+		private Thread bypassPingThread;
+
 		private readonly Sensor sensor;
 		private readonly Robot robot;
+
+		public event EventHandler<string> SensorPingReceived;
 
 		public event EventHandler<ConnectEventArgs> Sensor1Connected;
 		public event EventHandler<ConnectEventArgs> Sensor2Connected;
@@ -121,7 +139,6 @@ namespace Middleware
 		public bool IsSensor1Connected => sensor.IsSensor1Connected;
 		public bool IsSensor2Connected => sensor.IsSensor2Connected;
 
-		public bool BypassMode { get; set; }
 		public string Sensor1IpAddress
 		{
 			get => sensor.Sensor1IpAddress;
@@ -177,6 +194,76 @@ namespace Middleware
 			robot.Robot2Disconnected += Robot_Robot2Disconnected;
 
 			robot.RobotErrorOccurred += Robot_RobotErrorOccurred;
+
+			sensorPingThread = new Thread(new ThreadStart(() =>
+			{
+				while (true)
+				{
+					SendToSensor1(SENSOR_PINT_REQ);
+					SendToSensor2(SENSOR_PINT_REQ);
+					Thread.Sleep(1000);
+				}
+			}));
+			robotPingThread = new Thread(new ThreadStart(() =>
+			{
+				while (true)
+				{
+					if (PcStatusFlag)
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+					}
+					Thread.Sleep(1000);
+				}
+			}));
+			bypassPingThread = new Thread(new ThreadStart(() =>
+			{
+				while (true)
+				{
+					if (BYPASS_MODE)
+					{
+						try
+						{
+							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+					}
+					else
+					{
+						try
+						{
+							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+					}
+					Thread.Sleep(1000);
+				}
+			}));
+
+			sensorPingThread.Start();
+			robotPingThread.Start();
+			bypassPingThread.Start();
 		}
 
 		public void ConnectToSensor1(string ip, int port, int buffersize) => sensor.ConnectToSensor1(ip, port, buffersize);
@@ -186,6 +273,17 @@ namespace Middleware
 
 		public void StartRobotServer(int port, int buffersize) => robot.Start(port, buffersize);
 		public void StopRobotServer() => robot.Stop();
+
+		public void Stop()
+		{
+			DisconnectFromSensor1();
+			DisconnectFromSensor2();
+			StopRobotServer();
+
+			sensorPingThread.Abort();
+			robotPingThread.Abort();
+			bypassPingThread.Abort();
+		}
 
 		private void SendToSensor1(byte[] data) => sensor.SendToSensor1(data);
 		private void SendToSensor2(byte[] data) => sensor.SendToSensor2(data);
@@ -553,6 +651,55 @@ namespace Middleware
 					SendToRobot2(Bending_REQ);
 				}
 			}
+			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Sensor_Ping_Res)
+			{
+				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
+				if (Sensor1_Receive_Data[5] == 0x00 && Sensor1_Receive_Data[9] == 0x00)
+				{
+					if (SensorStatusFlag)
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
+					else
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
+				}
+				else
+				{
+					try
+					{
+						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+						request1.GetResponse();
+
+						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+						request2.GetResponse();
+					}
+					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+				}
+			}
 		}
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
 		{
@@ -680,6 +827,55 @@ namespace Middleware
 
 					Bending_REQ[8] = Robot2_Number;
 					SendToRobot2(Bending_REQ);
+				}
+			}
+			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Sensor_Ping_Res)
+			{
+				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
+				if (Sensor2_Receive_Data[5] == 0x00 && Sensor2_Receive_Data[9] == 0x00)
+				{
+					if (SensorStatusFlag)
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
+					else
+					{
+						try
+						{
+							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+							request1.GetResponse();
+
+							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+							request2.GetResponse();
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					}
+				}
+				else
+				{
+					try
+					{
+						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+						request1.GetResponse();
+
+						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+						request2.GetResponse();
+					}
+					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 				}
 			}
 		}

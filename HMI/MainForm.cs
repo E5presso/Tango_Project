@@ -23,6 +23,8 @@ namespace HMI
         {
             InitializeComponent();
 
+            controller.SensorPingReceived += Controller_SensorPingReceived;
+
             controller.Sensor1Connected += Controller_Sensor1Connected;
             controller.Sensor2Connected += Controller_Sensor2Connected;
             controller.Sensor1Sended += Controller_Sensor1Sended;
@@ -49,6 +51,7 @@ namespace HMI
 
             controller.ErrorOccurred += Controller_ErrorOccurred;
         }
+
         #region 윈도우 UI 기본동작
         private Point mousePosition;
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -102,12 +105,14 @@ namespace HMI
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            controller.DisconnectFromSensor1();
-            controller.DisconnectFromSensor2();
-            controller.StopRobotServer();
+            controller.Stop();
         }
         #endregion
         #region 로보틱스 네트워크 제어
+        private void Controller_SensorPingReceived(object sender, string e)
+        {
+
+        }
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
         {
             controller.Sensor1IpAddress = e.IP;

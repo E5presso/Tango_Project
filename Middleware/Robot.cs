@@ -40,33 +40,51 @@ namespace Middleware
 		public void Stop() => server.Close();
 		public void SendToRobot1(byte[] data)
 		{
-			if (Robot1IpAddress != null && server.List.Contains(Robot1IpAddress)) server.Send(Robot1IpAddress, data);
+			if (Robot1IpAddress != null)
+			{
+				foreach (string ip in server.List)
+				{
+					if (ip.Split(':')[0] == Robot1IpAddress)
+					{
+						server.Send(ip, data);
+					}
+				}
+			}
 		}
 		public void SendToRobot2(byte[] data)
 		{
-			if (Robot1IpAddress != null && server.List.Contains(Robot2IpAddress)) server.Send(Robot2IpAddress, data);
+			if (Robot2IpAddress != null)
+			{
+				foreach (string ip in server.List)
+				{
+					if (ip.Split(':')[0] == Robot2IpAddress)
+					{
+						server.Send(ip, data);
+					}
+				}
+			}
 		}
 
 		private void Server_Connected(object sender, ConnectEventArgs e)
 		{
-			if (e.IP == Robot1IpAddress) Robot1Connected?.Invoke(sender, e);
-			else if (e.IP == Robot2IpAddress) Robot2Connected?.Invoke(sender, e);
+			if (e.IP.Split(':')[0] == Robot1IpAddress) Robot1Connected?.Invoke(sender, e);
+			else if (e.IP.Split(':')[0] == Robot2IpAddress) Robot2Connected?.Invoke(sender, e);
 			else server.Disconnect(e.IP);
 		}
 		private void Server_Sended(object sender, SendEventArgs e)
 		{
-			if (e.IP == Robot1IpAddress) Robot1Sended?.Invoke(sender, e);
-			else if (e.IP == Robot2IpAddress) Robot2Sended?.Invoke(sender, e);
+			if (e.IP.Split(':')[0] == Robot1IpAddress) Robot1Sended?.Invoke(sender, e);
+			else if (e.IP.Split(':')[0] == Robot2IpAddress) Robot2Sended?.Invoke(sender, e);
 		}
 		private void Server_Received(object sender, ReceiveEventArgs e)
 		{
-			if (e.IP == Robot1IpAddress) Robot1Received?.Invoke(sender, e);
-			else if (e.IP == Robot2IpAddress) Robot2Received?.Invoke(sender, e);
+			if (e.IP.Split(':')[0] == Robot1IpAddress) Robot1Received?.Invoke(sender, e);
+			else if (e.IP.Split(':')[0] == Robot2IpAddress) Robot2Received?.Invoke(sender, e);
 		}
 		private void Server_Disconnected(object sender, DisconnectEventArgs e)
 		{
-			if (e.IP == Robot1IpAddress) Robot1Disconnected?.Invoke(sender, e);
-			else if (e.IP == Robot2IpAddress) Robot2Disconnected?.Invoke(sender, e);
+			if (e.IP.Split(':')[0] == Robot1IpAddress) Robot1Disconnected?.Invoke(sender, e);
+			else if (e.IP.Split(':')[0] == Robot2IpAddress) Robot2Disconnected?.Invoke(sender, e);
 		}
 		private void Server_ErrorOccurred(object sender, ExceptionEventArgs e)
 		{

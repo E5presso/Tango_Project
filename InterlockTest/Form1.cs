@@ -25,7 +25,6 @@ namespace InterlockTest
 		private readonly Server server = new Server();
 		private readonly Thread thread;
 
-
 		public Form1()
 		{
 			InitializeComponent();
