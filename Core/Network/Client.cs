@@ -90,11 +90,14 @@ namespace Core.Network
 		{
 			if (IsActive)
 			{
-				session.Close();
-				session.Sended -= OnSended;
-				session.Received -= OnReceived;
-				session.Disconnected -= OnDisconnected;
-				session.ErrorOccurred -= OnErrorOccurred;
+				if (session != null)
+				{
+					session.Close();
+					session.Sended -= OnSended;
+					session.Received -= OnReceived;
+					session.Disconnected -= OnDisconnected;
+					session.ErrorOccurred -= OnErrorOccurred;
+				}
 
 				IsActive = false;
 			}

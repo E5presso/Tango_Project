@@ -24,6 +24,7 @@ namespace HMI
             InitializeComponent();
 
             controller.SensorPingReceived += Controller_SensorPingReceived;
+            controller.DoorInformationReceived += Controller_DoorInformationReceived;
 
             controller.Sensor1Connected += Controller_Sensor1Connected;
             controller.Sensor2Connected += Controller_Sensor2Connected;
@@ -111,8 +112,26 @@ namespace HMI
         #region 로보틱스 네트워크 제어
         private void Controller_SensorPingReceived(object sender, string e)
         {
-
+            SensorPingData.AsyncInvoke(x =>
+            {
+                x.Text = $"Sensor Ping : {e}";
+            });
         }
+        private void Controller_DoorInformationReceived(object sender, EventArgs e)
+        {
+            this.AsyncInvoke(x =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.PassDiag.Enabled = false;
+                    x.NgDiag.Enabled = false;
+                    x.BPassDiag.Enabled = false;
+                    x.BNgDiag.Enabled = false;
+                    x.SensorDataStatusDiag.Enabled = false;
+                }
+            });
+        }
+
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
         {
             controller.Sensor1IpAddress = e.IP;
@@ -634,6 +653,90 @@ namespace HMI
         private void Sensor2X2Offset_ValueChanged(object sender, EventArgs e)
         {
             controller.S2_X2_Offset = (float)Sensor2X2Offset.Value;
+        }
+        private void BypassToggle_Click(object sender, EventArgs e)
+        {
+            if (controller.BYPASS_MODE)
+            {
+                controller.BYPASS_MODE = false;
+                BypassToggle.BackColor = Color.Silver;
+                BypassToggle.ForeColor = Color.Black;
+                BypassToggle.Text = "DISABLED";
+            }
+            else
+            {
+                controller.BYPASS_MODE = true;
+                BypassToggle.BackColor = Color.OliveDrab;
+                BypassToggle.ForeColor = Color.White;
+                BypassToggle.Text = "ENABLED";
+            }
+        }
+
+        private void PassDiag_Click(object sender, EventArgs e)
+        {
+            controller.PassFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
+        }
+        private void NgDiag_Click(object sender, EventArgs e)
+        {
+            controller.NgFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
+        }
+        private void BPassDiag_Click(object sender, EventArgs e)
+        {
+            controller.BPassFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
+        }
+        private void BNgDiag_Click(object sender, EventArgs e)
+        {
+            controller.BNgFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
+        }
+        private void PcStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void PcCommError_Click(object sender, EventArgs e)
+        {
+            controller.PcCommErrorFlag = false;
+        }
+        private void SensorStatus_Click(object sender, EventArgs e)
+        {
+            controller.SensorStatusFlag = false;
+        }
+        private void SensorDataStatusDiag_Click(object sender, EventArgs e)
+        {
+            controller.SensorDataStatusFlag = false;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
+        }
+        private void BypassDiag_Click(object sender, EventArgs e)
+        {
+            BypassToggle_Click(sender, e);
         }
         #endregion
     }

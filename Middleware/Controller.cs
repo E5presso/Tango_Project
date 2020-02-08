@@ -11,8 +11,15 @@ namespace Middleware
 {
 	public class Controller
 	{
+		private bool InternalFlag = false; // BENDING PASS || BENDING NG 내부 플래그 (테스트 용)
+
+		public bool PassFlag { get; set; } = false; // PASS 테스트 용
+		public bool NgFlag { get; set; } = false; // NG 테스트 용
+		public bool BPassFlag { get; set; } = false; // BENDING PASS 테스트 용
+		public bool BNgFlag { get; set; } = false; // BENDING NG 테스트 용
+		public bool PcCommErrorFlag { get; set; } = true; // PC_COMM_ERROR 테스트 용
 		public bool SensorStatusFlag { get; set; } = true; // SENSOR_STATUS 테스트 용
-		public bool PcStatusFlag { get; set; } = true; // PC_STATUS 테스트 용
+		public bool SensorDataStatusFlag { get; set; } = true; // SENSOR_DATA_STATUS 테스트 용
 
 		public bool BYPASS_MODE { get; set; } = false; // BYPASS 모드 스위치
 
@@ -90,7 +97,7 @@ namespace Middleware
 		const int B_Strat = 0x34;       // Bending 시작(Door까지의 위치)
 		const int B_End = 0x35;         // Bending 후(실제 Door를 미는 위치)
 
-		byte[] SENSOR_PINT_REQ = new byte[]
+		byte[] SENSOR_PING_REQ = new byte[]
 		{
 			0x04, 0x00, 0x07, 0x06
 		};
@@ -108,6 +115,7 @@ namespace Middleware
 		private readonly Robot robot;
 
 		public event EventHandler<string> SensorPingReceived;
+		public event EventHandler DoorInformationReceived;
 
 		public event EventHandler<ConnectEventArgs> Sensor1Connected;
 		public event EventHandler<ConnectEventArgs> Sensor2Connected;
@@ -199,8 +207,8 @@ namespace Middleware
 			{
 				while (true)
 				{
-					SendToSensor1(SENSOR_PINT_REQ);
-					SendToSensor2(SENSOR_PINT_REQ);
+					SendToSensor1(SENSOR_PING_REQ);
+					SendToSensor2(SENSOR_PING_REQ);
 					Thread.Sleep(1000);
 				}
 			}));
@@ -208,7 +216,7 @@ namespace Middleware
 			{
 				while (true)
 				{
-					if (PcStatusFlag)
+					if (PcCommErrorFlag)
 					{
 						try
 						{
@@ -580,7 +588,7 @@ namespace Middleware
 			{
 				ProcessingSensorData(e.IP, Sensor1_Receive_Data);
 
-				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
+				if (PassFlag)
 				{
 					Pass_REQ_Input(Pass_REQ);
 
@@ -590,8 +598,9 @@ namespace Middleware
 
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
+					PassFlag = false;
 				}
-				else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
+				else if (NgFlag)
 				{
 					Pass_REQ_Input(Pass_REQ);
 
@@ -601,54 +610,146 @@ namespace Middleware
 
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
+					NgFlag = false;
 				}
-				else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
+				else if (BPassFlag || BNgFlag)
 				{
-					Pass_REQ_Input(Pass_REQ);
-
-					Pass_REQ[8] = Robot1_Number;
-					Pass_REQ[9] = NG2_Pass;
-					SendToRobot1(Pass_REQ);
-
-					Pass_REQ[8] = Robot2_Number;
-					SendToRobot2(Pass_REQ);
-				}
-				else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
-				{
-					Bending_REQ_Input(Bending_REQ);
-
-					Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
-					Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
-
-					if (X1 >= 0)
+					if (BPassFlag && InternalFlag)
 					{
-						Bending_REQ[12] = 0x2b; // '+'
-						Buffer.BlockCopy(Byte_X1, 0, Bending_REQ, 20 - Byte_X1.Length + 1, Byte_X1.Length); 
-					}
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x33, 0x35, 0x46, 0x46,
+							0x38, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+							0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
 
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+						InternalFlag = false;
+						BPassFlag = false;
+					}
+					else if (BNgFlag && InternalFlag)
+					{
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x33, 0x35, 0x46, 0x46,
+							0x38, 0x33, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+							0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
+
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+						InternalFlag = false;
+						BNgFlag = false;
+					}
 					else
 					{
-						Bending_REQ[12] = 0x2d; // '-'
-						Buffer.BlockCopy(Byte_X1, 1, Bending_REQ, 20 - Byte_X1.Length + 2, Byte_X1.Length - 1);
-					}
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x32, 0x33, 0x30, 0x30,
+							0x38, 0x46, 0x30, 0x30, 0x2B, 0x30, 0x30, 0x30,
+							0x30, 0x30, 0x31, 0x30, 0x30, 0x2B, 0x30, 0x30,
+							0x30, 0x30, 0x30, 0x31, 0x30, 0x30, 0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
 
-					if (X2 >= 0)
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+					}
+				}
+				else if (SensorDataStatusFlag)
+				{
+					byte[] packet = new byte[]
 					{
-						Bending_REQ[21] = 0x2b; // '+'
-						Buffer.BlockCopy(Byte_X2, 0, Bending_REQ, 29 - Byte_X2.Length + 1, Byte_X2.Length); 
-					}
+							0x39, 0x37, 0x39, 0x30, 0x32, 0x33, 0x30, 0x30,
+							0x38, 0x46, 0x30, 0x30, 0x2B, 0x30, 0x30, 0x30,
+							0x30, 0x31, 0x30, 0x30, 0x30, 0x2B, 0x30, 0x30,
+							0x30, 0x30, 0x31, 0x30, 0x30, 0x30, 0x0D, 0x0A
+					};
+					packet[8] = Robot1_Number;
+					SendToRobot1(packet);
 
-					else
+					packet[8] = Robot2_Number;
+					SendToRobot2(packet);
+					SensorDataStatusFlag = false;
+				}
+				else
+				{
+					if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 					{
-						Bending_REQ[21] = 0x2d; // '-'
-						Buffer.BlockCopy(Byte_X2, 1, Bending_REQ, 29 - Byte_X2.Length + 2, Byte_X2.Length - 1); 
+						Pass_REQ_Input(Pass_REQ);
+
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = OK_Pass;
+						SendToRobot1(Pass_REQ);
+
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
 					}
+					else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
+					{
+						Pass_REQ_Input(Pass_REQ);
 
-					Bending_REQ[8] = Robot1_Number;
-					SendToRobot1(Bending_REQ);
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = NG1_Pass;
+						SendToRobot1(Pass_REQ);
 
-					Bending_REQ[8] = Robot2_Number;
-					SendToRobot2(Bending_REQ);
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
+					}
+					else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
+					{
+						Pass_REQ_Input(Pass_REQ);
+
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = NG2_Pass;
+						SendToRobot1(Pass_REQ);
+
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
+					}
+					else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
+					{
+						Bending_REQ_Input(Bending_REQ);
+
+						Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
+						Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
+
+						if (X1 >= 0)
+						{
+							Bending_REQ[12] = 0x2b; // '+'
+							Buffer.BlockCopy(Byte_X1, 0, Bending_REQ, 20 - Byte_X1.Length + 1, Byte_X1.Length);
+						}
+
+						else
+						{
+							Bending_REQ[12] = 0x2d; // '-'
+							Buffer.BlockCopy(Byte_X1, 1, Bending_REQ, 20 - Byte_X1.Length + 2, Byte_X1.Length - 1);
+						}
+
+						if (X2 >= 0)
+						{
+							Bending_REQ[21] = 0x2b; // '+'
+							Buffer.BlockCopy(Byte_X2, 0, Bending_REQ, 29 - Byte_X2.Length + 1, Byte_X2.Length);
+						}
+
+						else
+						{
+							Bending_REQ[21] = 0x2d; // '-'
+							Buffer.BlockCopy(Byte_X2, 1, Bending_REQ, 29 - Byte_X2.Length + 2, Byte_X2.Length - 1);
+						}
+
+						Bending_REQ[8] = Robot1_Number;
+						SendToRobot1(Bending_REQ);
+
+						Bending_REQ[8] = Robot2_Number;
+						SendToRobot2(Bending_REQ);
+					}
 				}
 			}
 			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Sensor_Ping_Res)
@@ -757,8 +858,7 @@ namespace Middleware
 			else if (e.BytesRead == 116 && Sensor2_Receive_Data[3] == Measured_R_ID)
 			{
 				ProcessingSensorData(e.IP, Sensor2_Receive_Data);
-
-				if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
+				if (PassFlag)
 				{
 					Pass_REQ_Input(Pass_REQ);
 
@@ -768,8 +868,9 @@ namespace Middleware
 
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
+					PassFlag = false;
 				}
-				else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
+				else if (NgFlag)
 				{
 					Pass_REQ_Input(Pass_REQ);
 
@@ -779,54 +880,146 @@ namespace Middleware
 
 					Pass_REQ[8] = Robot2_Number;
 					SendToRobot2(Pass_REQ);
+					NgFlag = false;
 				}
-				else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
+				else if (BPassFlag || BNgFlag)
 				{
-					Pass_REQ_Input(Pass_REQ);
-
-					Pass_REQ[8] = Robot1_Number;
-					Pass_REQ[9] = NG2_Pass;
-					SendToRobot1(Pass_REQ);
-
-					Pass_REQ[8] = Robot2_Number;
-					SendToRobot2(Pass_REQ);
-				}
-				else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
-				{
-					Bending_REQ_Input(Bending_REQ);
-
-					Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
-					Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
-
-					if (X1 >= 0)
+					if (BPassFlag && InternalFlag)
 					{
-						Bending_REQ[12] = 0x2b; // '+'
-						Buffer.BlockCopy(Byte_X1, 0, Bending_REQ, 20 - Byte_X1.Length + 1, Byte_X1.Length);
-					}
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x33, 0x35, 0x46, 0x46,
+							0x38, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+							0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
 
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+						InternalFlag = false;
+						BPassFlag = false;
+					}
+					else if (BNgFlag && InternalFlag)
+					{
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x33, 0x35, 0x46, 0x46,
+							0x38, 0x33, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+							0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
+
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+						InternalFlag = false;
+						BNgFlag = false;
+					}
 					else
 					{
-						Bending_REQ[12] = 0x2d; // '-'
-						Buffer.BlockCopy(Byte_X1, 1, Bending_REQ, 20 - Byte_X1.Length + 2, Byte_X1.Length - 1);
-					}
+						byte[] packet = new byte[]
+						{
+							0x39, 0x37, 0x39, 0x30, 0x32, 0x33, 0x30, 0x30,
+							0x38, 0x46, 0x30, 0x30, 0x2B, 0x30, 0x30, 0x30,
+							0x30, 0x30, 0x31, 0x30, 0x30, 0x2B, 0x30, 0x30,
+							0x30, 0x30, 0x30, 0x31, 0x30, 0x30, 0x0D, 0x0A
+						};
+						packet[8] = Robot1_Number;
+						SendToRobot1(packet);
 
-					if (X2 >= 0)
+						packet[8] = Robot2_Number;
+						SendToRobot2(packet);
+					}
+				}
+				else if (SensorDataStatusFlag)
+				{
+					byte[] packet = new byte[]
 					{
-						Bending_REQ[21] = 0x2b; // '+'
-						Buffer.BlockCopy(Byte_X2, 0, Bending_REQ, 29 - Byte_X2.Length + 1, Byte_X2.Length);
-					}
+							0x39, 0x37, 0x39, 0x30, 0x32, 0x33, 0x30, 0x30,
+							0x38, 0x46, 0x30, 0x30, 0x2B, 0x30, 0x30, 0x30,
+							0x30, 0x31, 0x30, 0x30, 0x30, 0x2B, 0x30, 0x30,
+							0x30, 0x30, 0x31, 0x30, 0x30, 0x30, 0x0D, 0x0A
+					};
+					packet[8] = Robot1_Number;
+					SendToRobot1(packet);
 
-					else
+					packet[8] = Robot2_Number;
+					SendToRobot2(packet);
+					SensorDataStatusFlag = false;
+				}
+				else
+				{
+					if ((X1 >= X1_Minus_T && X1 <= X1_Plus_T) && (X2 >= X2_Minus_T && X2 <= X2_Plus_T)) // X1, X2 둘 다 +-0.75 안에 들어오는 경우 (정상적인 Pass)
 					{
-						Bending_REQ[21] = 0x2d; // '-'
-						Buffer.BlockCopy(Byte_X2, 1, Bending_REQ, 29 - Byte_X2.Length + 2, Byte_X2.Length - 1);
+						Pass_REQ_Input(Pass_REQ);
+
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = OK_Pass;
+						SendToRobot1(Pass_REQ);
+
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
 					}
+					else if ((X1 < X1_Minus_L || X1 > X1_Plus_L) || (X2 < X2_Minus_L || X2 > X2_Plus_L))   // X1, X2 둘 중 하나라도 -3.5보다 작거나 3.5보다 클 경우 (Error 상황에서의 Pass)
+					{
+						Pass_REQ_Input(Pass_REQ);
 
-					Bending_REQ[8] = Robot1_Number;
-					SendToRobot1(Bending_REQ);
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = NG1_Pass;
+						SendToRobot1(Pass_REQ);
 
-					Bending_REQ[8] = Robot2_Number;
-					SendToRobot2(Bending_REQ);
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
+					}
+					else if (Bending_Cnt == 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))    // 2번 Bending 했지만 X1, X2가 정상적인 Pass가 아닌 경우 (Error 상황에서의 Pass)
+					{
+						Pass_REQ_Input(Pass_REQ);
+
+						Pass_REQ[8] = Robot1_Number;
+						Pass_REQ[9] = NG2_Pass;
+						SendToRobot1(Pass_REQ);
+
+						Pass_REQ[8] = Robot2_Number;
+						SendToRobot2(Pass_REQ);
+					}
+					else if (Bending_Cnt < 2 && (X1 >= X1_Minus_L && X1 <= X1_Plus_L) && (X2 >= X2_Minus_L && X2 <= X2_Plus_L) && ((X1 < X1_Minus_T || X1 > X1_Plus_T) || (X2 < X2_Minus_T || X2 > X2_Plus_T)))     // Bending이 필요한 경우
+					{
+						Bending_REQ_Input(Bending_REQ);
+
+						Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
+						Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
+
+						if (X1 >= 0)
+						{
+							Bending_REQ[12] = 0x2b; // '+'
+							Buffer.BlockCopy(Byte_X1, 0, Bending_REQ, 20 - Byte_X1.Length + 1, Byte_X1.Length);
+						}
+
+						else
+						{
+							Bending_REQ[12] = 0x2d; // '-'
+							Buffer.BlockCopy(Byte_X1, 1, Bending_REQ, 20 - Byte_X1.Length + 2, Byte_X1.Length - 1);
+						}
+
+						if (X2 >= 0)
+						{
+							Bending_REQ[21] = 0x2b; // '+'
+							Buffer.BlockCopy(Byte_X2, 0, Bending_REQ, 29 - Byte_X2.Length + 1, Byte_X2.Length);
+						}
+
+						else
+						{
+							Bending_REQ[21] = 0x2d; // '-'
+							Buffer.BlockCopy(Byte_X2, 1, Bending_REQ, 29 - Byte_X2.Length + 2, Byte_X2.Length - 1);
+						}
+
+						Bending_REQ[8] = Robot1_Number;
+						SendToRobot1(Bending_REQ);
+
+						Bending_REQ[8] = Robot2_Number;
+						SendToRobot2(Bending_REQ);
+					}
 				}
 			}
 			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Sensor_Ping_Res)
@@ -943,6 +1136,7 @@ namespace Middleware
 					Reset_Input(Reset);
 					SendToSensor2(Reset);
 				}
+				DoorInformationReceived?.Invoke(this, new EventArgs());
 			}
 			else if(Robot1_Receive_Data[4] == Pass_R_ID_1 && Robot1_Receive_Data[5] == Pass_R_ID_2)
 			{
@@ -967,6 +1161,7 @@ namespace Middleware
 					Reset_Input(Reset);
 					SendToSensor2(Reset);
 				}
+				if (BPassFlag || BNgFlag) InternalFlag = true;
 			}
 			else if (Robot1_Receive_Data[4] == Robot_Info_ID_1 && Robot1_Receive_Data[5] == Robot_Info_ID_2)
 			{
@@ -1035,6 +1230,7 @@ namespace Middleware
 					Interlock_R2 = true;
 					SendToRobot2(Door_Info_R_R2);
 				}
+				DoorInformationReceived?.Invoke(this, new EventArgs());
 			}
 			else if (Robot2_Receive_Data[4] == Pass_R_ID_1 && Robot2_Receive_Data[5] == Pass_R_ID_2)
 			{
