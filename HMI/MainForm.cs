@@ -411,7 +411,6 @@ namespace HMI
             {
                 x.Rows.Add(new object[]
                 {
-                    time, 
                     e.Status, 
                     e.Before.Sensor1, 
                     e.Before.Sensor2,
@@ -531,7 +530,6 @@ namespace HMI
             {
                 x.Rows.Add(new object[]
                 {
-                    time,
                     e.Status,
                     e.Before.Sensor1,
                     e.Before.Sensor2,
