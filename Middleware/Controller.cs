@@ -42,10 +42,10 @@ namespace Middleware
 		/* Robot 통신 Data */
 		bool Interlock_R1, Interlock_R2;    // 둘 다 true가 되어야 다음 단계 진행
 		int Door_Information;               // 현재 Door가 FDLH인지 FDRH인지를 구분
-		const int RDLH = 0x32;
-		const int RDRH = 0x31;
-		const int Robot1_Number = 0x32;
-		const int Robot2_Number = 0x31;
+		const int FDLH = 0x38;
+		const int FDRH = 0x34;
+		const int Robot1_Number = 0x38;
+		const int Robot2_Number = 0x34;
 		const int OK_Pass = 0x30;
 		const int NG1_Pass = 0x33;
 		const int NG2_Pass = 0x32;
@@ -68,20 +68,20 @@ namespace Middleware
 		int X2_Multiply;                // T, L 계산시 곱셈으로 사용되는 변수
 
 		byte[] Byte_X1;                 // 소수점 없는 X1(Byte)
-		byte[] Byte_X2;					// 소수점 없는 X2(Byte)
+		byte[] Byte_X2;                 // 소수점 없는 X2(Byte)
 
-		float Double_DP_X1;				// 소수점 있는 X1(Double)
-		float Double_DP_X2;				// 소수점 있는 X2(Double)
+		float Double_DP_X1;             // 소수점 있는 X1(Double)
+		float Double_DP_X2;             // 소수점 있는 X2(Double)
 
-		float X1_Plus_T;				// X1 +Tolerance 
-		float X1_Minus_T;				// X1 -Tolerance
-		float X2_Plus_T;				// X2 +Tolerance 
-		float X2_Minus_T;				// X2 -Tolerance
+		float X1_Plus_T;                // X1 +Tolerance 
+		float X1_Minus_T;               // X1 -Tolerance
+		float X2_Plus_T;                // X2 +Tolerance 
+		float X2_Minus_T;               // X2 -Tolerance
 
-		float X1_Plus_L;				// X1 +Limit
-		float X1_Minus_L;				// X1 -Limit
-		float X2_Plus_L;				// X2 +Limit
-		float X2_Minus_L;				// X2 -Limit
+		float X1_Plus_L;                // X1 +Limit
+		float X1_Minus_L;               // X1 -Limit
+		float X2_Plus_L;                // X2 +Limit
+		float X2_Minus_L;               // X2 -Limit
 
 		const int DP0 = 0;              // (Decimal Point) 소수점 2째짜리(mm)
 		const int DP1 = 1;              // 소수점 3째짜리(mm)
@@ -102,7 +102,7 @@ namespace Middleware
 			0x04, 0x00, 0x07, 0x06
 		};
 
-		private SensorValue First_Sensing {get; set;}
+		private SensorValue First_Sensing { get; set; }
 		private SensorValue Second_Sensing { get; set; }
 		private SensorValue Third_Sensing { get; set; }
 		private SensorValue Delta { get; set; }
@@ -215,11 +215,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -229,11 +246,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -250,13 +284,30 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
-						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
 					Thread.Sleep(100);
 				}
@@ -271,13 +322,30 @@ namespace Middleware
 						{
 							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
-						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
 					else
 					{
@@ -285,13 +353,30 @@ namespace Middleware
 						{
 							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
-						catch (Exception e) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(e)); }
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
 					Thread.Sleep(1000);
 				}
@@ -325,7 +410,7 @@ namespace Middleware
 		private void SendToSensor2(byte[] data) => sensor.SendToSensor2(data);
 		private void SendToRobot1(byte[] data) => robot.SendToRobot1(data);
 		private void SendToRobot2(byte[] data) => robot.SendToRobot2(data);
-	
+
 		private void Door_Information_R(byte[] D)   // PC에서 Robot으로 보내는 (Door_Information_R) Data Packet
 		{
 			D[0] = 0x39;                // Bytes 0 to 3 -> 고정값
@@ -336,8 +421,8 @@ namespace Middleware
 			D[5] = Door_Info_R_ID_2;
 			D[6] = 0x46;                // Bytes 6, 7 -> 고정값
 			D[7] = 0x46;
-			D[8] = 0x30;				// Door_Information과 동일
-			D[9] = 0x30;				// Door_Information과 동일 (Door Information Data)
+			D[8] = 0x30;                // Door_Information과 동일
+			D[9] = 0x30;                // Door_Information과 동일 (Door Information Data)
 			D[10] = 0x30;               // Bytes 10 to 15 -> 고정값
 			D[11] = 0x30;
 			D[12] = 0x30;
@@ -349,23 +434,23 @@ namespace Middleware
 		}
 		private void Pass_REQ_Input(byte[] P)   // PC에서 Robot으로 보내는 (Pass_REQ_Input) Data Packet
 		{
-			P[0] = 0x39;				// Bytes 0 to 3 -> 고정값
+			P[0] = 0x39;                // Bytes 0 to 3 -> 고정값
 			P[1] = 0x37;
 			P[2] = 0x39;
 			P[3] = 0x30;
-			P[4] = Pass_REQ_ID_1;		// Bytes 4, 5 -> Pass_REQ_Input 구분
+			P[4] = Pass_REQ_ID_1;       // Bytes 4, 5 -> Pass_REQ_Input 구분
 			P[5] = Pass_REQ_ID_2;
-			P[6] = 0x46;				// Bytes 6, 7 -> 고정값
+			P[6] = 0x46;                // Bytes 6, 7 -> 고정값
 			P[7] = 0x46;
-			P[8] = 0x30;				// Robot No.
-			P[9] = 0x30;				// Pass Case 구분
-			P[10] = 0x30;				// Bytes 10 to 15 -> 고정값
+			P[8] = 0x30;                // Robot No.
+			P[9] = 0x30;                // Pass Case 구분
+			P[10] = 0x30;               // Bytes 10 to 15 -> 고정값
 			P[11] = 0x30;
 			P[12] = 0x30;
 			P[13] = 0x30;
 			P[14] = 0x30;
 			P[15] = 0x30;
-			P[16] = 0x0D;				// Bytes 16, 17 -> Packet 끝
+			P[16] = 0x0D;               // Bytes 16, 17 -> Packet 끝
 			P[17] = 0x0A;
 		}
 		private void Bending_REQ_Input(byte[] B)    // PC에서 Robot으로 보내는 (Bending_REQ_Input) Data Packet
@@ -745,8 +830,8 @@ namespace Middleware
 					{
 						Bending_REQ_Input(Bending_REQ);
 
-						Bending_REQ[10] = Convert.ToByte(Convert.ToString(X1_DP));
-						Bending_REQ[11] = Convert.ToByte(Convert.ToString(X2_DP));
+						Bending_REQ[10] = Encoding.ASCII.GetBytes(X1_DP.ToString())[0];
+						Bending_REQ[11] = Encoding.ASCII.GetBytes(X2_DP.ToString())[0];
 
 						if (X1 >= 0)
 						{
@@ -791,11 +876,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -805,11 +907,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -820,11 +939,28 @@ namespace Middleware
 					{
 						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-						request1.GetResponse();
-
+						request1.BeginGetResponse(new AsyncCallback((ar) =>
+						{
+							try
+							{
+								request1.EndGetResponse(ar);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						}), request1);
+					}
+					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					try
+					{
 						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-						request2.GetResponse();
+						request2.BeginGetResponse(new AsyncCallback((ar) =>
+						{
+							try
+							{
+								request2.EndGetResponse(ar);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						}), request2);
 					}
 					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 				}
@@ -1061,11 +1197,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -1075,11 +1228,28 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.GetResponse();
-
+							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request1.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request1);
+						}
+						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						try
+						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.GetResponse();
+							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							{
+								try
+								{
+									request2.EndGetResponse(ar);
+								}
+								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							}), request2);
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -1090,11 +1260,28 @@ namespace Middleware
 					{
 						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-						request1.GetResponse();
-
+						request1.BeginGetResponse(new AsyncCallback((ar) =>
+						{
+							try
+							{
+								request1.EndGetResponse(ar);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						}), request1);
+					}
+					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+					try
+					{
 						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
 						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-						request2.GetResponse();
+						request2.BeginGetResponse(new AsyncCallback((ar) =>
+						{
+							try
+							{
+								request2.EndGetResponse(ar);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						}), request2);
 					}
 					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 				}
@@ -1129,30 +1316,30 @@ namespace Middleware
 			byte[] Door_Info_R_R1 = new byte[18];
 			byte[] Reset = new byte[6];
 			byte[] Robot1_Receive_Data = e.Data;
-			
+
 			if (Robot1_Receive_Data[4] == Door_Info_ID_1 && Robot1_Receive_Data[5] == Door_Info_ID_2)
 			{
-				if (Robot1_Receive_Data[9] == RDLH)
+				if (Robot1_Receive_Data[9] == FDLH)
 				{
 					Door_Information_R(Door_Info_R_R1);
 					Door_Info_R_R1[8] = Robot1_Receive_Data[8];
 					Door_Info_R_R1[9] = Robot1_Receive_Data[9];
 
-					Door_Information = RDLH;
+					Door_Information = FDLH;
 					SendToRobot1(Door_Info_R_R1);
 					Interlock_R1 = true;
 					Reset_Input(Reset);
-					while (!Interlock_R1 || !Interlock_R2);
+					while (!Interlock_R1 || !Interlock_R2) ;
 					SendToSensor1(Reset);
 				}
 
-				else if (Robot1_Receive_Data[9] == RDRH)
+				else if (Robot1_Receive_Data[9] == FDRH)
 				{
 					Door_Information_R(Door_Info_R_R1);
 					Door_Info_R_R1[8] = Robot1_Receive_Data[8];
 					Door_Info_R_R1[9] = Robot1_Receive_Data[9];
 
-					Door_Information = RDRH;
+					Door_Information = FDRH;
 					SendToRobot1(Door_Info_R_R1);
 					Interlock_R1 = true;
 					Reset_Input(Reset);
@@ -1161,7 +1348,7 @@ namespace Middleware
 				}
 				DoorInformationReceived?.Invoke(this, new EventArgs());
 			}
-			else if(Robot1_Receive_Data[4] == Pass_R_ID_1 && Robot1_Receive_Data[5] == Pass_R_ID_2)
+			else if (Robot1_Receive_Data[4] == Pass_R_ID_1 && Robot1_Receive_Data[5] == Pass_R_ID_2)
 			{
 				Interlock_R1 = true;
 				Bending_Cnt = 0;
@@ -1173,14 +1360,14 @@ namespace Middleware
 				Bending_Cnt++;
 
 				if (BPassFlag || BNgFlag) InternalFlag = true;
-				if (Door_Information == RDLH)
+				if (Door_Information == FDLH)
 				{
 					Reset_Input(Reset);
 					while (!Interlock_R1 || !Interlock_R2) ;
 					SendToSensor1(Reset);
 				}
 
-				else if (Door_Information == RDRH)
+				else if (Door_Information == FDRH)
 				{
 					Reset_Input(Reset);
 					while (!Interlock_R1 || !Interlock_R2) ;
@@ -1235,7 +1422,7 @@ namespace Middleware
 
 			if (Robot2_Receive_Data[4] == Door_Info_ID_1 && Robot2_Receive_Data[5] == Door_Info_ID_2)
 			{
-				if (Robot2_Receive_Data[9] == RDLH)
+				if (Robot2_Receive_Data[9] == FDLH)
 				{
 					Door_Information_R(Door_Info_R_R2);
 					Door_Info_R_R2[8] = Robot2_Receive_Data[8];
@@ -1245,7 +1432,7 @@ namespace Middleware
 					Interlock_R2 = true;
 				}
 
-				else if (Robot2_Receive_Data[9] == RDRH)
+				else if (Robot2_Receive_Data[9] == FDRH)
 				{
 					Door_Information_R(Door_Info_R_R2);
 					Door_Info_R_R2[8] = Robot2_Receive_Data[8];
@@ -1254,7 +1441,6 @@ namespace Middleware
 					SendToRobot2(Door_Info_R_R2);
 					Interlock_R2 = true;
 				}
-				DoorInformationReceived?.Invoke(this, new EventArgs());
 			}
 			else if (Robot2_Receive_Data[4] == Pass_R_ID_1 && Robot2_Receive_Data[5] == Pass_R_ID_2)
 			{

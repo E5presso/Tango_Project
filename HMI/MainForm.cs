@@ -1,27 +1,202 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Core.Extensions;
 using Core.Network;
 using Middleware;
+using System.IO;
 
 namespace HMI
 {
+    public struct SensorValueReformed
+    {
+        public DateTime Time { get; set; }
+        public StatusCode Status { get; set; }
+        public float X1Before { get; set; }
+        public float X1After { get; set; }
+        public float X1Delta { get; set; }
+        public float X2Before { get; set; }
+        public float X2After { get; set; }
+        public float X2Delta { get; set; }
+    }
+
     public partial class MainForm : Form
     {
+        private const string savePath = @"C:\Tango";
         private const int buffersize = 1500;
         private readonly Controller controller = new Controller();
+        private List<SensorValueReformed> Sensor1DataList = new List<SensorValueReformed>();
+        private List<SensorValueReformed> Sensor2DataList = new List<SensorValueReformed>();
+        private Thread interlockDiagCheckThread;
 
         public MainForm()
         {
             InitializeComponent();
+
+            interlockDiagCheckThread = new Thread(new ThreadStart(() =>
+            {
+                while (true)
+                {
+                    if (controller.PassFlag)
+                    {
+                        PassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "PASS\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        PassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "PASS";
+                            }
+                        });
+                    }
+                    if (controller.NgFlag)
+                    {
+                        NgDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "NG\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        NgDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "NG";
+                            }
+                        });
+                    }
+                    if (controller.BPassFlag)
+                    {
+                        BPassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "BENDING PASS\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        BPassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "BENDING PASS";
+                            }
+                        });
+                    }
+                    if (controller.BNgFlag)
+                    {
+                        BNgDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "BENDING NG\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        BNgDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "BENDING NG";
+                            }
+                        });
+                    }
+                    if (!controller.SensorStatusFlag)
+                    {
+                        SensorStatusDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "SENSOR STATUS\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        SensorStatusDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "SENSOR STATUS";
+                            }
+                        });
+                    }
+                    if (!controller.PcCommErrorFlag)
+                    {
+                        PcCommErrorDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "PC COMM ERROR\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        PcCommErrorDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "PC COMM ERROR";
+                            }
+                        });
+                    }
+                    if (controller.SensorDataStatusFlag)
+                    {
+                        SensorDataStatusDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "SENSOR DATA STATUS\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        SensorDataStatusDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "SENSOR DATA STATUS";
+                            }
+                        });
+                    }
+
+                    Thread.Sleep(100);
+                }
+            }));
 
             controller.SensorPingReceived += Controller_SensorPingReceived;
             controller.DoorInformationReceived += Controller_DoorInformationReceived;
@@ -103,9 +278,11 @@ namespace HMI
                     RobotConnectionSave.Enabled = false;
                 }
             }
+            interlockDiagCheckThread.Start();
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            interlockDiagCheckThread.Abort();
             controller.Stop();
         }
         #endregion
@@ -119,6 +296,41 @@ namespace HMI
         }
         private void Controller_DoorInformationReceived(object sender, EventArgs e)
         {
+            PassDiag.AsyncInvoke((x) =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Enabled = true;
+                }
+            });
+            NgDiag.AsyncInvoke((x) =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Enabled = true;
+                }
+            });
+            BPassDiag.AsyncInvoke((x) =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Enabled = true;
+                }
+            });
+            BNgDiag.AsyncInvoke((x) =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Enabled = true;
+                }
+            });
+            SensorDataStatusDiag.AsyncInvoke((x) =>
+            {
+                if (!x.IsDisposed)
+                {
+                    x.Enabled = true;
+                }
+            });
         }
 
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -194,6 +406,19 @@ namespace HMI
         private void Controller_Sensor1ValueReceived(object sender, SensorValueEventArgs e)
         {
             DateTime time = DateTime.Now;
+            Sensor1DataList.Add(new SensorValueReformed()
+            {
+                Time = time,
+                Status = e.Status,
+
+                X1Before = e.Before.Sensor1,
+                X1After = e.After == null ? 0f : e.After.Value.Sensor1,
+                X1Delta = e.Delta == null ? 0f : e.Delta.Value.Sensor1,
+
+                X2Before = e.Before.Sensor2,
+                X2After = e.After == null ? 0f : e.After.Value.Sensor2,
+                X2Delta = e.Delta == null ? 0f : e.Delta.Value.Sensor2
+            });
             Sensor1Data.AsyncInvoke(x =>
             {
                 x.Rows.Add(new object[]
@@ -226,8 +451,8 @@ namespace HMI
                     x.Series["Sensor2MinPlus"].Points.AddXY(time, 0.75f);
                     x.Series["Sensor2MinMinus"].Points.AddXY(time, -0.75f);
 
-                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor1);
-                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor2);
+                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : Math.Abs(e.Delta.Value.Sensor1));
+                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : Math.Abs(e.Delta.Value.Sensor2));
                 }
             });
             switch (e.Status)
@@ -301,6 +526,19 @@ namespace HMI
         private void Controller_Sensor2ValueReceived(object sender, SensorValueEventArgs e)
         {
             DateTime time = DateTime.Now;
+            Sensor2DataList.Add(new SensorValueReformed()
+            {
+                Time = time,
+                Status = e.Status,
+
+                X1Before = e.Before.Sensor1,
+                X1After = e.After == null ? 0f : e.After.Value.Sensor1,
+                X1Delta = e.Delta == null ? 0f : e.Delta.Value.Sensor1,
+
+                X2Before = e.Before.Sensor2,
+                X2After = e.After == null ? 0f : e.After.Value.Sensor2,
+                X2Delta = e.Delta == null ? 0f : e.Delta.Value.Sensor2
+            });
             Sensor2Data.AsyncInvoke(x =>
             {
                 x.Rows.Add(new object[]
@@ -333,8 +571,8 @@ namespace HMI
                     x.Series["Sensor2MinPlus"].Points.AddXY(time, 0.75f);
                     x.Series["Sensor2MinMinus"].Points.AddXY(time, -0.75f);
 
-                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor1);
-                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : e.Delta.Value.Sensor2);
+                    x.Series["Sensor1Delta"].Points.AddXY(time, e.Delta == null ? 0f : Math.Abs(e.Delta.Value.Sensor1));
+                    x.Series["Sensor2Delta"].Points.AddXY(time, e.Delta == null ? 0f : Math.Abs(e.Delta.Value.Sensor2));
                 }
             });
             switch (e.Status)
@@ -577,7 +815,11 @@ namespace HMI
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][ERROR] : {e.Message}[{e.ErrorCode}] {e.StackTrace}{Environment.NewLine}");
+                try
+                {
+                    if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][ERROR] : {e.Message}[{e.ErrorCode}] {e.StackTrace}{Environment.NewLine}");
+                }
+                catch { }
             });
         }
         #endregion
@@ -635,6 +877,44 @@ namespace HMI
             if (NetworkUtilities.ValidateIPAddress(Robot2IpAddress.Text, false))
                 controller.Robot1IpAddress = Robot2IpAddress.Text;
         }
+
+        private void SaveNow_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(savePath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+                catch (Exception ex)
+                {
+                    LogConsole.AsyncInvoke(x =>
+                    {
+                        try
+                        {
+                            if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][ERROR] : {ex.Message}[-1] {ex.StackTrace}{Environment.NewLine}");
+                        }
+                        catch { }
+                    });
+                }
+            }
+            string time = DateTime.Now.ToString("yyyy_MM_dd_HHmmss");
+            using (StreamWriter writer = new StreamWriter($@"{savePath}\SENSOR_1_{time}.txt", true))
+            {
+                foreach (var data in Sensor1DataList)
+                {
+                    writer.WriteLine($"[{data.Time}][{data.Status}]\tX1 Before : {data.X1Before}\tX1 After : {data.X1After}\tX1 Delta : {data.X1Delta}\tX2 Before : {data.X2Before}\tX2 After : {data.X2After}\tX2 Delta : {data.X2Delta}");
+                }
+            }
+            using (StreamWriter writer = new StreamWriter($@"{savePath}\SENSOR_2_{time}.txt", true))
+            {
+                foreach (var data in Sensor2DataList)
+                {
+                    writer.WriteLine($"[{data.Time}][{data.Status}]\tX1 Before : {data.X1Before}\tX1 After : {data.X1After}\tX1 Delta : {data.X1Delta}\tX2 Before : {data.X2Before}\tX2 After : {data.X2After}\tX2 Delta : {data.X2Delta}");
+                }
+            }
+        }
+
         private void Sensor1X1Offset_ValueChanged(object sender, EventArgs e)
         {
             controller.S1_X1_Offset = (float)Sensor1X1Offset.Value;
@@ -651,6 +931,7 @@ namespace HMI
         {
             controller.S2_X2_Offset = (float)Sensor2X2Offset.Value;
         }
+
         private void BypassToggle_Click(object sender, EventArgs e)
         {
             if (controller.BYPASS_MODE)
@@ -672,18 +953,42 @@ namespace HMI
         private void PassDiag_Click(object sender, EventArgs e)
         {
             controller.PassFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
         }
         private void NgDiag_Click(object sender, EventArgs e)
         {
             controller.NgFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
         }
         private void BPassDiag_Click(object sender, EventArgs e)
         {
             controller.BPassFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
         }
         private void BNgDiag_Click(object sender, EventArgs e)
         {
             controller.BNgFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
         }
         private void PcStatus_Click(object sender, EventArgs e)
         {
@@ -700,6 +1005,12 @@ namespace HMI
         private void SensorDataStatusDiag_Click(object sender, EventArgs e)
         {
             controller.SensorDataStatusFlag = true;
+
+            PassDiag.Enabled = false;
+            NgDiag.Enabled = false;
+            BPassDiag.Enabled = false;
+            BNgDiag.Enabled = false;
+            SensorDataStatusDiag.Enabled = false;
         }
         private void BypassDiag_Click(object sender, EventArgs e)
         {

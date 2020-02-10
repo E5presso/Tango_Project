@@ -36,7 +36,7 @@ namespace Core.Network
 					}
 					catch (Exception e)
 					{
-						if (e is Win32Exception w && (w.ErrorCode == 10060 || w.ErrorCode == 10061))
+						if (e is Win32Exception w && (w.ErrorCode == 10060 || w.ErrorCode == 10061 || w.ErrorCode == 10065))
 							ConnectionRefused?.Invoke(ip.MapToIPv4().ToString());
 						else ErrorOccurred?.Invoke(e);
 					}
