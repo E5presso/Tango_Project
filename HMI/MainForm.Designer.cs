@@ -1605,7 +1605,7 @@
             "Week",
             "Month",
             "Year"});
-			this.AutoSaveInterval.Location = new System.Drawing.Point(155, 98);
+			this.AutoSaveInterval.Location = new System.Drawing.Point(155, 99);
 			this.AutoSaveInterval.Name = "AutoSaveInterval";
 			this.AutoSaveInterval.Size = new System.Drawing.Size(222, 39);
 			this.AutoSaveInterval.TabIndex = 20;
