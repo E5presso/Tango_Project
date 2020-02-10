@@ -11,6 +11,7 @@ namespace Middleware
 {
 	public class Controller
 	{
+		private bool pingReceived = true; // 센서 핑 수신여부
 		private bool InternalFlag = false; // BENDING PASS || BENDING NG 내부 플래그 (테스트 용)
 
 		public bool PassFlag { get; set; } = false; // PASS 테스트 용
@@ -99,7 +100,7 @@ namespace Middleware
 
 		byte[] SENSOR_PING_REQ = new byte[]
 		{
-			0x04, 0x00, 0x07, 0x06
+			0x09, 0x00, 0x07, 0x0A, 0x00, 0x00, 0x02, 0x00, 0x00
 		};
 
 		private SensorValue First_Sensing { get; set; }
@@ -207,38 +208,70 @@ namespace Middleware
 			{
 				while (true)
 				{
-					//SendToSensor1(SENSOR_PING_REQ);
-					//SendToSensor2(SENSOR_PING_REQ);
-					if (SensorStatusFlag)
+					if (pingReceived)
 					{
-						try
+						if (SensorStatusFlag)
 						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							try
 							{
-								try
+								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+								request1.BeginGetResponse(new AsyncCallback((ar) =>
 								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
+									try
+									{
+										request1.EndGetResponse(ar);
+									}
+									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+								}), request1);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							try
+							{
+								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+								request2.BeginGetResponse(new AsyncCallback((ar) =>
+								{
+									try
+									{
+										request2.EndGetResponse(ar);
+									}
+									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+								}), request2);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
+						else
 						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							try
 							{
-								try
+								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
+								request1.BeginGetResponse(new AsyncCallback((ar) =>
 								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
+									try
+									{
+										request1.EndGetResponse(ar);
+									}
+									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+								}), request1);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+							try
+							{
+								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
+								request2.BeginGetResponse(new AsyncCallback((ar) =>
+								{
+									try
+									{
+										request2.EndGetResponse(ar);
+									}
+									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+								}), request2);
+							}
+							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
 					else
 					{
@@ -271,6 +304,9 @@ namespace Middleware
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
+					pingReceived = false;
+					SendToSensor1(SENSOR_PING_REQ);
+					SendToSensor2(SENSOR_PING_REQ);
 					Thread.Sleep(100);
 				}
 			}));
@@ -865,105 +901,10 @@ namespace Middleware
 					}
 				}
 			}
-			else if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Sensor_Ping_Res)
+			else if (e.BytesRead == 8)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
-				if (Sensor1_Receive_Data[4] == 0x00 && Sensor1_Receive_Data[8] == 0x00)
-				{
-					if (SensorStatusFlag)
-					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-					else
-					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-				}
-				else
-				{
-					try
-					{
-						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-						request1.BeginGetResponse(new AsyncCallback((ar) =>
-						{
-							try
-							{
-								request1.EndGetResponse(ar);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}), request1);
-					}
-					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					try
-					{
-						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-						request2.BeginGetResponse(new AsyncCallback((ar) =>
-						{
-							try
-							{
-								request2.EndGetResponse(ar);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}), request2);
-					}
-					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-				}
+				pingReceived = true;
 			}
 		}
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
@@ -1186,105 +1127,10 @@ namespace Middleware
 					}
 				}
 			}
-			else if (e.BytesRead == 9 && Sensor2_Receive_Data[3] == Sensor_Ping_Res)
+			else if (e.BytesRead == 8)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
-				if (Sensor2_Receive_Data[4] == 0x00 && Sensor2_Receive_Data[8] == 0x00)
-				{
-					if (SensorStatusFlag)
-					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-					else
-					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-				}
-				else
-				{
-					try
-					{
-						string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-						HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-						request1.BeginGetResponse(new AsyncCallback((ar) =>
-						{
-							try
-							{
-								request1.EndGetResponse(ar);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}), request1);
-					}
-					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					try
-					{
-						string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-						HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-						request2.BeginGetResponse(new AsyncCallback((ar) =>
-						{
-							try
-							{
-								request2.EndGetResponse(ar);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}), request2);
-					}
-					catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-				}
+				pingReceived = true;
 			}
 		}
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
