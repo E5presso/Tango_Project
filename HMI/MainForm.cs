@@ -29,7 +29,7 @@ namespace HMI
         private readonly Controller controller = new Controller();
         private List<SensorValueReformed> Sensor1DataList = new List<SensorValueReformed>();
         private List<SensorValueReformed> Sensor2DataList = new List<SensorValueReformed>();
-        private Thread interlockDiagCheckThread;
+        private readonly Thread interlockDiagCheckThread;
 
         public MainForm()
         {
