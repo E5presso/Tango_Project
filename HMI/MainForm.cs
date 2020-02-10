@@ -270,6 +270,7 @@ namespace HMI
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
             if (Sensor1IpAddress.Text != null && NetworkUtilities.ValidateIPAddress(Sensor1IpAddress.Text, true))
             {
                 NetworkUtilities.ParseAddressWithPort(Sensor1IpAddress.Text, out string ip, out int port);
