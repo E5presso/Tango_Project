@@ -193,6 +193,28 @@ namespace HMI
                             }
                         });
                     }
+                    if (controller.BYPASS_MODE)
+                    {
+                        BypassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Gold;
+                                x.Text = "BYPASS\nTesting...";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        BypassDiag.AsyncInvoke((x) =>
+                        {
+                            if (!x.IsDisposed)
+                            {
+                                x.BackColor = Color.Transparent;
+                                x.Text = "BYPASS";
+                            }
+                        });
+                    }
 
                     Thread.Sleep(100);
                 }
@@ -296,41 +318,6 @@ namespace HMI
         }
         private void Controller_DoorInformationReceived(object sender, EventArgs e)
         {
-            PassDiag.AsyncInvoke((x) =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.Enabled = true;
-                }
-            });
-            NgDiag.AsyncInvoke((x) =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.Enabled = true;
-                }
-            });
-            BPassDiag.AsyncInvoke((x) =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.Enabled = true;
-                }
-            });
-            BNgDiag.AsyncInvoke((x) =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.Enabled = true;
-                }
-            });
-            SensorDataStatusDiag.AsyncInvoke((x) =>
-            {
-                if (!x.IsDisposed)
-                {
-                    x.Enabled = true;
-                }
-            });
         }
 
         private void Controller_Sensor1Connected(object sender, Core.Network.ConnectEventArgs e)
@@ -953,42 +940,18 @@ namespace HMI
         private void PassDiag_Click(object sender, EventArgs e)
         {
             controller.PassFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void NgDiag_Click(object sender, EventArgs e)
         {
             controller.NgFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void BPassDiag_Click(object sender, EventArgs e)
         {
             controller.BPassFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void BNgDiag_Click(object sender, EventArgs e)
         {
             controller.BNgFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void PcStatus_Click(object sender, EventArgs e)
         {
@@ -1005,12 +968,6 @@ namespace HMI
         private void SensorDataStatusDiag_Click(object sender, EventArgs e)
         {
             controller.SensorDataStatusFlag = true;
-
-            PassDiag.Enabled = false;
-            NgDiag.Enabled = false;
-            BPassDiag.Enabled = false;
-            BNgDiag.Enabled = false;
-            SensorDataStatusDiag.Enabled = false;
         }
         private void BypassDiag_Click(object sender, EventArgs e)
         {

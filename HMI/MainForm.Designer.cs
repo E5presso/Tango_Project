@@ -29,41 +29,55 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.TabMenu = new System.Windows.Forms.TabControl();
 			this.Main = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.Sensor1Data = new System.Windows.Forms.DataGridView();
+			this.Sensor1BendingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X1Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X2Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X1After = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X2After = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X1Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor1X2Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Sensor2Data = new System.Windows.Forms.DataGridView();
+			this.Sensor2BendingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X1Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X2Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X1After = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X2After = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X1Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sensor2X2Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.StatusPanel = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.Robot2Status = new System.Windows.Forms.Label();
@@ -182,20 +196,6 @@
 			this.Exit = new System.Windows.Forms.Button();
 			this.TitleBar = new System.Windows.Forms.Label();
 			this.Logo = new System.Windows.Forms.PictureBox();
-			this.Sensor1BendingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X1Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X2Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X1After = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X2After = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X1Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor1X2Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2BendingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X1Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X2Before = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X1After = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X2After = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X1Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Sensor2X2Delta = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.TabMenu.SuspendLayout();
 			this.Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -357,6 +357,55 @@
 			this.Sensor1Data.Size = new System.Drawing.Size(500, 329);
 			this.Sensor1Data.TabIndex = 0;
 			// 
+			// Sensor1BendingStatus
+			// 
+			this.Sensor1BendingStatus.HeaderText = "Status";
+			this.Sensor1BendingStatus.MinimumWidth = 6;
+			this.Sensor1BendingStatus.Name = "Sensor1BendingStatus";
+			this.Sensor1BendingStatus.Width = 85;
+			// 
+			// Sensor1X1Before
+			// 
+			this.Sensor1X1Before.HeaderText = "X1 Before";
+			this.Sensor1X1Before.MinimumWidth = 6;
+			this.Sensor1X1Before.Name = "Sensor1X1Before";
+			this.Sensor1X1Before.Width = 60;
+			// 
+			// Sensor1X2Before
+			// 
+			this.Sensor1X2Before.HeaderText = "X2 Before";
+			this.Sensor1X2Before.MinimumWidth = 6;
+			this.Sensor1X2Before.Name = "Sensor1X2Before";
+			this.Sensor1X2Before.Width = 60;
+			// 
+			// Sensor1X1After
+			// 
+			this.Sensor1X1After.HeaderText = "X1 After";
+			this.Sensor1X1After.MinimumWidth = 6;
+			this.Sensor1X1After.Name = "Sensor1X1After";
+			this.Sensor1X1After.Width = 60;
+			// 
+			// Sensor1X2After
+			// 
+			this.Sensor1X2After.HeaderText = "X2 After";
+			this.Sensor1X2After.MinimumWidth = 6;
+			this.Sensor1X2After.Name = "Sensor1X2After";
+			this.Sensor1X2After.Width = 60;
+			// 
+			// Sensor1X1Delta
+			// 
+			this.Sensor1X1Delta.HeaderText = "X1 Delta";
+			this.Sensor1X1Delta.MinimumWidth = 6;
+			this.Sensor1X1Delta.Name = "Sensor1X1Delta";
+			this.Sensor1X1Delta.Width = 60;
+			// 
+			// Sensor1X2Delta
+			// 
+			this.Sensor1X2Delta.HeaderText = "X2 Delta";
+			this.Sensor1X2Delta.MinimumWidth = 6;
+			this.Sensor1X2Delta.Name = "Sensor1X2Delta";
+			this.Sensor1X2Delta.Width = 60;
+			// 
 			// Sensor2Data
 			// 
 			this.Sensor2Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -376,6 +425,55 @@
 			this.Sensor2Data.RowTemplate.Height = 27;
 			this.Sensor2Data.Size = new System.Drawing.Size(500, 330);
 			this.Sensor2Data.TabIndex = 1;
+			// 
+			// Sensor2BendingStatus
+			// 
+			this.Sensor2BendingStatus.HeaderText = "Status";
+			this.Sensor2BendingStatus.MinimumWidth = 6;
+			this.Sensor2BendingStatus.Name = "Sensor2BendingStatus";
+			this.Sensor2BendingStatus.Width = 85;
+			// 
+			// Sensor2X1Before
+			// 
+			this.Sensor2X1Before.HeaderText = "X1 Before";
+			this.Sensor2X1Before.MinimumWidth = 6;
+			this.Sensor2X1Before.Name = "Sensor2X1Before";
+			this.Sensor2X1Before.Width = 60;
+			// 
+			// Sensor2X2Before
+			// 
+			this.Sensor2X2Before.HeaderText = "X2 Before";
+			this.Sensor2X2Before.MinimumWidth = 6;
+			this.Sensor2X2Before.Name = "Sensor2X2Before";
+			this.Sensor2X2Before.Width = 60;
+			// 
+			// Sensor2X1After
+			// 
+			this.Sensor2X1After.HeaderText = "X1 After";
+			this.Sensor2X1After.MinimumWidth = 6;
+			this.Sensor2X1After.Name = "Sensor2X1After";
+			this.Sensor2X1After.Width = 60;
+			// 
+			// Sensor2X2After
+			// 
+			this.Sensor2X2After.HeaderText = "X2 After";
+			this.Sensor2X2After.MinimumWidth = 6;
+			this.Sensor2X2After.Name = "Sensor2X2After";
+			this.Sensor2X2After.Width = 60;
+			// 
+			// Sensor2X1Delta
+			// 
+			this.Sensor2X1Delta.HeaderText = "X1 Delta";
+			this.Sensor2X1Delta.MinimumWidth = 6;
+			this.Sensor2X1Delta.Name = "Sensor2X1Delta";
+			this.Sensor2X1Delta.Width = 60;
+			// 
+			// Sensor2X2Delta
+			// 
+			this.Sensor2X2Delta.HeaderText = "X2 Delta";
+			this.Sensor2X2Delta.MinimumWidth = 6;
+			this.Sensor2X2Delta.Name = "Sensor2X2Delta";
+			this.Sensor2X2Delta.Width = 60;
 			// 
 			// StatusPanel
 			// 
@@ -672,157 +770,157 @@
 			// 
 			// SensorChart
 			// 
-			chartArea6.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea6.AxisY.Maximum = 5D;
-			chartArea6.AxisY.Minimum = -5D;
-			chartArea6.Name = "Sensor1";
-			chartArea6.Position.Auto = false;
-			chartArea6.Position.Height = 33F;
-			chartArea6.Position.Width = 85F;
-			chartArea6.Position.X = 2.5F;
-			chartArea6.Position.Y = 3F;
-			chartArea7.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea7.AxisY.Maximum = 5D;
-			chartArea7.AxisY.Minimum = -5D;
-			chartArea7.Name = "Sensor2";
-			chartArea7.Position.Auto = false;
-			chartArea7.Position.Height = 33F;
-			chartArea7.Position.Width = 85F;
-			chartArea7.Position.X = 2.5F;
-			chartArea7.Position.Y = 36F;
-			chartArea8.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-			chartArea8.Name = "Delta";
-			chartArea8.Position.Auto = false;
-			chartArea8.Position.Height = 31F;
-			chartArea8.Position.Width = 85F;
-			chartArea8.Position.X = 2.5F;
-			chartArea8.Position.Y = 69F;
-			this.SensorChart.ChartAreas.Add(chartArea6);
-			this.SensorChart.ChartAreas.Add(chartArea7);
-			this.SensorChart.ChartAreas.Add(chartArea8);
+			chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea1.AxisY.Maximum = 5D;
+			chartArea1.AxisY.Minimum = -5D;
+			chartArea1.Name = "Sensor1";
+			chartArea1.Position.Auto = false;
+			chartArea1.Position.Height = 33F;
+			chartArea1.Position.Width = 85F;
+			chartArea1.Position.X = 2.5F;
+			chartArea1.Position.Y = 3F;
+			chartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea2.AxisY.Maximum = 5D;
+			chartArea2.AxisY.Minimum = -5D;
+			chartArea2.Name = "Sensor2";
+			chartArea2.Position.Auto = false;
+			chartArea2.Position.Height = 33F;
+			chartArea2.Position.Width = 85F;
+			chartArea2.Position.X = 2.5F;
+			chartArea2.Position.Y = 36F;
+			chartArea3.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+			chartArea3.Name = "Delta";
+			chartArea3.Position.Auto = false;
+			chartArea3.Position.Height = 31F;
+			chartArea3.Position.Width = 85F;
+			chartArea3.Position.X = 2.5F;
+			chartArea3.Position.Y = 69F;
+			this.SensorChart.ChartAreas.Add(chartArea1);
+			this.SensorChart.ChartAreas.Add(chartArea2);
+			this.SensorChart.ChartAreas.Add(chartArea3);
 			this.SensorChart.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SensorChart.Enabled = false;
-			legend7.DockedToChartArea = "Sensor1";
-			legend7.IsDockedInsideChartArea = false;
-			legend7.Name = "Sensor1";
-			legend7.Title = "Sensor 1";
-			legend8.DockedToChartArea = "Sensor2";
-			legend8.IsDockedInsideChartArea = false;
-			legend8.Name = "Sensor2";
-			legend8.Title = "Sensor 2";
-			legend9.DockedToChartArea = "Delta";
-			legend9.IsDockedInsideChartArea = false;
-			legend9.Name = "Delta";
-			legend9.Title = "Delta";
-			legend10.Enabled = false;
-			legend10.Name = "Hidden";
-			this.SensorChart.Legends.Add(legend7);
-			this.SensorChart.Legends.Add(legend8);
-			this.SensorChart.Legends.Add(legend9);
-			this.SensorChart.Legends.Add(legend10);
+			legend1.DockedToChartArea = "Sensor1";
+			legend1.IsDockedInsideChartArea = false;
+			legend1.Name = "Sensor1";
+			legend1.Title = "Sensor 1";
+			legend2.DockedToChartArea = "Sensor2";
+			legend2.IsDockedInsideChartArea = false;
+			legend2.Name = "Sensor2";
+			legend2.Title = "Sensor 2";
+			legend3.DockedToChartArea = "Delta";
+			legend3.IsDockedInsideChartArea = false;
+			legend3.Name = "Delta";
+			legend3.Title = "Delta";
+			legend4.Enabled = false;
+			legend4.Name = "Hidden";
+			this.SensorChart.Legends.Add(legend1);
+			this.SensorChart.Legends.Add(legend2);
+			this.SensorChart.Legends.Add(legend3);
+			this.SensorChart.Legends.Add(legend4);
 			this.SensorChart.Location = new System.Drawing.Point(0, 0);
 			this.SensorChart.Margin = new System.Windows.Forms.Padding(0);
 			this.SensorChart.Name = "SensorChart";
-			series19.BorderWidth = 2;
-			series19.ChartArea = "Sensor1";
-			series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series19.Color = System.Drawing.Color.SeaGreen;
-			series19.Legend = "Sensor1";
-			series19.LegendText = "Before";
-			series19.Name = "Sensor1Before";
-			series20.BorderWidth = 2;
-			series20.ChartArea = "Sensor1";
-			series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series20.Color = System.Drawing.Color.Orange;
-			series20.Legend = "Sensor1";
-			series20.LegendText = "After";
-			series20.Name = "Sensor1After";
-			series21.BorderWidth = 3;
-			series21.ChartArea = "Sensor1";
-			series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series21.Color = System.Drawing.Color.OrangeRed;
-			series21.Legend = "Hidden";
-			series21.Name = "Sensor1MaxPlus";
-			series22.BorderWidth = 3;
-			series22.ChartArea = "Sensor1";
-			series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series22.Color = System.Drawing.Color.OrangeRed;
-			series22.Legend = "Hidden";
-			series22.Name = "Sensor1MaxMinus";
-			series23.BorderWidth = 3;
-			series23.ChartArea = "Sensor1";
-			series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series23.Color = System.Drawing.Color.RoyalBlue;
-			series23.Legend = "Hidden";
-			series23.Name = "Sensor1MinPlus";
-			series24.BorderWidth = 3;
-			series24.ChartArea = "Sensor1";
-			series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series24.Color = System.Drawing.Color.RoyalBlue;
-			series24.Legend = "Hidden";
-			series24.Name = "Sensor1MinMinus";
-			series25.BorderWidth = 2;
-			series25.ChartArea = "Sensor2";
-			series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series25.Color = System.Drawing.Color.SeaGreen;
-			series25.Legend = "Sensor2";
-			series25.LegendText = "Before";
-			series25.Name = "Sensor2Before";
-			series26.BorderWidth = 2;
-			series26.ChartArea = "Sensor2";
-			series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series26.Color = System.Drawing.Color.Orange;
-			series26.Legend = "Sensor2";
-			series26.LegendText = "After";
-			series26.Name = "Sensor2After";
-			series27.BorderWidth = 3;
-			series27.ChartArea = "Sensor2";
-			series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series27.Color = System.Drawing.Color.OrangeRed;
-			series27.Legend = "Hidden";
-			series27.Name = "Sensor2MaxPlus";
-			series28.BorderWidth = 3;
-			series28.ChartArea = "Sensor2";
-			series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series28.Color = System.Drawing.Color.OrangeRed;
-			series28.Legend = "Hidden";
-			series28.Name = "Sensor2MaxMinus";
-			series29.BorderWidth = 3;
-			series29.ChartArea = "Sensor2";
-			series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series29.Color = System.Drawing.Color.RoyalBlue;
-			series29.Legend = "Hidden";
-			series29.Name = "Sensor2MinPlus";
-			series30.BorderWidth = 3;
-			series30.ChartArea = "Sensor2";
-			series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series30.Color = System.Drawing.Color.RoyalBlue;
-			series30.Legend = "Hidden";
-			series30.Name = "Sensor2MinMinus";
-			series31.ChartArea = "Delta";
-			series31.Color = System.Drawing.Color.RoyalBlue;
-			series31.Legend = "Delta";
-			series31.LegendText = "Sensor1";
-			series31.Name = "Sensor1Delta";
-			series32.ChartArea = "Delta";
-			series32.Color = System.Drawing.Color.Orange;
-			series32.Legend = "Delta";
-			series32.LegendText = "Sensor2";
-			series32.Name = "Sensor2Delta";
-			this.SensorChart.Series.Add(series19);
-			this.SensorChart.Series.Add(series20);
-			this.SensorChart.Series.Add(series21);
-			this.SensorChart.Series.Add(series22);
-			this.SensorChart.Series.Add(series23);
-			this.SensorChart.Series.Add(series24);
-			this.SensorChart.Series.Add(series25);
-			this.SensorChart.Series.Add(series26);
-			this.SensorChart.Series.Add(series27);
-			this.SensorChart.Series.Add(series28);
-			this.SensorChart.Series.Add(series29);
-			this.SensorChart.Series.Add(series30);
-			this.SensorChart.Series.Add(series31);
-			this.SensorChart.Series.Add(series32);
+			series1.BorderWidth = 2;
+			series1.ChartArea = "Sensor1";
+			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series1.Color = System.Drawing.Color.SeaGreen;
+			series1.Legend = "Sensor1";
+			series1.LegendText = "Before";
+			series1.Name = "Sensor1Before";
+			series2.BorderWidth = 2;
+			series2.ChartArea = "Sensor1";
+			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series2.Color = System.Drawing.Color.Orange;
+			series2.Legend = "Sensor1";
+			series2.LegendText = "After";
+			series2.Name = "Sensor1After";
+			series3.BorderWidth = 3;
+			series3.ChartArea = "Sensor1";
+			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series3.Color = System.Drawing.Color.OrangeRed;
+			series3.Legend = "Hidden";
+			series3.Name = "Sensor1MaxPlus";
+			series4.BorderWidth = 3;
+			series4.ChartArea = "Sensor1";
+			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series4.Color = System.Drawing.Color.OrangeRed;
+			series4.Legend = "Hidden";
+			series4.Name = "Sensor1MaxMinus";
+			series5.BorderWidth = 3;
+			series5.ChartArea = "Sensor1";
+			series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series5.Color = System.Drawing.Color.RoyalBlue;
+			series5.Legend = "Hidden";
+			series5.Name = "Sensor1MinPlus";
+			series6.BorderWidth = 3;
+			series6.ChartArea = "Sensor1";
+			series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series6.Color = System.Drawing.Color.RoyalBlue;
+			series6.Legend = "Hidden";
+			series6.Name = "Sensor1MinMinus";
+			series7.BorderWidth = 2;
+			series7.ChartArea = "Sensor2";
+			series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series7.Color = System.Drawing.Color.SeaGreen;
+			series7.Legend = "Sensor2";
+			series7.LegendText = "Before";
+			series7.Name = "Sensor2Before";
+			series8.BorderWidth = 2;
+			series8.ChartArea = "Sensor2";
+			series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series8.Color = System.Drawing.Color.Orange;
+			series8.Legend = "Sensor2";
+			series8.LegendText = "After";
+			series8.Name = "Sensor2After";
+			series9.BorderWidth = 3;
+			series9.ChartArea = "Sensor2";
+			series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series9.Color = System.Drawing.Color.OrangeRed;
+			series9.Legend = "Hidden";
+			series9.Name = "Sensor2MaxPlus";
+			series10.BorderWidth = 3;
+			series10.ChartArea = "Sensor2";
+			series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series10.Color = System.Drawing.Color.OrangeRed;
+			series10.Legend = "Hidden";
+			series10.Name = "Sensor2MaxMinus";
+			series11.BorderWidth = 3;
+			series11.ChartArea = "Sensor2";
+			series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series11.Color = System.Drawing.Color.RoyalBlue;
+			series11.Legend = "Hidden";
+			series11.Name = "Sensor2MinPlus";
+			series12.BorderWidth = 3;
+			series12.ChartArea = "Sensor2";
+			series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series12.Color = System.Drawing.Color.RoyalBlue;
+			series12.Legend = "Hidden";
+			series12.Name = "Sensor2MinMinus";
+			series13.ChartArea = "Delta";
+			series13.Color = System.Drawing.Color.RoyalBlue;
+			series13.Legend = "Delta";
+			series13.LegendText = "Sensor1";
+			series13.Name = "Sensor1Delta";
+			series14.ChartArea = "Delta";
+			series14.Color = System.Drawing.Color.Orange;
+			series14.Legend = "Delta";
+			series14.LegendText = "Sensor2";
+			series14.Name = "Sensor2Delta";
+			this.SensorChart.Series.Add(series1);
+			this.SensorChart.Series.Add(series2);
+			this.SensorChart.Series.Add(series3);
+			this.SensorChart.Series.Add(series4);
+			this.SensorChart.Series.Add(series5);
+			this.SensorChart.Series.Add(series6);
+			this.SensorChart.Series.Add(series7);
+			this.SensorChart.Series.Add(series8);
+			this.SensorChart.Series.Add(series9);
+			this.SensorChart.Series.Add(series10);
+			this.SensorChart.Series.Add(series11);
+			this.SensorChart.Series.Add(series12);
+			this.SensorChart.Series.Add(series13);
+			this.SensorChart.Series.Add(series14);
 			this.SensorChart.Size = new System.Drawing.Size(1260, 400);
 			this.SensorChart.TabIndex = 0;
 			// 
@@ -845,66 +943,66 @@
 			// 
 			// Stats2
 			// 
-			chartArea9.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea9.Name = "StatsArea";
-			this.Stats2.ChartAreas.Add(chartArea9);
+			chartArea4.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
+			chartArea4.Name = "StatsArea";
+			this.Stats2.ChartAreas.Add(chartArea4);
 			this.Stats2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Stats2.Enabled = false;
-			legend11.Alignment = System.Drawing.StringAlignment.Center;
-			legend11.DockedToChartArea = "StatsArea";
-			legend11.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend11.IsDockedInsideChartArea = false;
-			legend11.Name = "StatsLegend";
-			this.Stats2.Legends.Add(legend11);
+			legend5.Alignment = System.Drawing.StringAlignment.Center;
+			legend5.DockedToChartArea = "StatsArea";
+			legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend5.IsDockedInsideChartArea = false;
+			legend5.Name = "StatsLegend";
+			this.Stats2.Legends.Add(legend5);
 			this.Stats2.Location = new System.Drawing.Point(630, 0);
 			this.Stats2.Margin = new System.Windows.Forms.Padding(0);
 			this.Stats2.Name = "Stats2";
 			this.Stats2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			series33.ChartArea = "StatsArea";
-			series33.Color = System.Drawing.Color.SteelBlue;
-			series33.Legend = "StatsLegend";
-			series33.LegendText = "1st Bending";
-			series33.Name = "FirstBended";
-			series34.ChartArea = "StatsArea";
-			series34.Color = System.Drawing.Color.CornflowerBlue;
-			series34.Legend = "StatsLegend";
-			series34.LegendText = "2nd Bending";
-			series34.Name = "SecondBended";
-			this.Stats2.Series.Add(series33);
-			this.Stats2.Series.Add(series34);
+			series15.ChartArea = "StatsArea";
+			series15.Color = System.Drawing.Color.SteelBlue;
+			series15.Legend = "StatsLegend";
+			series15.LegendText = "1st Bending";
+			series15.Name = "FirstBended";
+			series16.ChartArea = "StatsArea";
+			series16.Color = System.Drawing.Color.CornflowerBlue;
+			series16.Legend = "StatsLegend";
+			series16.LegendText = "2nd Bending";
+			series16.Name = "SecondBended";
+			this.Stats2.Series.Add(series15);
+			this.Stats2.Series.Add(series16);
 			this.Stats2.Size = new System.Drawing.Size(630, 267);
 			this.Stats2.TabIndex = 3;
 			this.Stats2.Text = "chart2";
 			// 
 			// Stats1
 			// 
-			chartArea10.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
-			chartArea10.Name = "StatsArea";
-			this.Stats1.ChartAreas.Add(chartArea10);
+			chartArea5.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.None;
+			chartArea5.Name = "StatsArea";
+			this.Stats1.ChartAreas.Add(chartArea5);
 			this.Stats1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Stats1.Enabled = false;
-			legend12.Alignment = System.Drawing.StringAlignment.Center;
-			legend12.DockedToChartArea = "StatsArea";
-			legend12.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend12.IsDockedInsideChartArea = false;
-			legend12.Name = "StatsLegend";
-			this.Stats1.Legends.Add(legend12);
+			legend6.Alignment = System.Drawing.StringAlignment.Center;
+			legend6.DockedToChartArea = "StatsArea";
+			legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend6.IsDockedInsideChartArea = false;
+			legend6.Name = "StatsLegend";
+			this.Stats1.Legends.Add(legend6);
 			this.Stats1.Location = new System.Drawing.Point(0, 0);
 			this.Stats1.Margin = new System.Windows.Forms.Padding(0);
 			this.Stats1.Name = "Stats1";
 			this.Stats1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			series35.ChartArea = "StatsArea";
-			series35.Color = System.Drawing.Color.OrangeRed;
-			series35.Legend = "StatsLegend";
-			series35.LegendText = "Failed";
-			series35.Name = "Failed";
-			series36.ChartArea = "StatsArea";
-			series36.Color = System.Drawing.Color.RoyalBlue;
-			series36.Legend = "StatsLegend";
-			series36.LegendText = "Passed";
-			series36.Name = "Passed";
-			this.Stats1.Series.Add(series35);
-			this.Stats1.Series.Add(series36);
+			series17.ChartArea = "StatsArea";
+			series17.Color = System.Drawing.Color.OrangeRed;
+			series17.Legend = "StatsLegend";
+			series17.LegendText = "Failed";
+			series17.Name = "Failed";
+			series18.ChartArea = "StatsArea";
+			series18.Color = System.Drawing.Color.RoyalBlue;
+			series18.Legend = "StatsLegend";
+			series18.LegendText = "Passed";
+			series18.Name = "Passed";
+			this.Stats1.Series.Add(series17);
+			this.Stats1.Series.Add(series18);
 			this.Stats1.Size = new System.Drawing.Size(630, 267);
 			this.Stats1.TabIndex = 2;
 			this.Stats1.Text = "chart2";
@@ -2092,7 +2190,6 @@
 			// 
 			// PassDiag
 			// 
-			this.PassDiag.Enabled = false;
 			this.PassDiag.Location = new System.Drawing.Point(3, 3);
 			this.PassDiag.Name = "PassDiag";
 			this.PassDiag.Size = new System.Drawing.Size(410, 137);
@@ -2103,7 +2200,6 @@
 			// 
 			// NgDiag
 			// 
-			this.NgDiag.Enabled = false;
 			this.NgDiag.Location = new System.Drawing.Point(419, 3);
 			this.NgDiag.Name = "NgDiag";
 			this.NgDiag.Size = new System.Drawing.Size(410, 137);
@@ -2114,7 +2210,6 @@
 			// 
 			// BPassDiag
 			// 
-			this.BPassDiag.Enabled = false;
 			this.BPassDiag.Location = new System.Drawing.Point(835, 3);
 			this.BPassDiag.Name = "BPassDiag";
 			this.BPassDiag.Size = new System.Drawing.Size(410, 137);
@@ -2165,7 +2260,6 @@
 			// 
 			// SensorDataStatusDiag
 			// 
-			this.SensorDataStatusDiag.Enabled = false;
 			this.SensorDataStatusDiag.Location = new System.Drawing.Point(419, 289);
 			this.SensorDataStatusDiag.Name = "SensorDataStatusDiag";
 			this.SensorDataStatusDiag.Size = new System.Drawing.Size(410, 137);
@@ -2262,104 +2356,6 @@
 			this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.Logo.TabIndex = 2;
 			this.Logo.TabStop = false;
-			// 
-			// Sensor1BendingStatus
-			// 
-			this.Sensor1BendingStatus.HeaderText = "Status";
-			this.Sensor1BendingStatus.MinimumWidth = 6;
-			this.Sensor1BendingStatus.Name = "Sensor1BendingStatus";
-			this.Sensor1BendingStatus.Width = 85;
-			// 
-			// Sensor1X1Before
-			// 
-			this.Sensor1X1Before.HeaderText = "X1 Before";
-			this.Sensor1X1Before.MinimumWidth = 6;
-			this.Sensor1X1Before.Name = "Sensor1X1Before";
-			this.Sensor1X1Before.Width = 60;
-			// 
-			// Sensor1X2Before
-			// 
-			this.Sensor1X2Before.HeaderText = "X2 Before";
-			this.Sensor1X2Before.MinimumWidth = 6;
-			this.Sensor1X2Before.Name = "Sensor1X2Before";
-			this.Sensor1X2Before.Width = 60;
-			// 
-			// Sensor1X1After
-			// 
-			this.Sensor1X1After.HeaderText = "X1 After";
-			this.Sensor1X1After.MinimumWidth = 6;
-			this.Sensor1X1After.Name = "Sensor1X1After";
-			this.Sensor1X1After.Width = 60;
-			// 
-			// Sensor1X2After
-			// 
-			this.Sensor1X2After.HeaderText = "X2 After";
-			this.Sensor1X2After.MinimumWidth = 6;
-			this.Sensor1X2After.Name = "Sensor1X2After";
-			this.Sensor1X2After.Width = 60;
-			// 
-			// Sensor1X1Delta
-			// 
-			this.Sensor1X1Delta.HeaderText = "X1 Delta";
-			this.Sensor1X1Delta.MinimumWidth = 6;
-			this.Sensor1X1Delta.Name = "Sensor1X1Delta";
-			this.Sensor1X1Delta.Width = 60;
-			// 
-			// Sensor1X2Delta
-			// 
-			this.Sensor1X2Delta.HeaderText = "X2 Delta";
-			this.Sensor1X2Delta.MinimumWidth = 6;
-			this.Sensor1X2Delta.Name = "Sensor1X2Delta";
-			this.Sensor1X2Delta.Width = 60;
-			// 
-			// Sensor2BendingStatus
-			// 
-			this.Sensor2BendingStatus.HeaderText = "Status";
-			this.Sensor2BendingStatus.MinimumWidth = 6;
-			this.Sensor2BendingStatus.Name = "Sensor2BendingStatus";
-			this.Sensor2BendingStatus.Width = 85;
-			// 
-			// Sensor2X1Before
-			// 
-			this.Sensor2X1Before.HeaderText = "X1 Before";
-			this.Sensor2X1Before.MinimumWidth = 6;
-			this.Sensor2X1Before.Name = "Sensor2X1Before";
-			this.Sensor2X1Before.Width = 60;
-			// 
-			// Sensor2X2Before
-			// 
-			this.Sensor2X2Before.HeaderText = "X2 Before";
-			this.Sensor2X2Before.MinimumWidth = 6;
-			this.Sensor2X2Before.Name = "Sensor2X2Before";
-			this.Sensor2X2Before.Width = 60;
-			// 
-			// Sensor2X1After
-			// 
-			this.Sensor2X1After.HeaderText = "X1 After";
-			this.Sensor2X1After.MinimumWidth = 6;
-			this.Sensor2X1After.Name = "Sensor2X1After";
-			this.Sensor2X1After.Width = 60;
-			// 
-			// Sensor2X2After
-			// 
-			this.Sensor2X2After.HeaderText = "X2 After";
-			this.Sensor2X2After.MinimumWidth = 6;
-			this.Sensor2X2After.Name = "Sensor2X2After";
-			this.Sensor2X2After.Width = 60;
-			// 
-			// Sensor2X1Delta
-			// 
-			this.Sensor2X1Delta.HeaderText = "X1 Delta";
-			this.Sensor2X1Delta.MinimumWidth = 6;
-			this.Sensor2X1Delta.Name = "Sensor2X1Delta";
-			this.Sensor2X1Delta.Width = 60;
-			// 
-			// Sensor2X2Delta
-			// 
-			this.Sensor2X2Delta.HeaderText = "X2 Delta";
-			this.Sensor2X2Delta.MinimumWidth = 6;
-			this.Sensor2X2Delta.Name = "Sensor2X2Delta";
-			this.Sensor2X2Delta.Width = 60;
 			// 
 			// MainForm
 			// 
