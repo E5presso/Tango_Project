@@ -42,10 +42,10 @@ namespace Middleware
 		/* Robot 통신 Data */
 		bool Interlock_R1, Interlock_R2;    // 둘 다 true가 되어야 다음 단계 진행
 		int Door_Information;               // 현재 Door가 FDLH인지 FDRH인지를 구분
-		const int FDLH = 0x38;
-		const int FDRH = 0x34;
-		const int Robot1_Number = 0x38;
-		const int Robot2_Number = 0x34;
+		const int FDLH = 0x32;
+		const int FDRH = 0x31;
+		const int Robot1_Number = 0x32;
+		const int Robot2_Number = 0x31;
 		const int OK_Pass = 0x30;
 		const int NG1_Pass = 0x33;
 		const int NG2_Pass = 0x32;
