@@ -680,10 +680,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
-            LogConsole.AsyncInvoke(x =>
+            /*LogConsole.AsyncInvoke(x =>
             {
                 if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 1 as {e.IP}{Environment.NewLine}");
-            });
+            });*/
             Sensor1IpAddress.AsyncInvoke(x =>
             {
                 x.Enabled = true;
@@ -700,10 +700,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
-            LogConsole.AsyncInvoke(x =>
+            /*LogConsole.AsyncInvoke(x =>
             {
                 if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 2 as {e.IP}{Environment.NewLine}");
-            });
+            });*/
             Sensor2IpAddress.AsyncInvoke(x =>
             {
                 x.Enabled = true;

@@ -11,7 +11,8 @@ namespace Middleware
 {
 	public class Controller
 	{
-		private bool pingReceived = true; // 센서 핑 수신여부
+		private bool Sensor1_pingReceived = true; // 센서 핑 수신여부
+		private bool Sensor2_pingReceived = true; // 센서 핑 수신여부
 		private bool InternalFlag = false; // BENDING PASS || BENDING NG 내부 플래그 (테스트 용)
 
 		public bool PassFlag { get; set; } = false; // PASS 테스트 용
@@ -100,7 +101,7 @@ namespace Middleware
 
 		byte[] SENSOR_PING_REQ = new byte[]
 		{
-			0x09, 0x00, 0x07, 0x0A, 0x00, 0x00, 0x02, 0x00, 0x00
+			0x09, 0x00, 0x07, 0x0A, 0x00, 0x01, 0x02, 0x00, 0x00
 		};
 
 		private SensorValue First_Sensing { get; set; }
@@ -208,36 +209,38 @@ namespace Middleware
 			{
 				while (true)
 				{
-					if (pingReceived)
+					if (Sensor1_pingReceived && Sensor2_pingReceived)
 					{
 						if (SensorStatusFlag)
 						{
 							try
 							{
-								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+								string url1 = $"http://{Robot1IpAddress}/KCL/SET%20PORT%20DOUT[647]=ON";
 								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-								request1.BeginGetResponse(new AsyncCallback((ar) =>
+								request1.GetResponse();
+								/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 								{
 									try
 									{
 										request1.EndGetResponse(ar);
 									}
 									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request1);
+								}), request1);*/
 							}
 							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 							try
 							{
-								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
+								string url2 = $"http://{Robot2IpAddress}/KCL/SET%20PORT%20DOUT[647]=ON";
 								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-								request2.BeginGetResponse(new AsyncCallback((ar) =>
+								request2.GetResponse();
+								/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 								{
 									try
 									{
 										request2.EndGetResponse(ar);
 									}
 									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request2);
+								}), request2);*/
 							}
 							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						}
@@ -245,30 +248,32 @@ namespace Middleware
 						{
 							try
 							{
-								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+								string url1 = $"http://{Robot1IpAddress}/KCL/SET%20PORT%20DOUT[647]=OFF";
 								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-								request1.BeginGetResponse(new AsyncCallback((ar) =>
+								request1.GetResponse();
+								/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 								{
 									try
 									{
 										request1.EndGetResponse(ar);
 									}
 									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request1);
+								}), request1);*/
 							}
 							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 							try
 							{
-								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+								string url2 = $"http://{Robot2IpAddress}/KCL/SET%20PORT%20DOUT[647]=OFF";
 								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-								request2.BeginGetResponse(new AsyncCallback((ar) =>
+								request2.GetResponse();
+								/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 								{
 									try
 									{
 										request2.EndGetResponse(ar);
 									}
 									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request2);
+								}), request2);*/
 							}
 							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						}
@@ -277,37 +282,40 @@ namespace Middleware
 					{
 						try
 						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							string url1 = $"http://{Robot1IpAddress}/KCL/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							request1.GetResponse();
+							/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request1.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
+							}), request1);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						try
 						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
+							string url2 = $"http://{Robot2IpAddress}/KCL/SET%20PORT%20DOUT[647]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							request2.GetResponse();
+							/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request2.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
+							}), request2);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
-					pingReceived = false;
+					Sensor1_pingReceived = false;
+					Sensor2_pingReceived = false;
 					SendToSensor1(SENSOR_PING_REQ);
 					SendToSensor2(SENSOR_PING_REQ);
-					Thread.Sleep(100);
+					Thread.Sleep(1000);
 				}
 			}));
 			robotPingThread = new Thread(new ThreadStart(() =>
@@ -320,28 +328,30 @@ namespace Middleware
 						{
 							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							request1.GetResponse();
+							/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request1.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
+							}), request1);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						try
 						{
 							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							request2.GetResponse();
+							/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request2.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
+							}), request2);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -358,28 +368,30 @@ namespace Middleware
 						{
 							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							request1.GetResponse();
+							/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request1.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
+							}), request1);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						try
 						{
 							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							request2.GetResponse();
+							/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request2.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
+							}), request2);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -389,28 +401,30 @@ namespace Middleware
 						{
 							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
 							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
+							request1.GetResponse();
+							/*request1.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request1.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
+							}), request1);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 						try
 						{
 							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
 							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
+							request2.GetResponse();
+							/*request2.BeginGetResponse(new AsyncCallback((ar) =>
 							{
 								try
 								{
 									request2.EndGetResponse(ar);
 								}
 								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
+							}), request2);*/
 						}
 						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
 					}
@@ -696,6 +710,7 @@ namespace Middleware
 		private void Sensor_Sensor1Connected(object sender, ConnectEventArgs e)
 		{
 			Sensor1Connected?.Invoke(sender, e);
+			Sensor1_pingReceived = true;
 		}
 		private void Sensor_Sensor1Sended(object sender, SendEventArgs e)
 		{
@@ -904,12 +919,13 @@ namespace Middleware
 			else if (e.BytesRead == 8)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
-				pingReceived = true;
+				Sensor1_pingReceived = true;
 			}
 		}
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
 		{
 			Sensor1Disconnected?.Invoke(sender, e);
+			Sensor1_pingReceived = false;
 		}
 		private void Sensor_Sensor1ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
 		{
@@ -923,6 +939,7 @@ namespace Middleware
 		private void Sensor_Sensor2Connected(object sender, ConnectEventArgs e)
 		{
 			Sensor2Connected?.Invoke(sender, e);
+			Sensor2_pingReceived = true;
 		}
 		private void Sensor_Sensor2Sended(object sender, SendEventArgs e)
 		{
@@ -1130,12 +1147,13 @@ namespace Middleware
 			else if (e.BytesRead == 8)
 			{
 				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
-				pingReceived = true;
+				Sensor2_pingReceived = true;
 			}
 		}
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
 		{
 			Sensor2Disconnected?.Invoke(sender, e);
+			Sensor2_pingReceived = false;
 		}
 		private void Sensor_Sensor2ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
 		{

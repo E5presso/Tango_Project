@@ -74,15 +74,26 @@ namespace Core.Network
 				{
 					socket.BeginSend(packet, 0, packet.Length, 0, new AsyncCallback((ar) =>
 					{
-						int bytesSent = socket.EndSend(ar);
-						Sended?.Invoke(this, enableMultiBytes ? bytesSent - 4 : bytesSent);
+						try
+						{
+							int bytesSent = socket.EndSend(ar);
+							Sended?.Invoke(this, enableMultiBytes ? bytesSent - 4 : bytesSent);
+						}
+						catch  (Exception ex)
+						{
+							if (ex is Win32Exception w && (w.ErrorCode == 10054 || w.ErrorCode == 10060))
+							{
+								Disconnected?.Invoke(this);
+							}
+							else ErrorOccurred?.Invoke(ex);
+						}
 					}), null);
 				}
 				catch (Exception e) { ErrorOccurred?.Invoke(e); }
 			}
 			else
 			{
-				ErrorOccurred?.Invoke(new InvalidOperationException("현재 소켓이 연결되어있지 않습니다."));
+				Disconnected?.Invoke(this);
 			}
 		}
 		public void Close()
@@ -136,7 +147,7 @@ namespace Core.Network
 			}
 			catch (Exception e)
 			{
-				if (e is Win32Exception w && w.ErrorCode == 10054)
+				if (e is Win32Exception w && (w.ErrorCode == 10054 || w.ErrorCode == 10060))
 				{
 					Disconnected?.Invoke(this);
 				}
