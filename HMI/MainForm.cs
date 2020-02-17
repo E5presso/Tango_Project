@@ -193,7 +193,7 @@ namespace HMI
                             }
                         });
                     }
-                    if (controller.BYPASS_MODE)
+                    if (controller.SENSOR_DATA_STATUS_RESET_R1)
                     {
                         BypassDiag.AsyncInvoke((x) =>
                         {
@@ -367,28 +367,28 @@ namespace HMI
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Sensor 1 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sent to Sensor 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor2Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Sensor 2 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sent to Sensor 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Sensor 1 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Received from Sensor 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor2Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Sensor 2 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Received from Sensor 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Sensor1ValueReceived(object sender, SensorValueEventArgs e)
@@ -680,10 +680,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
-            LogConsole.AsyncInvoke(x =>
+            /*LogConsole.AsyncInvoke(x =>
             {
                 if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 1 as {e.IP}{Environment.NewLine}");
-            });
+            });*/
             Sensor1IpAddress.AsyncInvoke(x =>
             {
                 x.Enabled = true;
@@ -700,10 +700,10 @@ namespace HMI
                 x.BackColor = Color.OrangeRed;
                 x.Text = "Connection Failed";
             });
-            LogConsole.AsyncInvoke(x =>
+            /*LogConsole.AsyncInvoke(x =>
             {
                 if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : Disconnected From Sensor 2 as {e.IP}{Environment.NewLine}");
-            });
+            });*/
             Sensor2IpAddress.AsyncInvoke(x =>
             {
                 x.Enabled = true;
@@ -736,28 +736,28 @@ namespace HMI
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Robot 1 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sent to Robot 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Sended(object sender, SendEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sended to Robot 2 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesSent} Bytes Sent to Robot 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Robot 1 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Received from Robot 1 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot2Received(object sender, ReceiveEventArgs e)
         {
             LogConsole.AsyncInvoke(x =>
             {
-                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Readed from Robot 2 as {e.IP}{Environment.NewLine}");
+                if (!x.IsDisposed) x.AppendText($"[{DateTime.Now}][NETWORK] : {e.BytesRead} Bytes Received from Robot 2 as {e.IP}{Environment.NewLine}");
             });
         }
         private void Controller_Robot1PhaseChanged(object sender, RobotPhaseEventArgs e)
@@ -920,20 +920,8 @@ namespace HMI
 
         private void BypassToggle_Click(object sender, EventArgs e)
         {
-            if (controller.BYPASS_MODE)
-            {
-                controller.BYPASS_MODE = false;
-                BypassToggle.BackColor = Color.Silver;
-                BypassToggle.ForeColor = Color.Black;
-                BypassToggle.Text = "DISABLED";
-            }
-            else
-            {
-                controller.BYPASS_MODE = true;
-                BypassToggle.BackColor = Color.OliveDrab;
-                BypassToggle.ForeColor = Color.White;
-                BypassToggle.Text = "ENABLED";
-            }
+            controller.SENSOR_DATA_STATUS_RESET_R1 = true;
+            controller.SENSOR_DATA_STATUS_RESET_R2 = true;
         }
 
         private void PassDiag_Click(object sender, EventArgs e)

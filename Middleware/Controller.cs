@@ -11,7 +11,8 @@ namespace Middleware
 {
 	public class Controller
 	{
-		private bool pingReceived = true; // 센서 핑 수신여부
+		private bool Sensor1_pingReceived = true; // 센서 핑 수신여부
+		private bool Sensor2_pingReceived = true; // 센서 핑 수신여부
 		private bool InternalFlag = false; // BENDING PASS || BENDING NG 내부 플래그 (테스트 용)
 
 		public bool PassFlag { get; set; } = false; // PASS 테스트 용
@@ -22,7 +23,8 @@ namespace Middleware
 		public bool SensorStatusFlag { get; set; } = true; // SENSOR_STATUS 테스트 용
 		public bool SensorDataStatusFlag { get; set; } = false; // SENSOR_DATA_STATUS 테스트 용
 
-		public bool BYPASS_MODE { get; set; } = false; // BYPASS 모드 스위치
+		public bool SENSOR_DATA_STATUS_RESET_R1 { get; set; } = false; // SENSOR_DATA_STATUS_RESET 스위치
+		public bool SENSOR_DATA_STATUS_RESET_R2 { get; set; } = false; // SENSOR_DATA_STATUS_RESET 스위치
 
 		/* Robot Data Packet 구분 */
 		const int Door_Info_ID_1 = 0x31;
@@ -39,6 +41,15 @@ namespace Middleware
 		const int Pass_REQ_ID_2 = 0x35;
 		const int Pass_R_ID_1 = 0x33;
 		const int Pass_R_ID_2 = 0x36;
+		const int Sensor_Status_REQ_ID_1 = 0x34;
+		const int Sensor_Status_REQ_ID_2 = 0x31;
+		const int Sensor_Status_R_ID_1 = 0x34;
+		const int Sensor_Status_R_ID_2 = 0x32;
+		const int Sensor_Data_Status_REQ_ID_1 = 0x34;
+		const int Sensor_Data_Status_REQ_ID_2 = 0x33;
+		const int Sensor_Data_Status_R_ID_1 = 0x34;
+		const int Sensor_Data_Status_R_ID_2 = 0x34;
+
 
 		/* Robot 통신 Data */
 		bool Interlock_R1, Interlock_R2;    // 둘 다 true가 되어야 다음 단계 진행
@@ -55,7 +66,7 @@ namespace Middleware
 		const int Reset_R_ID = 0x11;
 		const int Timing_R_ID = 0x0f;
 		const int Measured_R_ID = 0x15;
-		const int Sensor_Ping_Res = 0x07;
+		const int Sensor_Ping_ID = 0x0b;
 
 		/* Sensor 통신 Data */
 		bool Timing;    // true이면 Timing on 상태 false이면 Timing off 상태
@@ -98,19 +109,12 @@ namespace Middleware
 		const int B_Strat = 0x34;       // Bending 시작(Door까지의 위치)
 		const int B_End = 0x35;         // Bending 후(실제 Door를 미는 위치)
 
-		byte[] SENSOR_PING_REQ = new byte[]
-		{
-			0x09, 0x00, 0x07, 0x0A, 0x00, 0x00, 0x02, 0x00, 0x00
-		};
-
 		private SensorValue First_Sensing { get; set; }
 		private SensorValue Second_Sensing { get; set; }
 		private SensorValue Third_Sensing { get; set; }
 		private SensorValue Delta { get; set; }
 
 		private Thread sensorPingThread;
-		private Thread robotPingThread;
-		private Thread bypassPingThread;
 
 		private readonly Sensor sensor;
 		private readonly Robot robot;
@@ -208,219 +212,21 @@ namespace Middleware
 			{
 				while (true)
 				{
-					if (pingReceived)
+					if (SensorStatusFlag)
 					{
-						if (SensorStatusFlag)
-						{
-							try
-							{
-								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-								request1.BeginGetResponse(new AsyncCallback((ar) =>
-								{
-									try
-									{
-										request1.EndGetResponse(ar);
-									}
-									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request1);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							try
-							{
-								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=ON";
-								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-								request2.BeginGetResponse(new AsyncCallback((ar) =>
-								{
-									try
-									{
-										request2.EndGetResponse(ar);
-									}
-									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request2);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}
-						else
-						{
-							try
-							{
-								string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-								HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-								request1.BeginGetResponse(new AsyncCallback((ar) =>
-								{
-									try
-									{
-										request1.EndGetResponse(ar);
-									}
-									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request1);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							try
-							{
-								string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-								HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-								request2.BeginGetResponse(new AsyncCallback((ar) =>
-								{
-									try
-									{
-										request2.EndGetResponse(ar);
-									}
-									catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-								}), request2);
-							}
-							catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						}
+						SendToSensor1(Sensor_Ping_REQ);
+						SendToSensor2(Sensor_Ping_REQ);
 					}
 					else
 					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20PORT%20DOUT[647]=OFF";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
+						Sensor1_pingReceived = false;
+						Sensor2_pingReceived = false;
 					}
-					pingReceived = false;
-					SendToSensor1(SENSOR_PING_REQ);
-					SendToSensor2(SENSOR_PING_REQ);
-					Thread.Sleep(100);
-				}
-			}));
-			robotPingThread = new Thread(new ThreadStart(() =>
-			{
-				while (true)
-				{
-					if (PcCommErrorFlag)
-					{
-						try
-						{
-							string url1 = $"http://{Robot1IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = $"http://{Robot2IpAddress}/KCLDO/SET%20VAR%20[REAL_OUT]pgs=true";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-					Thread.Sleep(100);
-				}
-			}));
-			bypassPingThread = new Thread(new ThreadStart(() =>
-			{
-				while (true)
-				{
-					if (BYPASS_MODE)
-					{
-						try
-						{
-							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=ON";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=ON";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-					else
-					{
-						try
-						{
-							string url1 = "http://124.127.248.84/KCLDO/SET%20PORT%20DOUT[649]=OFF";
-							HttpWebRequest request1 = WebRequest.Create(url1) as HttpWebRequest;
-							request1.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request1.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request1);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-						try
-						{
-							string url2 = "http://124.127.248.85/KCLDO/SET%20PORT%20DOUT[649]=OFF";
-							HttpWebRequest request2 = WebRequest.Create(url2) as HttpWebRequest;
-							request2.BeginGetResponse(new AsyncCallback((ar) =>
-							{
-								try
-								{
-									request2.EndGetResponse(ar);
-								}
-								catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-							}), request2);
-						}
-						catch (Exception ex) { ErrorOccurred?.Invoke(this, new ExceptionEventArgs(ex)); }
-					}
-					Thread.Sleep(1000);
+					Thread.Sleep(2000);
 				}
 			}));
 
 			sensorPingThread.Start();
-			robotPingThread.Start();
-			bypassPingThread.Start();
 		}
 
 		public void ConnectToSensor1(string ip, int port, int buffersize) => sensor.ConnectToSensor1(ip, port, buffersize);
@@ -438,8 +244,6 @@ namespace Middleware
 			StopRobotServer();
 
 			sensorPingThread.Abort();
-			robotPingThread.Abort();
-			bypassPingThread.Abort();
 		}
 
 		private void SendToSensor1(byte[] data) => sensor.SendToSensor1(data);
@@ -447,6 +251,10 @@ namespace Middleware
 		private void SendToRobot1(byte[] data) => robot.SendToRobot1(data);
 		private void SendToRobot2(byte[] data) => robot.SendToRobot2(data);
 
+		byte[] Sensor_Ping_REQ = new byte[]     // PC에서 Sensor로 보내는 (Sensor_Ping_REQ) Data Packet
+		{
+			0x09, 0x00, 0x07, 0x0a, 0x03, 0x00, 0x09, 0x00, 0x00
+		};
 		private void Door_Information_R(byte[] D)   // PC에서 Robot으로 보내는 (Door_Information_R) Data Packet
 		{
 			D[0] = 0x39;                // Bytes 0 to 3 -> 고정값
@@ -465,7 +273,7 @@ namespace Middleware
 			D[13] = 0x30;
 			D[14] = 0x30;
 			D[15] = 0x30;
-			D[16] = 0x0D;               // Bytes 16, 17 -> Packet 끝
+			D[16] = 0x0D;               // Bytes 16, 17 -> CR, LF
 			D[17] = 0x0A;
 		}
 		private void Pass_REQ_Input(byte[] P)   // PC에서 Robot으로 보내는 (Pass_REQ_Input) Data Packet
@@ -486,7 +294,7 @@ namespace Middleware
 			P[13] = 0x30;
 			P[14] = 0x30;
 			P[15] = 0x30;
-			P[16] = 0x0D;               // Bytes 16, 17 -> Packet 끝
+			P[16] = 0x0D;               // Bytes 16, 17 -> CR, LF
 			P[17] = 0x0A;
 		}
 		private void Bending_REQ_Input(byte[] B)    // PC에서 Robot으로 보내는 (Bending_REQ_Input) Data Packet
@@ -521,8 +329,50 @@ namespace Middleware
 			B[27] = 0x30;
 			B[28] = 0x30;
 			B[29] = 0x30;
-			B[30] = 0x0D;               // Bytes 30, 31 -> Packet 끝
+			B[30] = 0x0D;               // Bytes 30, 31 -> CR, LF
 			B[31] = 0x0A;
+		}
+		private void Sensor_Status_R_Input(byte[] SS)	// PC에서 Robot으로 보내는 (Sensor_Status_Input) Data Packet
+		{
+			SS[0] = 0x39;
+			SS[1] = 0x37;
+			SS[2] = 0x39;
+			SS[3] = 0x30;
+			SS[4] = Sensor_Status_R_ID_1;		// Bytes 4, 5 -> Sensor_Status_Input 구분
+			SS[5] = Sensor_Status_R_ID_2;
+			SS[6] = 0x30;
+			SS[7] = 0x30;			// Byte 7 -> 1이면 정상 0이면 에러
+			SS[8] = 0x30;
+			SS[9] = 0x30;
+			SS[10] = 0x30;
+			SS[11] = 0x30;
+			SS[12] = 0x30;
+			SS[13] = 0x30;
+			SS[14] = 0x30;
+			SS[15] = 0x30;
+			SS[16] = 0x0d;			// Bytes 16, 17 -> CR, LF
+			SS[17] = 0x0a;
+		}
+		private void Sensor_Data_Status_R_Input(byte[] SD)
+		{
+			SD[0] = 0x39;
+			SD[1] = 0x37;
+			SD[2] = 0x39;
+			SD[3] = 0x30;
+			SD[4] = Sensor_Data_Status_R_ID_1;       // Bytes 4, 5 -> Sensor_Data_Status_R_Input 구분
+			SD[5] = Sensor_Data_Status_R_ID_2;
+			SD[6] = 0x30;
+			SD[7] = 0x30;           // Byte 7 -> 1이면 Reset, 0이면 대기
+			SD[8] = 0x30;
+			SD[9] = 0x30;
+			SD[10] = 0x30;
+			SD[11] = 0x30;
+			SD[12] = 0x30;
+			SD[13] = 0x30;
+			SD[14] = 0x30;
+			SD[15] = 0x30;
+			SD[16] = 0x0d;          // Bytes 16, 17 -> CR, LF
+			SD[17] = 0x0a;
 		}
 		private void Reset_Input(byte[] R)  // PC에서 Sensor로 보내는 (Reset_Input) Data Packet
 		{
@@ -696,6 +546,7 @@ namespace Middleware
 		private void Sensor_Sensor1Connected(object sender, ConnectEventArgs e)
 		{
 			Sensor1Connected?.Invoke(sender, e);
+			Sensor1_pingReceived = true;
 		}
 		private void Sensor_Sensor1Sended(object sender, SendEventArgs e)
 		{
@@ -710,6 +561,7 @@ namespace Middleware
 			byte[] Measured_REQ = new byte[7];
 			byte[] Pass_REQ = new byte[18];
 			byte[] Bending_REQ = new byte[32];
+			byte[] Sensor_Status_R = new byte[18];
 			byte[] Sensor1_Receive_Data = e.Data;
 
 			if (e.BytesRead == 9 && Sensor1_Receive_Data[3] == Reset_R_ID)
@@ -901,15 +753,24 @@ namespace Middleware
 					}
 				}
 			}
-			else if (e.BytesRead == 8)
+			else if(e.BytesRead == 8 && Sensor1_Receive_Data[3] == Sensor_Ping_ID)
 			{
-				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
-				pingReceived = true;
+				if (Sensor1_Receive_Data[4] == 0x33)
+				{
+					Sensor1_pingReceived = true;
+					SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
+				}
+				else
+				{
+					Sensor1_pingReceived = false;
+					SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor1_Receive_Data));
+				}
 			}
 		}
 		private void Sensor_Sensor1Disconnected(object sender, DisconnectEventArgs e)
 		{
 			Sensor1Disconnected?.Invoke(sender, e);
+			Sensor1_pingReceived = false;
 		}
 		private void Sensor_Sensor1ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
 		{
@@ -923,6 +784,7 @@ namespace Middleware
 		private void Sensor_Sensor2Connected(object sender, ConnectEventArgs e)
 		{
 			Sensor2Connected?.Invoke(sender, e);
+			Sensor2_pingReceived = true;
 		}
 		private void Sensor_Sensor2Sended(object sender, SendEventArgs e)
 		{
@@ -1026,9 +888,9 @@ namespace Middleware
 						byte[] packet = new byte[]
 						{
 							0x39, 0x37, 0x39, 0x30, 0x32, 0x33, 0x30, 0x30,
-							0x38, 0x46, 0x30, 0x30, 0x2B, 0x30, 0x30, 0x30,
-							0x30, 0x30, 0x31, 0x30, 0x30, 0x2B, 0x30, 0x30,
-							0x30, 0x30, 0x30, 0x31, 0x30, 0x30, 0x0D, 0x0A
+							0x38, 0x46, 0x30, 0x30, 0x2D, 0x30, 0x30, 0x30,
+							0x30, 0x30, 0x31, 0x34, 0x32, 0x2D, 0x30, 0x30,
+							0x30, 0x30, 0x30, 0x31, 0x33, 0x35, 0x0D, 0x0A
 						};
 						packet[8] = Robot1_Number;
 						SendToRobot1(packet);
@@ -1127,15 +989,24 @@ namespace Middleware
 					}
 				}
 			}
-			else if (e.BytesRead == 8)
+			else if (e.BytesRead == 8 && Sensor2_Receive_Data[3] == Sensor_Ping_ID)
 			{
-				SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
-				pingReceived = true;
+				if (Sensor2_Receive_Data[4] == 0x33)
+				{
+					Sensor2_pingReceived = true;
+					SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
+				}
+				else
+				{
+					Sensor2_pingReceived = false;
+					SensorPingReceived?.Invoke(this, Core.Utilities.Convert.ToHexCode(Sensor2_Receive_Data));
+				}
 			}
 		}
 		private void Sensor_Sensor2Disconnected(object sender, DisconnectEventArgs e)
 		{
 			Sensor2Disconnected?.Invoke(sender, e);
+			Sensor2_pingReceived = false;
 		}
 		private void Sensor_Sensor2ConnectionRefused(object sender, ConnectionRefusedEventArgs e)
 		{
@@ -1161,6 +1032,8 @@ namespace Middleware
 			Interlock_R1 = false;
 			byte[] Door_Info_R_R1 = new byte[18];
 			byte[] Reset = new byte[6];
+			byte[] Sensor_Status_R = new byte[18];
+			byte[] Sensor_Data_Status_R = new byte[18];
 			byte[] Robot1_Receive_Data = e.Data;
 
 			if (Robot1_Receive_Data[4] == Door_Info_ID_1 && Robot1_Receive_Data[5] == Door_Info_ID_2)
@@ -1245,6 +1118,33 @@ namespace Middleware
 						break;
 				}
 			}
+			else if (Robot1_Receive_Data[4] == Sensor_Status_REQ_ID_1 && Robot1_Receive_Data[5] == Sensor_Status_REQ_ID_2)
+			{
+				Sensor_Status_R_Input(Sensor_Status_R);
+				if (Sensor1_pingReceived && Sensor2_pingReceived)
+				{
+					Sensor_Status_R[7] = 0x31;
+				}
+				else
+				{
+					Sensor_Status_R[7] = 0x30;
+				}
+				SendToRobot1(Sensor_Status_R);
+			}
+			else if (Robot1_Receive_Data[4] == Sensor_Data_Status_REQ_ID_1 && Robot1_Receive_Data[5] == Sensor_Data_Status_REQ_ID_2)
+			{
+				Sensor_Data_Status_R_Input(Sensor_Data_Status_R);
+				if(SENSOR_DATA_STATUS_RESET_R1)
+				{
+					Sensor_Data_Status_R[7] = 0x31;
+					SENSOR_DATA_STATUS_RESET_R1 = false;
+				}
+				else
+				{
+					Sensor_Data_Status_R[7] = 0x30;
+				}
+				SendToRobot1(Sensor_Data_Status_R);
+			}
 		}
 		private void Robot_Robot1Disconnected(object sender, DisconnectEventArgs e)
 		{
@@ -1264,6 +1164,9 @@ namespace Middleware
 			Robot2Received?.Invoke(sender, e);
 
 			byte[] Door_Info_R_R2 = new byte[18];
+			byte[] Sensor_Ping = new byte[9];
+			byte[] Sensor_Status_R = new byte[18];
+			byte[] Sensor_Data_Status_R = new byte[18];
 			byte[] Robot2_Receive_Data = e.Data;
 
 			if (Robot2_Receive_Data[4] == Door_Info_ID_1 && Robot2_Receive_Data[5] == Door_Info_ID_2)
@@ -1320,6 +1223,33 @@ namespace Middleware
 						Robot2PhaseChanged?.Invoke(this, new RobotPhaseEventArgs(PhaseCode.BENDING_END));
 						break;
 				}
+			}
+			else if (Robot2_Receive_Data[4] == Sensor_Status_REQ_ID_1 && Robot2_Receive_Data[5] == Sensor_Status_REQ_ID_2)
+			{
+				Sensor_Status_R_Input(Sensor_Status_R);
+				if (Sensor1_pingReceived && Sensor2_pingReceived)
+				{
+					Sensor_Status_R[7] = 0x31;
+				}
+				else
+				{
+					Sensor_Status_R[7] = 0x30;
+				}
+				SendToRobot2(Sensor_Status_R);
+			}
+			else if (Robot2_Receive_Data[4] == Sensor_Data_Status_REQ_ID_1 && Robot2_Receive_Data[5] == Sensor_Data_Status_REQ_ID_2)
+			{
+				Sensor_Data_Status_R_Input(Sensor_Data_Status_R);
+				if (SENSOR_DATA_STATUS_RESET_R2)
+				{
+					Sensor_Data_Status_R[7] = 0x31;
+					SENSOR_DATA_STATUS_RESET_R2 = false;
+				}
+				else
+				{
+					Sensor_Data_Status_R[7] = 0x30;
+				}
+				SendToRobot2(Sensor_Data_Status_R);
 			}
 		}
 		private void Robot_Robot2Disconnected(object sender, DisconnectEventArgs e)
