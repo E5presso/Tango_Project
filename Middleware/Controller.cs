@@ -225,7 +225,6 @@ namespace Middleware
 					Thread.Sleep(2000);
 				}
 			}));
-
 			sensorPingThread.Start();
 		}
 

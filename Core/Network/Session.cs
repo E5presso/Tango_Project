@@ -83,6 +83,8 @@ namespace Core.Network
 						{
 							if (ex is Win32Exception w && (w.ErrorCode == 10054 || w.ErrorCode == 10060))
 							{
+								IsClosed = true;
+								socket.Shutdown(SocketShutdown.Both);
 								Disconnected?.Invoke(this);
 							}
 							else ErrorOccurred?.Invoke(ex);
@@ -93,6 +95,8 @@ namespace Core.Network
 			}
 			else
 			{
+				IsClosed = true;
+				socket.Shutdown(SocketShutdown.Both);
 				Disconnected?.Invoke(this);
 			}
 		}
@@ -140,21 +144,17 @@ namespace Core.Network
 						Received?.Invoke(this, bytesRead, data);
 					}
 				}
-				else
-				{
-					Close();
-				}
+				else Close();
 			}
 			catch (Exception e)
 			{
 				if (e is Win32Exception w && (w.ErrorCode == 10054 || w.ErrorCode == 10060))
 				{
+					IsClosed = true;
+					socket.Shutdown(SocketShutdown.Both);
 					Disconnected?.Invoke(this);
 				}
-				else
-				{
-					ErrorOccurred?.Invoke(e);
-				}
+				else ErrorOccurred?.Invoke(e);
 			}
 		}
 		private void GetPacket()
