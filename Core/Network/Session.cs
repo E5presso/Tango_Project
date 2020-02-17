@@ -26,7 +26,7 @@ namespace Core.Network
 		private readonly byte[] buffer;
 
 		public string IP { get; }
-		public bool IsClosed { private set; get; } = false;
+		public bool IsClosed { private set; get; } = true;
 
 		public event SendEvent Sended;
 		public event ReceiveEvent Received;
@@ -95,6 +95,8 @@ namespace Core.Network
 			}
 			else
 			{
+				IsClosed = true;
+				socket.Shutdown(SocketShutdown.Both);
 				Disconnected?.Invoke(this);
 			}
 		}
@@ -114,10 +116,7 @@ namespace Core.Network
 				}
 				catch (Exception e) { ErrorOccurred?.Invoke(e); }
 			}
-			else
-			{
-				ErrorOccurred?.Invoke(new InvalidOperationException("현재 소켓이 연결되어있지 않습니다."));
-			}
+			else ErrorOccurred?.Invoke(new InvalidOperationException("현재 소켓이 연결되어있지 않습니다."));
 		}
 
 		private void OnReceived(IAsyncResult ar)
@@ -142,10 +141,7 @@ namespace Core.Network
 						Received?.Invoke(this, bytesRead, data);
 					}
 				}
-				else
-				{
-					Close();
-				}
+				else Close();
 			}
 			catch (Exception e)
 			{
@@ -155,10 +151,7 @@ namespace Core.Network
 					socket.Shutdown(SocketShutdown.Both);
 					Disconnected?.Invoke(this);
 				}
-				else
-				{
-					ErrorOccurred?.Invoke(e);
-				}
+				else ErrorOccurred?.Invoke(e);
 			}
 		}
 		private void GetPacket()

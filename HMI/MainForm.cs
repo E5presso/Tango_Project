@@ -264,6 +264,10 @@ namespace HMI
             if (e.Button == MouseButtons.Left)
                 Location = new Point(Location.X + (mousePosition.X + e.X), Location.Y + (mousePosition.Y + e.Y));
         }
+        private void Minimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
