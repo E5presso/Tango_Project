@@ -7,6 +7,8 @@ using Core.Extensions;
 using Core.Network;
 using Middleware;
 using System.IO;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace HMI
 {
@@ -21,7 +23,6 @@ namespace HMI
         public float X2After { get; set; }
         public float X2Delta { get; set; }
     }
-
     public partial class MainForm : Form
     {
         private const string savePath = @"C:\Tango";
@@ -29,12 +30,36 @@ namespace HMI
         private readonly Controller controller = new Controller();
         private List<SensorValueReformed> Sensor1DataList = new List<SensorValueReformed>();
         private List<SensorValueReformed> Sensor2DataList = new List<SensorValueReformed>();
+        private readonly Thread monitorThread;
         private readonly Thread interlockDiagCheckThread;
 
         public MainForm()
         {
             InitializeComponent();
 
+            monitorThread = new Thread(new ThreadStart(() =>
+            {
+                while (true)
+                {
+                    CpuUsage.AsyncInvoke((x) =>
+                    {
+                        x.Series["Cpu"].Points.Add(SystemMonitor.CpuUsage);
+                        if (x.Series["Cpu"].Points.Count > 100) x.Series["Cpu"].Points.RemoveAt(0);
+                    });
+                    MemoryUsage.AsyncInvoke((x) =>
+                    {
+                        x.Series["Memory"].Points.Add(SystemMonitor.MemUsage);
+                        if (x.Series["Memory"].Points.Count > 100) x.Series["Memory"].Points.RemoveAt(0);
+                    });
+                    DiskUsage.AsyncInvoke((x) =>
+                    {
+                        x.Series["DiskFree"].Points.Clear();
+                        x.Series["DiskFree"].Points.AddXY($"Disk Free : {SystemMonitor.DiskFree / 1024 / 1024} MB", SystemMonitor.DiskFree);
+                        x.Series["DiskFree"].Points.AddXY($"Disk Used : {SystemMonitor.DiskUsed / 1024 / 1024} MB", SystemMonitor.DiskUsed);
+                    });
+                    Thread.Sleep(1000);
+                }
+            }));
             interlockDiagCheckThread = new Thread(new ThreadStart(() =>
             {
                 while (true)
@@ -220,6 +245,12 @@ namespace HMI
                 }
             }));
 
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            if (registryKey.GetValue("MyApp") == null)
+            {
+                registryKey.SetValue("MyApp", Application.ExecutablePath.ToString());
+            }
+
             controller.SensorPingReceived += Controller_SensorPingReceived;
             controller.DoorInformationReceived += Controller_DoorInformationReceived;
 
@@ -264,6 +295,10 @@ namespace HMI
             if (e.Button == MouseButtons.Left)
                 Location = new Point(Location.X + (mousePosition.X + e.X), Location.Y + (mousePosition.Y + e.Y));
         }
+        private void Minimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -301,10 +336,12 @@ namespace HMI
                     RobotConnectionSave.Enabled = false;
                 }
             }
+            monitorThread.Start();
             interlockDiagCheckThread.Start();
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            monitorThread.Abort();
             interlockDiagCheckThread.Abort();
             controller.Stop();
         }
