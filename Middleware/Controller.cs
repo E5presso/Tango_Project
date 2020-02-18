@@ -1158,6 +1158,7 @@ namespace Middleware
 		{
 			Robot2Received?.Invoke(sender, e);
 
+			Interlock_R2 = false;
 			byte[] Door_Info_R_R2 = new byte[18];
 			byte[] Sensor_Ping = new byte[9];
 			byte[] Sensor_Status_R = new byte[18];

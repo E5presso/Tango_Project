@@ -96,7 +96,6 @@ namespace Core.Network
 			else
 			{
 				IsClosed = true;
-				socket.Shutdown(SocketShutdown.Both);
 				Disconnected?.Invoke(this);
 			}
 		}
@@ -151,7 +150,6 @@ namespace Core.Network
 				if (e is Win32Exception w && (w.ErrorCode == 10054 || w.ErrorCode == 10060))
 				{
 					IsClosed = true;
-					socket.Shutdown(SocketShutdown.Both);
 					Disconnected?.Invoke(this);
 				}
 				else ErrorOccurred?.Invoke(e);
